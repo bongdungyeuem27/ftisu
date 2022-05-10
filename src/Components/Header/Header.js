@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import title from "../images/title.png";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import MyModal from "../MyModal";
+import ShowLanguage from "./ShowLanguage";
 
 const menus = [
   {
@@ -60,11 +61,43 @@ var showMenu = (temps, location) => {
 
 export default function Header() {
   const location = useLocation();
-  const [dropdownLang, setDropdownLang] = useState(false);
+  // Kich ra ngoai se tat list
+  const wrapperRef = useRef(null);
+  // function useOutsideAlerter() {
+  //   useEffect(() => {
+  //     /**
+  //      * Alert if clicked on outside of element
+  //      */
+  //     function handleClickOutside(event) {
+  //       if (
+  //         menuRight.current.classList.contains("navbar-mobile") &&
+  //         wrapperRef.current &&
+  //         !wrapperRef.current.contains(event.target)
+  //       ) {
+  //         menuToggle();
+  //       }
+  //     }
+  //     // Bind the event listener
+  //     document.addEventListener("mousedown", handleClickOutside);
+  //     return () => {
+  //       // Unbind the event listener on clean up
+  //       document.removeEventListener("mousedown", handleClickOutside);
+  //     };
+  //   }, []);
+  // }
+  // useOutsideAlerter();
   const [toggle, setToggle] = useState(false);
+  const menuRight = useRef(null);
+  const menuRightCloseBtn = useRef(null);
+  const [languageToggle, setLanguageToggle] = useState(false);
+  const menuToggle = () => {
+    menuRight.current.classList.toggle("navbar-mobile");
+    menuRightCloseBtn.current.classList.toggle("bi-x");
+    menuRightCloseBtn.current.classList.toggle("bi-list");
+  };
+
   return (
     <div>
-      {/* <ChangeModal toggle={toggle}></ChangeModal> */}
       <MyModal
         toggle={toggle}
         style={{ maxWidth: "unset", width: "848px" }}
@@ -1251,383 +1284,48 @@ export default function Header() {
           </div>
         }
       ></MyModal>
+
+        <ShowLanguage toggle={languageToggle}></ShowLanguage>
       <header id="header" className="fixed-top d-flex align-items-center">
         <div className="container d-flex align-items-center justify-content-between">
           <div className="logo">
             <h1>
               <img style={{ width: "100%" }} alt="Inixtas" src={title}></img>
             </h1>
-            {/* Uncomment below if you prefer to use an image logo */}
-            {/* <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>*/}
           </div>
-          <nav id="navbar" className="navbar">
-            <ul>
-              {/* <li>
-                <a className="nav-link scrollto active" href="#hero">
-                  Trang chủ
+          <nav id="navbar" className="navbar" ref={menuRight}>
+            <ul ref={wrapperRef}>
+              {showMenu(menus, location)}
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+
+                    setLanguageToggle(!languageToggle);
+                }}
+              >
+                <a className="" href={() => false}>
+                  Tiếng Việt
+                  <span className="sc-1b4wplq-0 ifkbzu">
+                    <i className="fa fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </a>{" "}
+               
+              </li>
+
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => setToggle(!toggle)}
+              >
+                <a className="" href={() => false}>
+                  USD
+                  <span className="sc-1b4wplq-0 ifkbzu">
+                    <i className="fa fa-angle-down" aria-hidden="true"></i>
+                  </span>
                 </a>
               </li>
-              <li>
-                <a className="nav-link scrollto" href="#contact">
-                  Liên hệ
-                </a>
-              </li> */}
-              {showMenu(menus, location)}
-              <div className="rz95fb-0 jKIeAa">
-                <div className="rz95fb-1 rz95fb-2 eanzZL">
-                  <div className="cmc-popover">
-                    <div
-                      className="cmc-popover__trigger"
-                      onClick={() => {
-                        setDropdownLang(!dropdownLang);
-                      }}
-                    >
-                      <button
-                        title="Thay đổi ngôn ngữ của bạn"
-                        className="sc-1kx6hcr-0 eFEgkr"
-                      >
-                        <span className="sc-1b4wplq-1 kJnRBT">Tiếng Việt</span>
-                        <span className="sc-1b4wplq-0 ifkbzu">
-                          <i
-                            className="fa fa-angle-down"
-                            aria-hidden="true"
-                          ></i>
-                        </span>
-                      </button>
-                    </div>
-                    {dropdownLang && (
-                      <div
-                        className="cmc-popover__dropdown"
-                        style={{
-                          position: "absolute",
-                          // willChange: "transform",
-                          // transform: "translate3d(1059px, 31px, 0px)",
-                        }}
-                        data-placement="bottom-end"
-                      >
-                        <form className="bvgmfz-0 glLXAQ">
-                          <div className="fvnhew-0 iPvcpq cmc-input-group">
-                            <input
-                              placeholder="Tìm kiếm"
-                              autoComplete="off"
-                              spellCheck="false"
-                              className="ykm2vq-1 fAWiaZ cmc-input"
-                            />
-                            <span className="cmc-icon__wrap">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                height="16px"
-                                width="16px"
-                                viewBox="0 0 24 24"
-                                className="sc-16r8icm-0 coGWQa cmc-icon"
-                                pointerEvents="none"
-                              >
-                                <path
-                                  d="M16.4153 16.4153L20 20M18.5455 11.2727C18.5455 15.2893 15.2894 18.5454 11.2728 18.5454C7.25612 18.5454 4 15.2893 4 11.2727C4 7.2561 7.25612 4 11.2728 4C15.2894 4 18.5455 7.2561 18.5455 11.2727Z"
-                                  stroke="currentColor"
-                                  strokeWidth={2}
-                                  strokeMiterlimit={10}
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            </span>
-                          </div>
-                        </form>
-                        <div className="sc-1cm3a78-0 dsmLjZ">
-                          <div className="sc-1b4wplq-3 eSrHmB">
-                            <p>Ngôn ngữ phổ biến</p>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/"
-                              >
-                                English&nbsp;<span>en</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/ru/"
-                              >
-                                Русский&nbsp;<span>ru</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/vi/"
-                              >
-                                Tiếng Việt&nbsp;<span>vi</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/tr/"
-                              >
-                                Türkçe&nbsp;<span>tr</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/es/"
-                              >
-                                Español&nbsp;<span>es</span>
-                              </a>
-                            </div>
-                          </div>
-                          <div className="sc-1b4wplq-3 eSrHmB">
-                            <p>Tất cả ngôn ngữ</p>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/cs/"
-                              >
-                                čeština&nbsp;<span>cs</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/da/"
-                              >
-                                dansk&nbsp;<span>da</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/de/"
-                              >
-                                Deutsch&nbsp;<span>de</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/el/"
-                              >
-                                ελληνικά&nbsp;<span>el</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/"
-                              >
-                                English&nbsp;<span>en</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/es/"
-                              >
-                                Español&nbsp;<span>es</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/fr/"
-                              >
-                                Français&nbsp;<span>fr</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/hi/"
-                              >
-                                हिन्दी&nbsp;<span>hi</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/hu/"
-                              >
-                                magyar&nbsp;<span>hu</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/id/"
-                              >
-                                Bahasa Indonesia&nbsp;<span>id</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/it/"
-                              >
-                                Italiano&nbsp;<span>it</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/ja/"
-                              >
-                                日本語&nbsp;<span>ja</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/ko/"
-                              >
-                                한국어&nbsp;<span>ko</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/nl/"
-                              >
-                                Nederlands&nbsp;<span>nl</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/no/"
-                              >
-                                Norsk&nbsp;<span>no</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/pl/"
-                              >
-                                język polski&nbsp;<span>pl</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/pt-br/"
-                              >
-                                Português Brasil&nbsp;<span>pt-br</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/ro/"
-                              >
-                                Română&nbsp;<span>ro</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/ru/"
-                              >
-                                Русский&nbsp;<span>ru</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/sk/"
-                              >
-                                Slovenčina&nbsp;<span>sk</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/sv/"
-                              >
-                                Svenska&nbsp;<span>sv</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/th/"
-                              >
-                                ไทย&nbsp;<span>th</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/tr/"
-                              >
-                                Türkçe&nbsp;<span>tr</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/uk/"
-                              >
-                                Українська&nbsp;<span>uk</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/vi/"
-                              >
-                                Tiếng Việt&nbsp;<span>vi</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/zh/"
-                              >
-                                简体中文&nbsp;<span>zh</span>
-                              </a>
-                            </div>
-                            <div className="rz95fb-3 rz95fb-4 YsYKS">
-                              <a
-                                className="cmc-language-picker__option"
-                                href="/zh-tw/"
-                              >
-                                繁體中文&nbsp;<span>zh-tw</span>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="rz95fb-1 cfBxiI">
-                  <div>
-                    <button
-                      title="Chọn loại tiền tệ"
-                      data-qa-id="button-global-currency-picker"
-                      className="sc-1kx6hcr-0 eFEgkr"
-                      onClick={() => setToggle(!toggle)}
-                    >
-                      <span className="sc-1q0bpva-0 fAPnqP" />
-                      <span className="sc-1bafwtq-1 dUQeWc">USD</span>
-                      <span className="sc-1bafwtq-0 cIzAJN">
-                        <i className="fa fa-angle-down" aria-hidden="true"></i>
-                      </span>
-                    </button>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="sc-1kx6hcr-0 rz95fb-6 ccLqrB cmc-theme-picker cmc-theme-picker--day"
-                >
-                  <span className="icon-Moon" />
-                </button>
-              </div>
-
+                <li>
+                  <a className="" href= {()=>false}> </a>
+                </li>
               <li>
                 <a className="getstarted scrollto" href="#about">
                   <i
@@ -1638,7 +1336,11 @@ export default function Header() {
                 </a>
               </li>
             </ul>
-            <i className="bi bi-list mobile-nav-toggle" />
+            <i
+              className="bi bi-list mobile-nav-toggle"
+              onClick={menuToggle}
+              ref={menuRightCloseBtn}
+            />
           </nav>
           {/* .navbar */}
         </div>
