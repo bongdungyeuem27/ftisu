@@ -13,6 +13,7 @@ const reducer = (state = initialState, action) => {
     }
 
     default:
+      document.documentElement.lang=languages.LANGUAGES.find(x=>x.key===state.language).value;
       return state;
   }
 };

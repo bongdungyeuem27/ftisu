@@ -1,29 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, lazy } from "react";
 import title from "../images/title.png";
 import "./Header.css";
 import { useSelector} from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import MyModal from "../MyModal";
 import ShowLanguage from "./ShowLanguage";
-import {LANGUAGES} from "../../Redux/constrants/languageConst";
+import { LANGUAGES } from "../../Redux/constrants/languageConst";
 
-const menus = [
-  {
-    name: "Trang chủ",
-    to: "/",
-    exact: true,
-  },
-  {
-    name: "Thành viên",
-    to: "/team",
-    exact: true,
-  },
-  {
-    name: "Liên hệ",
-    to: "/contact",
-    exact: true,
-  },
-];
 
 // var showMenu = (temps, params) => {
 //   return temps.map((value, key) => {
@@ -51,7 +34,7 @@ var MenuLink = ({ lable, to, activeOnlyWhenExact, location }) => {
 
 var showMenu = (temps, location) => {
   var result = null;
-  result = temps.map((value, key) => {
+  result = temps?.map((value, key) => {
     return (
       <MenuLink
         key={key}
@@ -68,34 +51,24 @@ var showMenu = (temps, location) => {
 
 export default function Header() {
   const location = useLocation();
-  
+  const [keywords, setKeywords] = useState();
   const language = useSelector((state) => state.language.language);
-
+ 
+  useEffect(() => {
+    import(
+      `./keyword/${LANGUAGES.find((x) => x.key === language).value}/index.js`
+    )
+      .then((res) => {
+        setKeywords(res.default);
+      })
+      .catch((rej) => {
+        console.log(rej);
+        setKeywords(undefined);
+      });
+  },[language])
   // Kich ra ngoai se tat list
   const wrapperRef = useRef(null);
-  // function useOutsideAlerter() {
-  //   useEffect(() => {
-  //     /**
-  //      * Alert if clicked on outside of element
-  //      */
-  //     function handleClickOutside(event) {
-  //       if (
-  //         menuRight.current.classList.contains("navbar-mobile") &&
-  //         wrapperRef.current &&
-  //         !wrapperRef.current.contains(event.target)
-  //       ) {
-  //         menuToggle();
-  //       }
-  //     }
-  //     // Bind the event listener
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //     return () => {
-  //       // Unbind the event listener on clean up
-  //       document.removeEventListener("mousedown", handleClickOutside);
-  //     };
-  //   }, []);
-  // }
-  // useOutsideAlerter();
+  
   const [toggle, setToggle] = useState(false);
   const menuRight = useRef(null);
   const menuRightCloseBtn = useRef(null);
@@ -1305,7 +1278,7 @@ export default function Header() {
           </div>
           <nav id="navbar" className="navbar" ref={menuRight}>
             <ul ref={wrapperRef}>
-              {showMenu(menus, location)}
+              {showMenu(keywords?._menus, location)}
               <li
                 style={{ cursor: "pointer" }}
                 onClick={() => {
@@ -1342,7 +1315,7 @@ export default function Header() {
                     style={{ paddingRight: "10px" }}
                     className="fa-thin fa-user"
                   ></i>
-                  Tài khoản
+                  {keywords?._account}
                 </a>
               </li>
             </ul>
