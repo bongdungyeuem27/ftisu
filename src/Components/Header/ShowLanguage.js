@@ -8,7 +8,7 @@ export default function ShowLanguageMobile(props) {
       toggle={props.toggle}
       style={{
         maxWidth: "unset",
-        width: window.innerWidth > 991 ? "848px" : "100%",
+        width: window.innerWidth > 991 ? "500px" : "100%",
         height: window.innerWidth > 991 ? "unset" : "100%",
       }}
       title="Chọn ngôn ngữ"

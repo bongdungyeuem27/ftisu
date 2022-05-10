@@ -29,9 +29,6 @@
 .kJnRBT {
     font-weight: 600;
 }
-.ifkbzu {
-    margin: 2px 0px 0px 4px;
-}
 .fAPnqP {
     background-image: url(https://s2.coinmarketcap.com/static/cloud/img/fiat-flags/USD.svg);
     background-position: center center;
@@ -172,10 +169,7 @@
     text-transform: uppercase;
     color: rgb(88, 102, 126);
 }
-.clxZon.modalOpened {
-    visibility: visible;
-    opacity: 1;
-}
+
 .clxZon {
     position: fixed;
     z-index: 999999;

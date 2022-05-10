@@ -28,3 +28,16 @@
     font-size: 24px;
     line-height: 34px;
 }
+.modalOpened {
+    visibility: visible;
+    opacity: 1;
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.377);
+    transition: 1s;
+    z-index: 999;
+}
