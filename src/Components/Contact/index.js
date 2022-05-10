@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Index() {
   return (
-    <section id="contact" className="contact">
+    <section id="contact" className="contact section-bg">
       <div className="container">
         <div className="section-title" data-aos="fade-up">
           <h2>Contact Us</h2>

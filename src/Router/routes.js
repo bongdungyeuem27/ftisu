@@ -3,12 +3,18 @@ import NotFoundPage from "./NotFoundPage";
 import Currency from "../Components/Currency";
 import Contact from "../Components/Contact";
 import Login from "../Components/Login";
+import Team from "../Components/Team";
 
 const routes = [
   {
-    path: "/:category/:currency",
+    path: "/currencies/:currency",
     exact: true,
     main: <Currency></Currency>,
+  },
+  {
+    path: "/team",
+    exact: true,
+    main:  <Team ></Team>,
   },
   {
     path: "/contact",

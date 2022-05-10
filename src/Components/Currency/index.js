@@ -1,10 +1,26 @@
-import React from "react";
+import React, {useEffect, useState, useRef} from "react";
 import "./Currency.css";
 import chart from "./chart.png";
 
 export default function Index() {
+  const headerRef = useRef(null);
+  useEffect(() => {
+    if (headerRef==null) return;
+    window.addEventListener("scroll", () =>{
+      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80){
+        headerRef?.current?.classList?.add("popped");
+      }
+      else{
+      
+        headerRef?.current?.classList?.remove("popped");
+      }
+      return ()=>{
+        window.removeEventListener("scroll")
+      }
+    })
+  }, [])
   return (
-    <section className="currency">
+    <section className="currency" >
       <div className="sc-16r8icm-0 eMxKgr container">
         <div className="n78udj-0 jskEGI">
           <div className="sc-16r8icm-0 kjciSH top-summary-container">
@@ -59,7 +75,7 @@ export default function Index() {
                   2.66{/* */}%
                 </span>
               </div>
-              <div className="n78udj-3 emihhf">
+              <div className="n78udj-3 emihhf" ref= {headerRef}>
                 <span>
                   <img
                     src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"

@@ -1,14 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 import title from "../images/title.png";
 import "./Header.css";
+import { useSelector} from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import MyModal from "../MyModal";
 import ShowLanguage from "./ShowLanguage";
+import {LANGUAGES} from "../../Redux/constrants/languageConst";
 
 const menus = [
   {
     name: "Trang chủ",
     to: "/",
+    exact: true,
+  },
+  {
+    name: "Thành viên",
+    to: "/team",
     exact: true,
   },
   {
@@ -61,6 +68,9 @@ var showMenu = (temps, location) => {
 
 export default function Header() {
   const location = useLocation();
+  
+  const language = useSelector((state) => state.language.language);
+
   // Kich ra ngoai se tat list
   const wrapperRef = useRef(null);
   // function useOutsideAlerter() {
@@ -1304,9 +1314,9 @@ export default function Header() {
                 }}
               >
                 <a className="" href={() => false}>
-                  Tiếng Việt
+                  {LANGUAGES.find(x=>x.key===language).name}
                   <span className="sc-1b4wplq-0 ifkbzu">
-                    <i className="fa fa-angle-down" aria-hidden="true"></i>
+                    <i className="fa fa-angle-down" ></i>
                   </span>
                 </a>{" "}
                

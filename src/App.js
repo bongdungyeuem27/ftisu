@@ -2,7 +2,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import routes from "./Router/routes";
 import configureStore from "./Redux/configureStore";
-
 import { Provider } from "react-redux";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer";

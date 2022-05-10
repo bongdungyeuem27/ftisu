@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./ShowLanguage.css";
 import MyModal from "../MyModal";
+import * as languages from "../../Redux/constrants/languageConst";
+import { useSelector, useDispatch } from "react-redux";
+import * as languageConst from "../../Redux/constrants/languageConst";
+import * as languageAct from "../../Redux/actions/languageAct";
 
 export default function ShowLanguageMobile(props) {
+  const manhanvien = useSelector((state) => state.language.language);
+  const dispatch = useDispatch();
+  const changeLanguage = (lang) => {
+    dispatch(languageAct.changeLanguageReport(lang));
+  };
   return (
     <MyModal
       toggle={props.toggle}
@@ -48,169 +57,20 @@ export default function ShowLanguageMobile(props) {
             <div className="sc-1cm3a78-0 dsmLjZ">
               <div className="sc-1b4wplq-3 eSrHmB">
                 <p>Ngôn ngữ phổ biến</p>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/">
-                    English&nbsp;<span>en</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/ru/">
-                    Русский&nbsp;<span>ru</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/vi/">
-                    Tiếng Việt&nbsp;<span>vi</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/tr/">
-                    Türkçe&nbsp;<span>tr</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/es/">
-                    Español&nbsp;<span>es</span>
-                  </a>
-                </div>
-              </div>
-              <div className="sc-1b4wplq-3 eSrHmB">
-                <p>Tất cả ngôn ngữ</p>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/cs/">
-                    čeština&nbsp;<span>cs</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/da/">
-                    dansk&nbsp;<span>da</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/de/">
-                    Deutsch&nbsp;<span>de</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/el/">
-                    ελληνικά&nbsp;<span>el</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/">
-                    English&nbsp;<span>en</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/es/">
-                    Español&nbsp;<span>es</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/fr/">
-                    Français&nbsp;<span>fr</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/hi/">
-                    हिन्दी&nbsp;<span>hi</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/hu/">
-                    magyar&nbsp;<span>hu</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/id/">
-                    Bahasa Indonesia&nbsp;<span>id</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/it/">
-                    Italiano&nbsp;<span>it</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/ja/">
-                    日本語&nbsp;<span>ja</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/ko/">
-                    한국어&nbsp;<span>ko</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/nl/">
-                    Nederlands&nbsp;<span>nl</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/no/">
-                    Norsk&nbsp;<span>no</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/pl/">
-                    język polski&nbsp;<span>pl</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/pt-br/">
-                    Português Brasil&nbsp;<span>pt-br</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/ro/">
-                    Română&nbsp;<span>ro</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/ru/">
-                    Русский&nbsp;<span>ru</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/sk/">
-                    Slovenčina&nbsp;<span>sk</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/sv/">
-                    Svenska&nbsp;<span>sv</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/th/">
-                    ไทย&nbsp;<span>th</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/tr/">
-                    Türkçe&nbsp;<span>tr</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/uk/">
-                    Українська&nbsp;<span>uk</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/vi/">
-                    Tiếng Việt&nbsp;<span>vi</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/zh/">
-                    简体中文&nbsp;<span>zh</span>
-                  </a>
-                </div>
-                <div className="rz95fb-3 rz95fb-4 YsYKS">
-                  <a className="cmc-language-picker__option" href="/zh-tw/">
-                    繁體中文&nbsp;<span>zh-tw</span>
-                  </a>
-                </div>
+                {languages.LANGUAGES.map((value, i) => {
+                  return (
+                    <div key={i} className="rz95fb-3 rz95fb-4 YsYKS">
+                      <span
+                        className="cmc-language-picker__option"
+                        onClick={() => {
+                          changeLanguage(value.key)
+                        }}
+                      >
+                        {value.name} &nbsp;<span>{value.value}</span>
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

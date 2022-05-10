@@ -7,6 +7,7 @@ import function5 from "./images/function5.png";
 import function6 from "./images/function6.png";
 import "./Home.css";
 import Pdf from "react-to-pdf";
+import { Link } from "react-router-dom";
 
 const ref = React.createRef();
 
@@ -291,7 +292,7 @@ export default function Home() {
                 </td>
                 <td style={{ textAlign: "left" }}>
                   <div display="flex" className="sc-16r8icm-0 escjiH">
-                    <a href="/vi/currencies/bitcoin/" className="cmc-link">
+                    <Link to="/currencies/bitcoin" className="cmc-link">
                       <div className="sc-16r8icm-0 sc-1teo54s-0 dBKWCw">
                         <img
                           className="coin-logo"
@@ -323,7 +324,7 @@ export default function Home() {
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                     <div className="sc-16r8icm-0 bKmQGi">
                       <div data-nosnippet="true" aria-expanded="false">
                         <div className="sc-1x3bens-0 hRpznX">
@@ -3104,134 +3105,7 @@ export default function Home() {
           </div>
         </section>
         {/* End Portfolio Section */}
-        {/* ======= Team Section ======= */}
-        <section id="team" className="team section-bg">
-          <div className="container">
-            <div className="section-title" data-aos="fade-up">
-              <h2>Team</h2>
-              <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem</p>
-            </div>
-            <div className="row">
-              <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
-                <div className="member" data-aos="fade-up" data-aos-delay={100}>
-                  <div className="member-img">
-                    <img
-                      src="assets/img/team/team-1.jpg"
-                      className="img-fluid"
-                      alt=""
-                    />
-                    <div className="social">
-                      <a href>
-                        <i className="bi bi-twitter" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-facebook" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-instagram" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-linkedin" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="member-info">
-                    <h4>Walter White</h4>
-                    <span>Chief Executive Officer</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
-                <div className="member" data-aos="fade-up" data-aos-delay={200}>
-                  <div className="member-img">
-                    <img
-                      src="assets/img/team/team-2.jpg"
-                      className="img-fluid"
-                      alt=""
-                    />
-                    <div className="social">
-                      <a href>
-                        <i className="bi bi-twitter" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-facebook" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-instagram" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-linkedin" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="member-info">
-                    <h4>Sarah Jhonson</h4>
-                    <span>Product Manager</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
-                <div className="member" data-aos="fade-up" data-aos-delay={300}>
-                  <div className="member-img">
-                    <img
-                      src="assets/img/team/team-3.jpg"
-                      className="img-fluid"
-                      alt=""
-                    />
-                    <div className="social">
-                      <a href>
-                        <i className="bi bi-twitter" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-facebook" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-instagram" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-linkedin" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="member-info">
-                    <h4>William Anderson</h4>
-                    <span>CTO</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
-                <div className="member" data-aos="fade-up" data-aos-delay={400}>
-                  <div className="member-img">
-                    <img
-                      src="assets/img/team/team-4.jpg"
-                      className="img-fluid"
-                      alt=""
-                    />
-                    <div className="social">
-                      <a href>
-                        <i className="bi bi-twitter" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-facebook" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-instagram" />
-                      </a>
-                      <a href>
-                        <i className="bi bi-linkedin" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="member-info">
-                    <h4>Amanda Jepson</h4>
-                    <span>Accountant</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* End Team Section */}
+
         {/* ======= Pricing Section ======= */}
         <section id="pricing" className="pricing">
           <div className="container">
