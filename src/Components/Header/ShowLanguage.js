@@ -5,13 +5,28 @@ import * as languages from "../../Redux/constrants/languageConst";
 import { useSelector, useDispatch } from "react-redux";
 import * as languageConst from "../../Redux/constrants/languageConst";
 import * as languageAct from "../../Redux/actions/languageAct";
+import { LANGUAGES } from "../../Redux/constrants/languageConst";
 
 export default function ShowLanguageMobile(props) {
-  const manhanvien = useSelector((state) => state.language.language);
+  const language = useSelector((state) => state.language.language);
   const dispatch = useDispatch();
   const changeLanguage = (lang) => {
     dispatch(languageAct.changeLanguageReport(lang));
   };
+
+  const [keywords, setKeywords] = useState();
+  useEffect(() => {
+    import(
+      `./keyword/${LANGUAGES.find((x) => x.key === language).value}/showLanguage.js`
+    )
+      .then((res) => {
+        setKeywords(res.default);
+      })
+      .catch((rej) => {
+        console.log(rej);
+        setKeywords(undefined);
+      });
+  },[language])
   return (
     <MyModal
       toggle={props.toggle}
@@ -20,18 +35,18 @@ export default function ShowLanguageMobile(props) {
         width: window.innerWidth > 991 ? "500px" : "100%",
         height: window.innerWidth > 991 ? "unset" : "100%",
       }}
-      title="Chọn ngôn ngữ"
+      title={keywords?._select_language}
       render={
         <div className="XuJWe ">
           <div className="">
             <form className="bvgmfz-0 glLXAQ">
               <div className="fvnhew-0 iPvcpq cmc-input-group jBaqVU">
                 <input
-                  placeholder="Tìm kiếm"
+                  placeholder={keywords?._find}
                   autoComplete="off"
                   spellCheck="false"
                   className="ykm2vq-1 fAWiaZ cmc-input"
-                />
+                ></input>
                 <span className="cmc-icon__wrap">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +71,7 @@ export default function ShowLanguageMobile(props) {
             </form>
             <div className="sc-1cm3a78-0 dsmLjZ">
               <div className="sc-1b4wplq-3 eSrHmB">
-                <p>Ngôn ngữ phổ biến</p>
+                <p>{keywords?._popular_language}</p>
                 {languages.LANGUAGES.map((value, i) => {
                   return (
                     <div key={i} className="rz95fb-3 rz95fb-4 YsYKS">

@@ -1,7 +1,6 @@
 import React from "react";
 
 function Index(props) {
-    const { translate } = props;
     return (
         <section id="team" className="team section-bg">
             <div className="container">

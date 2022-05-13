@@ -95,19 +95,7 @@
     padding: 12px;
     width: 100%;
 }
-.iPvcpq input + .cmc-icon, .iPvcpq input + .cmc-icon__wrap {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-}
+
 .coGWQa {
     box-sizing: border-box;
     margin: 0px;
