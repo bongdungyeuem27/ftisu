@@ -2,9 +2,8 @@
     color: rgb(166, 176, 195);
     font-size: 12px;
     cursor: pointer;
-    position: absolute;
-    right: 16px;
-    top: 16px;
+    position: relative;
+    margin: auto 0px;
 }
 .jZwKai {
     box-sizing: border-box;

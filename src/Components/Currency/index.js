@@ -1,26 +1,28 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Currency.css";
-import chart from "./chart.png";
+import MyChart from "./MyChart";
 
 export default function Index() {
   const headerRef = useRef(null);
   useEffect(() => {
-    if (headerRef==null) return;
-    window.addEventListener("scroll", () =>{
-      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80){
+    if (headerRef == null) return;
+    window.addEventListener("scroll", () => {
+      if (
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > 80
+      ) {
         headerRef?.current?.classList?.add("popped");
-      }
-      else{
-      
+      } else {
         headerRef?.current?.classList?.remove("popped");
       }
-      return ()=>{
-        window.removeEventListener("scroll")
-      }
-    })
-  }, [])
+      return () => {
+        window.removeEventListener("scroll");
+      };
+    });
+  }, []);
   return (
-    <section className="currency" >
+    <section className="currency">
+      {/* Tiêu đề */}
       <div className="sc-16r8icm-0 eMxKgr container">
         <div className="n78udj-0 jskEGI">
           <div className="sc-16r8icm-0 kjciSH top-summary-container">
@@ -75,7 +77,7 @@ export default function Index() {
                   2.66{/* */}%
                 </span>
               </div>
-              <div className="n78udj-3 emihhf" ref= {headerRef}>
+              <div className="n78udj-3 emihhf" ref={headerRef}>
                 <span>
                   <img
                     src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
@@ -1042,6 +1044,110 @@ export default function Index() {
         </div>
       </div>
 
+      {/* Phần Tool Carousel */}
+      <div className="sc-16r8icm-0 sc-2a8jfd-3 kfTTiy">
+        <div className="container routeSwitcher">
+          <span>
+            <a
+              href="/vi/currencies/near-protocol/"
+              style={{ backgroundColor: "#3861FB" }}
+              className="x0o17e-0 kzspeM sc-1dmz9yx-0 eystbV cmc-link"
+            >
+              Tổng quan
+            </a>
+            <a
+              href="/vi/currencies/near-protocol/markets/"
+              style={{ backgroundColor: "transparent" }}
+              className="x0o17e-0 DChGS sc-1dmz9yx-0 cckSAk cmc-link"
+            >
+              Thị trường
+            </a>
+            <a
+              href="/vi/currencies/near-protocol/historical-data/"
+              style={{ backgroundColor: "transparent" }}
+              className="x0o17e-0 DChGS sc-1dmz9yx-0 cckSAk cmc-link"
+            >
+              Dữ Liệu Lịch Sử Thị Trường
+            </a>
+            <a
+              href="/vi/currencies/near-protocol/project-info/"
+              style={{ backgroundColor: "transparent" }}
+              className="x0o17e-0 DChGS sc-1dmz9yx-0 cckSAk cmc-link"
+            >
+              Project Info
+            </a>
+            <a
+              rel="nofollow"
+              href="/vi/currencies/near-protocol/wallets/"
+              style={{ backgroundColor: "transparent" }}
+              className="x0o17e-0 DChGS sc-1dmz9yx-0 cckSAk cmc-link"
+            >
+              Ví
+            </a>
+            <a
+              href="/vi/currencies/near-protocol/news/"
+              style={{ backgroundColor: "transparent" }}
+              className="x0o17e-0 DChGS sc-1dmz9yx-0 cckSAk cmc-link"
+            >
+              Tin tức
+            </a>
+            <a
+              rel="nofollow"
+              href="/vi/currencies/near-protocol/social/"
+              style={{ backgroundColor: "transparent" }}
+              className="x0o17e-0 DChGS sc-1dmz9yx-0 cckSAk cmc-link"
+            >
+              Mạng xã hội
+            </a>
+            <a
+              rel="nofollow"
+              href="/vi/currencies/near-protocol/ratings/"
+              style={{ backgroundColor: "transparent" }}
+              className="x0o17e-0 DChGS sc-1dmz9yx-0 cckSAk cmc-link"
+            >
+              Xếp hạng
+            </a>
+            <a
+              rel="nofollow"
+              href="/vi/currencies/near-protocol/onchain-analysis/"
+              style={{ backgroundColor: "transparent" }}
+              className="x0o17e-0 DChGS sc-1dmz9yx-0 cckSAk cmc-link"
+            >
+              Phân tích
+            </a>
+            <a
+              rel="nofollow"
+              href="/vi/currencies/near-protocol/price-estimates/"
+              style={{ backgroundColor: "transparent" }}
+              className="x0o17e-0 DChGS sc-1dmz9yx-0 cckSAk cmc-link"
+            >
+              Price Estimates
+            </a>
+          </span>
+          {/* <button className="x0o17e-0 eCXbyL n70ab0-1 bcqMxx">
+            <span className="x0o17e-1 bHCvsh">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                height="16px"
+                width="16px"
+                viewBox="0 0 24 24"
+                color="currentColor"
+                className="sc-16r8icm-0 eWuPKG"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M12.0008 2C12.266 2 12.5204 2.10536 12.7079 2.29289L18.1085 7.69346C18.499 8.08398 18.499 8.71715 18.1085 9.10767C17.7179 9.49819 17.0848 9.49819 16.6943 9.10767L13.001 5.41438V16C13.001 16.5523 12.5533 17 12.001 17C11.4487 17 11.001 16.5523 11.001 16V5.41405L7.30737 9.10767C6.91684 9.49819 6.28368 9.49819 5.89315 9.10767C5.50263 8.71715 5.50263 8.08398 5.89315 7.69346L11.2937 2.29289C11.4812 2.10536 11.7356 2 12.0008 2ZM3 15C3.55228 15 4 15.4477 4 16V19C4 19.5523 4.44772 20 5 20H19.0018C19.5541 20 20.0018 19.5523 20.0018 19V16C20.0018 15.4477 20.4496 15 21.0018 15C21.5541 15 22.0018 15.4477 22.0018 16V19C22.0018 20.6569 20.6587 22 19.0018 22H5C3.34315 22 2 20.6569 2 19V16C2 15.4477 2.44772 15 3 15Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+            Share
+          </button> */}
+        </div>
+      </div>
+
       {/* phần nội dung */}
       <div className="sc-16r8icm-0 jKrmxw container">
         <div style={{ display: "initial" }}>
@@ -1100,11 +1206,7 @@ export default function Index() {
                         </div>
                       </div>
                       <div className="sc-16r8icm-0 kjciSH table-control-left table-control-chart-type">
-                        <img
-                          alt="chart"
-                          style={{ width: "100%" }}
-                          src={chart}
-                        ></img>
+                        <MyChart></MyChart>
                       </div>
                       {/* <div className="sc-117f5dm-0 cjTISQ">
                     <div className="sc-16r8icm-0 kjciSH table-control-left table-control-chart-type">
@@ -1828,7 +1930,7 @@ export default function Index() {
                 </div>
               </div>
             </div>
-            <div className="sc-16r8icm-0 iutcov">
+            <div className="sc-16r8icm-0 iutcov border-box-shadow">
               <div className="sc-16r8icm-0 hgKnTV">
                 <div className="sc-16r8icm-0 nds9rn-0 dAxhCK">
                   <h2 color="text" className="sc-1q9q90x-0 bjfmoe">

@@ -42,17 +42,15 @@ export default function MyModal(props) {
         <div ref={wrapperRef} style={props.style}>
             
           <div className="t8xka3-1 XuJWe has-title">
-            <span>
+            <div className="d-flex flex-row justify-content-between">
               <div className="sc-1bafwtq-3 ggaVxK">{props.title}</div>
-            </span>
-            <button className="" onClick={closeModal}>
+              <button className="sc-16r8icm-0 jZwKai close-button" onClick={closeModal}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
                 height="24px"
                 width="24px"
                 viewBox="0 0 24 24"
-                className="sc-16r8icm-0 jZwKai close-button"
               >
                 <path
                   d="M18 6L6 18M18 18L6 6"
@@ -64,6 +62,8 @@ export default function MyModal(props) {
                 />
               </svg>
             </button>
+            </div>
+
           </div>
           {props.render}
         </div>
