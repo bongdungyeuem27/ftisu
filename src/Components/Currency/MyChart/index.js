@@ -1,458 +1,93 @@
-import React from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import "./MyChart.css";
 import CanvasJSReact from "../../../common/canvasjs/canvasjs.react";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-const options = {
-  animationEnabled: true,
-  exportEnabled: true,
-  height: 450,
-  zoomEnabled: true,
-  theme: "light2", // "light1", "dark1", "dark2"
-  // title:{
-  //   text: "Bounce Rate by Week of Year"
-  // },
-  axisY: {
-    // title: "Bounce Rate",
-    includeZero: false,
-    suffix: "%",
-  },
-  axisX: {
-    // title: "Week of Year",
-    prefix: "W",
-    interval: 2,
-  },
-  data: [
-    {
-      type: "line",
-      toolTipContent: "Week {x}: {y}%",
-      dataPoints: [
-        { x: 1, y: 64 },
-        { x: 2, y: 61 },
-        { x: 3, y: 64 },
-        { x: 4, y: 62 },
-        { x: 5, y: 64 },
-        { x: 6, y: 60 },
-        { x: 7, y: 58 },
-        { x: 8, y: 59 },
-        { x: 9, y: 53 },
-        { x: 10, y: 54 },
-        { x: 11, y: 61 },
-        { x: 12, y: 60 },
-        { x: 13, y: 55 },
-        { x: 14, y: 60 },
-        { x: 15, y: 56 },
-        { x: 16, y: 60 },
-        { x: 17, y: 59.5 },
-        { x: 18, y: 63 },
-        { x: 19, y: 58 },
-        { x: 20, y: 54 },
-        { x: 21, y: 59 },
-        { x: 22, y: 64 },
-        { x: 23, y: 59 },
-      ],
-    },
-  ],
-};
+
 
 export default function Index() {
+  const [options, setOptions] = useState(
+    {
+      animationEnabled: true,
+      exportEnabled: true,
+      height: 450,
+      zoomEnabled: true,
+      theme: "light2", // "light1", "dark1", "dark2"
+      // title:{
+      //   text: "Bounce Rate by Week of Year"
+      // },
+      axisY: {
+        // title: "Bounce Rate",
+        includeZero: false,
+        suffix: "%",
+      },
+      axisX: {
+        // title: "Week of Year",
+        prefix: "W",
+        interval: 2,
+      },
+      data: [
+        {
+          type: "line",
+          toolTipContent: "Week {x}: {y}%",
+          dataPoints: [
+            { x: 1, y: 64 },
+            { x: 2, y: 61 },
+            { x: 3, y: 64 },
+            { x: 4, y: 62 },
+            { x: 5, y: 64 },
+            { x: 6, y: 60 },
+            { x: 7, y: 58 },
+            { x: 8, y: 59 },
+            { x: 9, y: 53 },
+            { x: 10, y: 54 },
+            { x: 11, y: 61 },
+            { x: 12, y: 60 },
+            { x: 13, y: 55 },
+            { x: 14, y: 60 },
+            { x: 15, y: 56 },
+            { x: 16, y: 60 },
+            { x: 17, y: 59.5 },
+            { x: 18, y: 63 },
+            { x: 19, y: 58 },
+            { x: 20, y: 54 },
+            { x: 21, y: 59 },
+            { x: 22, y: 64 },
+            { x: 23, y: 59 },
+          ],
+        },
+      ],
+    }
+  );
+  const horizontalToolBarRef = useRef(null);
+  const coverCanvasRef = useRef(null);
+  // const [coverCanvasHeight, setcoverCanvasHeight] = useState(options.height);
+  const screen1 = useFullScreenHandle();
+  const [fullScreen, setFullScreen] = useState(false);
+  const reportChange = useCallback(
+    (state, handle) => {
+      if (handle === screen1) {
+        
+        options.height = coverCanvasRef?.current?.clientHeight-horizontalToolBarRef?.current?.clientHeight;
+        
+        setOptions({...options});
+        console.log(options);
+        setFullScreen(state);
+      }
+    },
+    [screen1]
+  );
+
   return (
-    <interactive-chart>
+    <FullScreen handle={screen1} onChange={reportChange} >
       <div
-        className="bc-interactive-chart"
+        className="bc-interactive-chart" 
         data-ng-class="{'full-screen': fullScreen, 'dashboard': dashboardMode, 'full-tab-screen': fullTabScreen, 'grid-enabled': gridEnabled, 'flipchart-mode': flipChartMode}"
       >
-        {/* ngIf: !dashboardMode && !fullScreen */}
-        <div
-          className="interactive-chart-premier-ads bc-premier-new-ads-block show-for-medium-up no-print ng-scope ng-isolate-scope ng-hide"
-          data-ng-class="{'show': !$ctrl.hideContent}"
-          data-ng-hide="$ctrl.hideContent"
-          data-ng-if="!dashboardMode && !fullScreen"
-        >
-          <div
-            aria-label="close modal"
-            className="modal-close-wrapper"
-            data-ng-click="$ctrl.close()"
-          >
-            <i className="bc-glyph-times" />
-          </div>
-          <div className="bc-premier-new-ads-block__container">
-            <div className="bc-premier-new-ads-block__button-wrapper">
-              <img
-                className="bc-premier-new-ads-block__logo"
-                src="/img/premier/premier-logo.svg"
-                alt="Barchart Premier"
-              />
-            </div>
-            <div className="bc-premier-new-ads-block__content-wrapper">
-              {/*            <h3><strong>Interactive Charts</strong> Help Expose the Secrets of Stocks</h3> */}
-              <p>
-                With <strong>Barchart Premier</strong> you have unlimited chart
-                downloads, grid view, and much more. Why not try it risk-free
-                today?&nbsp;&nbsp;&nbsp;
-                <a
-                  target="_blank"
-                  data-ng-href="/get-barchart-premier?ref=chartDownload"
-                  className="bc-premier-new-ads-block__button"
-                  href="/get-barchart-premier?ref=chartDownload"
-                >
-                  Start Here
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-        {/* end ngIf: !dashboardMode && !fullScreen */}
-        {/*    <interactive-chart-announcement data-ng-if="flipChartMode || dashboardMode"></interactive-chart-announcement>*/}
-        {/*<div class="bc-interactive-chart__my-chart-feature" data-ng-if="showMyChartAds">*/}
-        {/*<interactive-chart-my-chart-feature-ads></interactive-chart-my-chart-feature-ads>*/}
-        {/*</div>*/}
-        {/*<div class="bc-interactive-chart__my-chart-feature" data-ng-if="showScrollbarFeatureAds">*/}
-        {/*<interactive-chart-scrollbar-feature-ads></interactive-chart-scrollbar-feature-ads>*/}
-        {/*</div>*/}
-        <div className="bc-interactive-chart__wrapper">
-          {/* ngIf: currentChartSettings && !readOnlyMode */}
-          <div
-            className="bc-interactive-chart__wrapper-toolbar no-print ng-scope"
-            data-ng-if="currentChartSettings && !readOnlyMode"
-            data-ng-class="{'fullscreen-toolbar-wrapper': fullScreen || flipChartMode}"
-          >
-            <div className="tools">
-              <div className="bc-interactive-chart__toolbars">
-                {/* This chart UI row is used for FlipCharts only. */}
-                {/* ngIf: flipChartMode */}
-                {/* ngIf: flipChartMode && !gridEnabled && !isCotChart */}
-                {/* First row of the chart UI. */}
-                {/* ngIf: fullScreen */}
-                {/* ngIf: !fullScreen */}
-                <div data-ng-if="!fullScreen" className="ng-scope">
-                  {/* ngIf: !flipChartMode */}
-                  <div
-                    className="bc-interactive-chart__toolbar-wrapper separator hide-for-print show-for-medium-up clearfix ng-scope"
-                    data-ng-if="!flipChartMode"
-                  >
-                    <form
-                      className="bc-interactive-chart__symbol-selector bc-form ng-pristine ng-valid ng-isolate-scope"
-                      data-ng-submit="changeSymbol()"
-                      autoComplete="off"
-                      data-dashboard-mode="dashboardMode"
-                      data-full-screen="fullScreen"
-                    >
-                      <div
-                        className="bc-interactive-chart__symbol-selector-fieldset"
-                        data-ng-class="{ fullscreen: fullScreen }"
-                      >
-                        <input
-                          type="submit"
-                          defaultValue="Go"
-                          className="bc-button light-blue"
-                          data-ng-hide="fullScreen"
-                        />
-                        <input
-                          type="text"
-                          aria-label="chart symbol search"
-                          className="js-interactive-chart-symbol-selector-input ng-pristine ng-untouched ng-valid"
-                          data-ng-model="symbol"
-                          data-ng-model-options="{ debounce: 100 }"
-                          placeholder
-                          data-ng-change="useSearch()"
-                          data-ng-focus="preSymbolEnter()"
-                          data-ng-blur="pastSymbolEnter()"
-                          data-ng-keydown="keyboardNavigation($event)"
-                          data-ng-class="{'error': invalidSymbol}"
-                        />
-                        {/* ngIf: fullScreen */}
-                        <div
-                          className="symbol-autocomplete quick-search hide ng-isolate-scope ng-hide"
-                          data-ng-show="searchResultsVisible"
-                          data-ng-class="{'hide': !searchResultsVisible}"
-                          data-model="symbol"
-                          data-search-results="searchResults"
-                          data-on-symbol-select="selectSymbol(symbol)"
-                        >
-                          <div
-                            data-ng-show="$ctrl.extented"
-                            className="search-results-header ng-hide"
-                          >
-                            Click to add:
-                          </div>
-                          {/* ngRepeat: item in $ctrl.searchResults */}
-                          <div
-                            className="no-found columns"
-                            data-ng-show="$ctrl.searchResults === null"
-                          >
-                            <div className="large-12 medium-12 small-12">
-                              <span>No Matching Results</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                    <div
-                      className="bar-type-drop-down right-border-separator"
-                      data-ng-hide="gridEnabled"
-                    >
-                      <div
-                        className="tools-dropdown tools-dropdown-bartype ng-isolate-scope"
-                        title="Change Bar Type"
-                        data-current-chart-settings="currentChartSettings"
-                        data-use-font="true"
-                      >
-                        <div
-                          className="js-bc-interactive-chart-dropdown-bartype bc-dropdown-flexible mob-styles ng-isolate-scope"
-                          data-label-font="$ctrl.labelFont"
-                          data-label-img="$ctrl.label"
-                          data-flipchart-bar-type="$ctrl.flipchartMode"
-                          data-dropdown-id="bc-interactive-chart-hamburger-template-83783"
-                          data-remove-mobile-touch="true"
-                        >
-                          {/* ngIf: !isMobile */}
-                          <a
-                            data-ng-if="!isMobile"
-                            className="bc-dropdown-flexible-toggle ng-scope"
-                            data-ng-click="handleClick($event)"
-                            data-dropdown-toggle="#bc-interactive-chart-hamburger-template-83783"
-                          >
-                            <span
-                              data-ng-show="label"
-                              className="ng-binding ng-hide"
-                            />
-                            <img
-                              className="image-preview ng-hide"
-                              bc-asset
-                              data-ng-show="labelImg"
-                            />
-                            <i
-                              data-ng-show="labelFont"
-                              className="icon-glypth bc-glyph-plot_Line"
-                            />
-                            <i className="bc-glyph-chevron-down bc-dropdown-flexible-arrow" />
-                          </a>
-                          {/* end ngIf: !isMobile */}
-                          {/* ngIf: isMobile */}
-                          <div
-                            id="bc-interactive-chart-hamburger-template-83783"
-                            className="f-dropdown"
-                          >
-                            <ng-transclude>
-                              <div className="tools-dropdown-content ng-scope">
-                                <ul>
-                                  {/* ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check ng-hide"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      OHLC Bars
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check ng-hide"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      Colored OHLC Bars
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check ng-hide"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      HLC Bars
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check ng-hide"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      Candlestick Hollow
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check ng-hide"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      Candlestick Open-to-Close
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check ng-hide"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      Candlestick Close-to-Close
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check ng-hide"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      Heikin-Ashi
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check ng-hide"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      Elder-Impulse-System
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      Line Chart
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check ng-hide"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      Area Chart
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check ng-hide"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      Renko
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                  <li
-                                    data-ng-repeat="item in $ctrl.typeList"
-                                    data-ng-click="$ctrl.changeBarType(item)"
-                                    className="ng-scope"
-                                  >
-                                    <i
-                                      className="icon bc-glyph-check ng-hide"
-                                      data-ng-show="$ctrl.selectedBarType.key === item.key && $ctrl.selectedBarType.attr === item.attr"
-                                    ></i>
-                                    <div className="label ng-binding">
-                                      Column
-                                    </div>
-                                  </li>
-                                  {/* end ngRepeat: item in $ctrl.typeList */}
-                                </ul>
-                              </div>
-                            </ng-transclude>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {/* ngIf: gridEnabled */}
-                    <button
-                      className="bc-button white-button small"
-                      title="Add, Change, Delete Studies"
-                      data-ng-hide="gridEnabled"
-                      data-ng-click="plotToolsModal()"
-                    >
-                      +Study
-                    </button>
-                    {/* ngIf: gridEnabled */}
-                    <button
-                      className="bc-button white-button small chart-tools-button 3"
-                      title="Add, Drawing Tools"
-                      data-ng-click="openToolsModal()"
-                      data-ng-hide="gridEnabled"
-                    >
-                      Tools
-                    </button>
-                    <button
-                      className="bc-button white-button small settings-button"
-                      data-ng-hide="gridEnabled"
-                      title="Change Chart Settings"
-                      data-ng-click="settingsModal()"
-                    >
-                      <span className="show-for-medium-up">Settings</span>
-                      <i className="bc-glyph-cog show-for-small-down" />
-                    </button>
-                  </div>
-                  {/* end ngIf: !flipChartMode */}
-                </div>
-                {/* end ngIf: !fullScreen */}
+        <div className="bc-interactive-chart__wrapper" ref={coverCanvasRef}>
 
-                {/* Second row of the chart UI. */}
-                {/* ngIf: !flipChartMode */}
-                <div
-                  className="bc-interactive-chart__toolbar-wrapper hide-for-print hide-for-medium-up ng-scope"
-                  data-ng-if="!flipChartMode"
-                >
-                  {/* This part of the toolbar is visible only on mobile devices. */}
-                  <div className="bc-interactive-chart__mobile-toolbar js-bc-interactive-chart__mobile-toolbar show-for-small-down">
+                  <div className="bc-interactive-chart__mobile-toolbar js-bc-interactive-chart__mobile-toolbar show-for-small-down" ref={horizontalToolBarRef}>
                     <form className="bc-interactive-chart__symbol-selector bc-form ng-pristine ng-valid ng-isolate-scope">
                       <div className="bc-interactive-chart__symbol-selector-fieldset">
                         <input
@@ -541,82 +176,89 @@ export default function Index() {
                         className="tools-sidebar-horizontal ng-scope cwgaxb-0 iOPuHO"
                         data-tabs="true"
                       >
-                        <ul className="react-tabs__tab-list-horizontal" role="tablist">
-                          <li
-                            className="react-tabs__tab-horizontal"
-                            role="tab"
-                            id="react-tabs-0"
-                            aria-selected="true"
-                            aria-disabled="false"
-                            aria-controls="react-tabs-1"
-                            tabIndex={0}
-                            onClick={()=>{}}
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28"><path fill="currentColor" d="M8.5 6A2.5 2.5 0 0 0 6 8.5V11h1V8.5C7 7.67 7.67 7 8.5 7H11V6H8.5zM6 17v2.5A2.5 2.5 0 0 0 8.5 22H11v-1H8.5A1.5 1.5 0 0 1 7 19.5V17H6zM19.5 7H17V6h2.5A2.5 2.5 0 0 1 22 8.5V11h-1V8.5c0-.83-.67-1.5-1.5-1.5zM22 19.5V17h-1v2.5c0 .83-.67 1.5-1.5 1.5H17v1h2.5a2.5 2.5 0 0 0 2.5-2.5z"></path></svg>
-                          </li>
-                          <li
-                            className="react-tabs__tab-horizontal"
-                            role="tab"
-                            id="react-tabs-0"
-                            aria-selected="true"
-                            aria-disabled="false"
-                            aria-controls="react-tabs-1"
-                            tabIndex={0}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 28 28"
-                              width={28}
-                              height={28}
+                        <ul
+                          className="react-tabs__tab-list-horizontal"
+                          role="tablist"
+                        >
+                          {fullScreen ? (
+                            <li
+                              className="react-tabs__tab-horizontal"
+                              role="tab"
+                              id="react-tabs-0"
+                              aria-selected="true"
+                              aria-disabled="false"
+                              aria-controls="react-tabs-1"
+                              tabIndex={0}
+                              onClick={screen1.exit}
                             >
-                              <g fill="currentColor">
-                                <path d="M18 15h8v-1h-8z" />
-                                <path d="M14 18v8h1v-8zM14 3v8h1v-8zM3 15h8v-1h-8z" />
-                              </g>
-                            </svg>
-                          </li>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlnsXlink="http://www.w3.org/1999/xlink"
+                                width="24px"
+                                height="24px"
+                                viewBox="0 0 24 24"
+                                version="1.1"
+                              >
+                                {/* Uploaded to SVGRepo https://www.svgrepo.com */}
+
+                                <g
+                                  id="🔍-Product-Icons"
+                                  stroke="none"
+                                  strokeWidth={1}
+                                  fill="none"
+                                  fillRule="evenodd"
+                                >
+                                  <g
+                                    id="ic_fluent_full_screen_zoom_24_regular"
+                                    fill="#212121"
+                                    fillRule="nonzero"
+                                  >
+                                    <path
+                                      d="M16.25,15.5 L20.25,15.5 C20.6642136,15.5 21,15.8357864 21,16.25 C21,16.6296958 20.7178461,16.943491 20.3517706,16.9931534 L20.25,17 L17,17 L17,20.25 C17,20.6642136 16.6642136,21 16.25,21 C15.8703042,21 15.556509,20.7178461 15.5068466,20.3517706 L15.5,20.25 L15.5,16.25 C15.5,15.8703042 15.7821539,15.556509 16.1482294,15.5068466 L16.25,15.5 L20.25,15.5 L16.25,15.5 Z M3.75,15.5 L7.75,15.5 C8.12969577,15.5 8.44349096,15.7821539 8.49315338,16.1482294 L8.5,16.25 L8.5,20.25 C8.5,20.6642136 8.16421356,21 7.75,21 C7.37030423,21 7.05650904,20.7178461 7.00684662,20.3517706 L7,20.25 L7,17 L3.75,17 C3.33578644,17 3,16.6642136 3,16.25 C3,15.8703042 3.28215388,15.556509 3.64822944,15.5068466 L3.75,15.5 L7.75,15.5 L3.75,15.5 Z M7.75,3 C8.12969577,3 8.44349096,3.28215388 8.49315338,3.64822944 L8.5,3.75 L8.5,7.75 C8.5,8.12969577 8.21784612,8.44349096 7.85177056,8.49315338 L7.75,8.5 L3.75,8.5 C3.33578644,8.5 3,8.16421356 3,7.75 C3,7.37030423 3.28215388,7.05650904 3.64822944,7.00684662 L3.75,7 L7,7 L7,3.75 C7,3.33578644 7.33578644,3 7.75,3 Z M16.25,3 C16.6296958,3 16.943491,3.28215388 16.9931534,3.64822944 L17,3.75 L17,7 L20.25,7 C20.6642136,7 21,7.33578644 21,7.75 C21,8.12969577 20.7178461,8.44349096 20.3517706,8.49315338 L20.25,8.5 L16.25,8.5 C15.8703042,8.5 15.556509,8.21784612 15.5068466,7.85177056 L15.5,7.75 L15.5,3.75 C15.5,3.33578644 15.8357864,3 16.25,3 Z"
+                                      id="🎨-Color"
+                                    />
+                                  </g>
+                                </g>
+                              </svg>
+                            </li>
+                          ) : (
+                            <li
+                              className="react-tabs__tab-horizontal"
+                              role="tab"
+                              id="react-tabs-0"
+                              aria-selected="true"
+                              aria-disabled="false"
+                              aria-controls="react-tabs-1"
+                              tabIndex={0}
+                              onClick={screen1.enter}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 28 28"
+                                width="28"
+                                height="28"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M8.5 6A2.5 2.5 0 0 0 6 8.5V11h1V8.5C7 7.67 7.67 7 8.5 7H11V6H8.5zM6 17v2.5A2.5 2.5 0 0 0 8.5 22H11v-1H8.5A1.5 1.5 0 0 1 7 19.5V17H6zM19.5 7H17V6h2.5A2.5 2.5 0 0 1 22 8.5V11h-1V8.5c0-.83-.67-1.5-1.5-1.5zM22 19.5V17h-1v2.5c0 .83-.67 1.5-1.5 1.5H17v1h2.5a2.5 2.5 0 0 0 2.5-2.5z"
+                                ></path>
+                              </svg>
+                            </li>
+                          )}
                         </ul>
                       </div>
                     </div>
                   </div>
-                </div>
-                {/* end ngIf: !flipChartMode */}
-              </div>
-            </div>
-          </div>
+
+       
           {/* end ngIf: currentChartSettings && !readOnlyMode */}
           {/*<div id="bc-interactive-chart__chart-container-tooltip" data-ng-show="currentChartSettings.settings.tooltip.mode === 'cards' && !gridEnabled"></div>*/}
-          <div className="tool_and_chart-reduce d-flex flex-row justify-content-between">
+          <div className="tool_and_chart-reduce d-flex flex-row justify-content-between"  >
             {/* ngIf: showDrawingsPanel && !isMobileOnly && !flipChartMode && !gridEnabled */}
             <div
               className="tools-sidebar ng-scope cwgaxb-0 iOPuHO"
               data-tabs="true"
             >
-              {/*           
-               {
-                 [1,2].map((value, key)=>{
-                  return ( <span key={key} className="icon-G7o5fBfa">
-                    
-                    <button type="button" className="chart-selector-button">
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 28 28"
-                    width={28}
-                    height={28}
-                  >
-                    <g fill="currentColor">
-                      <path d="M18 15h8v-1h-8z" />
-                      <path d="M14 18v8h1v-8zM14 3v8h1v-8zM3 15h8v-1h-8z" />
-                    </g>
-                  </svg>
-                    </button>
-                    
-               
-                </span>
-           )
-                 })
-               } */}
-
               <ul className="react-tabs__tab-list" role="tablist">
                 <li
                   className="react-tabs__tab react-tabs__tab--selected"
@@ -768,12 +410,10 @@ export default function Index() {
               options={options}
               /* onRef={ref => this.chart = ref} */
             />
-
-            {/* end ngIf: !isMobile */}
           </div>
         </div>
       </div>
-      <div id="mouseMoveSpinner">Drawing</div>
-    </interactive-chart>
+    </FullScreen>
   );
+  
 }

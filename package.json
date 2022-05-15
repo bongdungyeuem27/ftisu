@@ -11,6 +11,7 @@
     "prettier": "^2.6.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-full-screen": "^1.1.0",
     "react-modal": "^3.15.1",
     "react-redux": "^8.0.1",
     "react-redux-multilingual": "^2.0.4",

@@ -1154,7 +1154,6 @@ export default function Index() {
           <div display=",,flex" className="sc-16r8icm-0 sc-19zk94m-1 gRSJaB">
             <div
               style={{
-                maxWidth: "930px",
                 flexGrow: 1,
                 display: "flex",
                 flexDirection: "column",

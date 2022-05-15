@@ -471,10 +471,16 @@ select {
     top: 13px!important;
     left: 13px!important;
 }
-.interactive-chart-sidebar-container .bc-interactive-chart__wrapper-chart {
-    width: 100%;
+.bc-interactive-chart__wrapper{
+    height: 100%;
+}
+.bc-interactive-chart{
+    background-color: var(--theme-white);
+    height: 100%;
 }
 .bc-interactive-chart__wrapper-chart {
+    width: 100%;
+    height: 100%;
     margin-bottom: 20px;
 }
 .bc-interactive-chart .bc-interactive-chart__chart-error-block {
@@ -632,14 +638,18 @@ hr {
 /* tool and chart */
 .tool_and_chart-reduce{
     padding: 10px 0px;
-    height: 450px;
+    /* height: 100%; */
 }
+canvas{
+    width:100%;
+    max-width:100%;
+    height:100%;
+ }
 .tools-sidebar {
     position: relative;
     z-index: 5;
     width: 45px;
     display: inline-block;
-    padding-top: 15px;
     height: 100%;
 }
 
