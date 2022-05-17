@@ -24,6 +24,28 @@
     line-height: 21px;
     display: inline-block;
 }
+
+.kfTTiy .routeSwitcher > span {
+    white-space: nowrap;
+    overflow-x: scroll;
+    
+}
+
+/* ÷÷÷÷////////÷÷÷÷÷÷ */
+@media (max-width: 912px){
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    /* .kfTTiy .routeSwitcher > span {
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    } */
+}
+
+
+
+
 @media (min-width: 768px){
     .jskEGI .top-summary-container {
         display: flex;
@@ -113,6 +135,9 @@
         padding-right: 24px;
     }
 }
+
+
+/* //////////////////////////////////////////////////////////////// */
 @media screen and (min-width: 768px){
     .hMKivi {
         padding-right: 24px;
@@ -241,10 +266,6 @@
 .jskEGI .priceSection {
     margin-top: 14px;
 }
-.kjciSH {
-    box-sizing: border-box;
-    margin: 0px;
-}
 .jskEGI .priceHeading {
     color: var(--text-color-sub);
     font-size: 12px;
@@ -256,11 +277,6 @@
     color: var(--color-light-neutral-5);
     font-weight: inherit;
     font-size: inherit;
-}
-
-.kjciSH {
-    box-sizing: border-box;
-    margin: 0px;
 }
 .jskEGI .priceValue, .jskEGI .icoTitleText {
     font-size: 32px;
@@ -653,10 +669,6 @@
     box-sizing: border-box;
     margin: 0px;
 }
-.kjciSH {
-    box-sizing: border-box;
-    margin: 0px;
-}
 .cEhSvA {
     display: block;
     width: 100%;
@@ -683,10 +695,6 @@
 }
 .dAxhCK .hide {
     display: none;
-}
-.kjciSH {
-    box-sizing: border-box;
-    margin: 0px;
 }
 .dDXPcp {
     -webkit-box-align: center;
@@ -731,19 +739,11 @@
     -webkit-box-align: center;
     align-items: center;
 }
-.kjciSH {
-    box-sizing: border-box;
-    margin: 0px;
-}
 .cjTISQ .table-control-left {
     display: flex;
     flex-direction: row;
     -webkit-box-align: center;
     align-items: center;
-}
-.kjciSH {
-    box-sizing: border-box;
-    margin: 0px;
 }
 .hmFKKb {
     border-radius: 50%;
@@ -822,10 +822,7 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
 }
-.kfTTiy .routeSwitcher > span {
-    white-space: nowrap;
-    margin-right: 16px;
-}
+
 .kfTTiy a:-webkit-any-link {
     text-decoration: none;
 }

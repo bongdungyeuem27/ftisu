@@ -2,64 +2,62 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import "./MyChart.css";
 import CanvasJSReact from "../../../common/canvasjs/canvasjs.react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import "./TopBar.css";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-
 export default function Index() {
-  const [options, setOptions] = useState(
-    {
-      animationEnabled: true,
-      exportEnabled: true,
-      height: 450,
-      zoomEnabled: true,
-      theme: "light2", // "light1", "dark1", "dark2"
-      // title:{
-      //   text: "Bounce Rate by Week of Year"
-      // },
-      axisY: {
-        // title: "Bounce Rate",
-        includeZero: false,
-        suffix: "%",
+  const [options, setOptions] = useState({
+    animationEnabled: true,
+    exportEnabled: true,
+    height: 450,
+    zoomEnabled: true,
+    theme: "light2", // "light1", "dark1", "dark2"
+    // title:{
+    //   text: "Bounce Rate by Week of Year"
+    // },
+    axisY: {
+      // title: "Bounce Rate",
+      includeZero: false,
+      suffix: "%",
+    },
+    axisX: {
+      // title: "Week of Year",
+      prefix: "W",
+      interval: 2,
+    },
+    data: [
+      {
+        type: "line",
+        toolTipContent: "Week {x}: {y}%",
+        dataPoints: [
+          { x: 1, y: 64 },
+          { x: 2, y: 61 },
+          { x: 3, y: 64 },
+          { x: 4, y: 62 },
+          { x: 5, y: 64 },
+          { x: 6, y: 60 },
+          { x: 7, y: 58 },
+          { x: 8, y: 59 },
+          { x: 9, y: 53 },
+          { x: 10, y: 54 },
+          { x: 11, y: 61 },
+          { x: 12, y: 60 },
+          { x: 13, y: 55 },
+          { x: 14, y: 60 },
+          { x: 15, y: 56 },
+          { x: 16, y: 60 },
+          { x: 17, y: 59.5 },
+          { x: 18, y: 63 },
+          { x: 19, y: 58 },
+          { x: 20, y: 54 },
+          { x: 21, y: 59 },
+          { x: 22, y: 64 },
+          { x: 23, y: 59 },
+        ],
       },
-      axisX: {
-        // title: "Week of Year",
-        prefix: "W",
-        interval: 2,
-      },
-      data: [
-        {
-          type: "line",
-          toolTipContent: "Week {x}: {y}%",
-          dataPoints: [
-            { x: 1, y: 64 },
-            { x: 2, y: 61 },
-            { x: 3, y: 64 },
-            { x: 4, y: 62 },
-            { x: 5, y: 64 },
-            { x: 6, y: 60 },
-            { x: 7, y: 58 },
-            { x: 8, y: 59 },
-            { x: 9, y: 53 },
-            { x: 10, y: 54 },
-            { x: 11, y: 61 },
-            { x: 12, y: 60 },
-            { x: 13, y: 55 },
-            { x: 14, y: 60 },
-            { x: 15, y: 56 },
-            { x: 16, y: 60 },
-            { x: 17, y: 59.5 },
-            { x: 18, y: 63 },
-            { x: 19, y: 58 },
-            { x: 20, y: 54 },
-            { x: 21, y: 59 },
-            { x: 22, y: 64 },
-            { x: 23, y: 59 },
-          ],
-        },
-      ],
-    }
-  );
+    ],
+  });
   const horizontalToolBarRef = useRef(null);
   const coverCanvasRef = useRef(null);
   // const [coverCanvasHeight, setcoverCanvasHeight] = useState(options.height);
@@ -68,11 +66,11 @@ export default function Index() {
   const reportChange = useCallback(
     (state, handle) => {
       if (handle === screen1) {
-        
-        options.height = coverCanvasRef?.current?.clientHeight-horizontalToolBarRef?.current?.clientHeight;
-        
-        setOptions({...options});
-        console.log(options);
+        options.height =
+          coverCanvasRef?.current?.clientHeight -
+          horizontalToolBarRef?.current?.clientHeight;
+
+        setOptions({ ...options });
         setFullScreen(state);
       }
     },
@@ -80,184 +78,161 @@ export default function Index() {
   );
 
   return (
-    <FullScreen handle={screen1} onChange={reportChange} >
+    <FullScreen handle={screen1} onChange={reportChange}>
       <div
-        className="bc-interactive-chart" 
+        className="bc-interactive-chart"
         data-ng-class="{'full-screen': fullScreen, 'dashboard': dashboardMode, 'full-tab-screen': fullTabScreen, 'grid-enabled': gridEnabled, 'flipchart-mode': flipChartMode}"
       >
         <div className="bc-interactive-chart__wrapper" ref={coverCanvasRef}>
+           
+          {/* Top bar */}
+          <div
+            className=" bc-interactive-chart__mobile-toolbar d-flex justify-content-between routeSwitcher"
+            ref={horizontalToolBarRef}
+          >
+           
+          {/* top bar left */}
+            <div className="topbar-left d-flex quick-settings justify-content-start tools-sidebar-horizontal react-tabs__tab-list-horizontal">
+              {/* Line */}
+              <span className="d-flex justify-content-center react-tabs__tab-horizontal">
+                <svg
+                  className="my-auto"
+                  width={16}
+                  height={16}
+                  viewBox="0 0 24 24"
+                  data-icon="line-type-line"
+                  style={{
+                    fill: "rgb(70, 78, 86)",
+                    stroke: "rgb(70, 78, 86)",
+                    strokeWidth: 0,
+                    verticalAlign: "bottom",
+                  }}
+                >
+                  <path d="M9.048 19.345c-.263 0-.518-.103-.707-.293l-2.985-2.986L2.71 18.73c-.39.39-1.022.393-1.415.003-.392-.39-.393-1.023-.004-1.414l3.354-3.375c.186-.19.44-.295.707-.295h.003c.265 0 .52.105.707.293l2.625 2.625 2.623-6.52c.125-.312.398-.54.726-.607.332-.07.67.034.908.272l4.28 4.265 3.774-9.352c.207-.512.794-.757 1.302-.553.513.207.76.79.554 1.3l-4.34 10.752c-.127.312-.4.538-.73.606-.327.067-.667-.034-.905-.272L12.6 12.195l-2.624 6.523c-.125.312-.4.54-.728.606-.066.014-.134.02-.2.02" />
+                </svg>
+                <span className="ms-2 my-auto">Line</span>
+                <i className="fa-light fa-angle-down my-auto ms-1"></i>
+              </span>
 
-                  <div className="bc-interactive-chart__mobile-toolbar js-bc-interactive-chart__mobile-toolbar show-for-small-down" ref={horizontalToolBarRef}>
-                    <form className="bc-interactive-chart__symbol-selector bc-form ng-pristine ng-valid ng-isolate-scope">
-                      <div className="bc-interactive-chart__symbol-selector-fieldset">
-                        <input
-                          type="submit"
-                          defaultValue="Go"
-                          className="bc-button light-blue"
-                          data-ng-hide="fullScreen"
-                        />
-                        <input
-                          type="text"
-                          className="js-interactive-chart-symbol-selector-input ng-pristine ng-untouched ng-valid"
-                        />
-                      </div>
-                    </form>
+              {/* Indicators */}
+              <span className="d-flex justify-content-center react-tabs__tab-horizontal">
+                <svg
+                  className="my-auto"
+                  width={16}
+                  height={16}
+                  viewBox="0 0 48 48"
+                  data-icon="plus-circle"
+                  style={{
+                    fill: "rgb(70, 78, 86)",
+                    stroke: "rgb(70, 78, 86)",
+                    strokeWidth: 0,
+                    verticalAlign: "bottom",
+                  }}
+                >
+                  <path d="M26 22v-6c0-1.104-.896-2-2-2-1.105 0-2 .896-2 2v6h-6c-1.104 0-2 .896-2 2 0 1.105.896 2 2 2h6v6c0 1.105.895 2 2 2 1.104 0 2-.895 2-2v-6h6c1.104 0 2-.895 2-2 0-1.104-.896-2-2-2h-6zm-2 20c9.94 0 18-8.06 18-18S33.94 6 24 6 6 14.06 6 24s8.06 18 18 18zm0 4C11.85 46 2 36.15 2 24S11.85 2 24 2s22 9.85 22 22-9.85 22-22 22z" />
+                </svg>
+                <span className="ms-2 my-auto">Indicators</span>
+              </span>
 
-                    <div className="quick-settings ng-isolate-scope">
-                      <ul
-                        className="quick-settings-list"
-                        data-ng-show="!asSelectList"
-                      >
-                        <li className="ng-binding ng-scope active">1D</li>
-                        <li className="ng-binding ng-scope ">1D</li>
-                        <li className="ng-binding ng-scope ">1D</li>
-                        <li className="ng-binding ng-scope ">1D</li>
-                        <li className="ng-binding ng-scope ">1D</li>
-                      </ul>
-                      <div
-                        className="bc-dropdown styled interactive-chart__apply-period-drop-down ng-hide"
-                        data-ng-show="asSelectList"
-                      >
-                        <select
-                          aria-label="select period"
-                          data-ng-model="period"
-                          data-ng-change="applyQuickSettings(period)"
-                          data-ng-options="item as item.label.desktop for item in quickPeriods"
-                          className="ng-pristine ng-untouched ng-valid"
-                        >
-                          <option
-                            value="object:164"
-                            label="1D"
-                            selected="selected"
-                          >
-                            1D
-                          </option>
-                          <option value="object:165" label="5D">
-                            5D
-                          </option>
-                          <option value="object:166" label="1M">
-                            1M
-                          </option>
-                          <option value="object:167" label="3M">
-                            3M
-                          </option>
-                          <option value="object:168" label="6M">
-                            6M
-                          </option>
-                          <option value="object:169" label="9M">
-                            9M
-                          </option>
-                          <option value="object:170" label="1Y">
-                            1Y
-                          </option>
-                          <option value="object:171" label="2Y">
-                            2Y
-                          </option>
-                          <option value="object:172" label="3Y">
-                            3Y
-                          </option>
-                          <option value="object:173" label="5Y">
-                            5Y
-                          </option>
-                          <option value="object:174" label="10Y">
-                            10Y
-                          </option>
-                          <option value="object:175" label="20Y">
-                            20Y
-                          </option>
-                          <option value="object:176" label="MAX">
-                            MAX
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="right ">
-                      <div
-                        className="tools-sidebar-horizontal ng-scope cwgaxb-0 iOPuHO"
-                        data-tabs="true"
-                      >
-                        <ul
-                          className="react-tabs__tab-list-horizontal"
-                          role="tablist"
-                        >
-                          {fullScreen ? (
-                            <li
-                              className="react-tabs__tab-horizontal"
-                              role="tab"
-                              id="react-tabs-0"
-                              aria-selected="true"
-                              aria-disabled="false"
-                              aria-controls="react-tabs-1"
-                              tabIndex={0}
-                              onClick={screen1.exit}
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                xmlnsXlink="http://www.w3.org/1999/xlink"
-                                width="24px"
-                                height="24px"
-                                viewBox="0 0 24 24"
-                                version="1.1"
-                              >
-                                {/* Uploaded to SVGRepo https://www.svgrepo.com */}
+              {/* Comparison */}
+              <span className="d-flex justify-content-center react-tabs__tab-horizontal">
+                <svg
+                  className="my-auto"
+                  width={16}
+                  height={16}
+                  viewBox="0 0 48 48"
+                  data-icon="plus-circle"
+                  style={{
+                    fill: "rgb(70, 78, 86)",
+                    stroke: "rgb(70, 78, 86)",
+                    strokeWidth: 0,
+                    verticalAlign: "bottom",
+                  }}
+                >
+                  <path d="M26 22v-6c0-1.104-.896-2-2-2-1.105 0-2 .896-2 2v6h-6c-1.104 0-2 .896-2 2 0 1.105.896 2 2 2h6v6c0 1.105.895 2 2 2 1.104 0 2-.895 2-2v-6h6c1.104 0 2-.895 2-2 0-1.104-.896-2-2-2h-6zm-2 20c9.94 0 18-8.06 18-18S33.94 6 24 6 6 14.06 6 24s8.06 18 18 18zm0 4C11.85 46 2 36.15 2 24S11.85 2 24 2s22 9.85 22 22-9.85 22-22 22z" />
+                </svg>
+                <span className="ms-2 my-auto">Comparison</span>
+              </span>
 
-                                <g
-                                  id="🔍-Product-Icons"
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
-                                  <g
-                                    id="ic_fluent_full_screen_zoom_24_regular"
-                                    fill="#212121"
-                                    fillRule="nonzero"
-                                  >
-                                    <path
-                                      d="M16.25,15.5 L20.25,15.5 C20.6642136,15.5 21,15.8357864 21,16.25 C21,16.6296958 20.7178461,16.943491 20.3517706,16.9931534 L20.25,17 L17,17 L17,20.25 C17,20.6642136 16.6642136,21 16.25,21 C15.8703042,21 15.556509,20.7178461 15.5068466,20.3517706 L15.5,20.25 L15.5,16.25 C15.5,15.8703042 15.7821539,15.556509 16.1482294,15.5068466 L16.25,15.5 L20.25,15.5 L16.25,15.5 Z M3.75,15.5 L7.75,15.5 C8.12969577,15.5 8.44349096,15.7821539 8.49315338,16.1482294 L8.5,16.25 L8.5,20.25 C8.5,20.6642136 8.16421356,21 7.75,21 C7.37030423,21 7.05650904,20.7178461 7.00684662,20.3517706 L7,20.25 L7,17 L3.75,17 C3.33578644,17 3,16.6642136 3,16.25 C3,15.8703042 3.28215388,15.556509 3.64822944,15.5068466 L3.75,15.5 L7.75,15.5 L3.75,15.5 Z M7.75,3 C8.12969577,3 8.44349096,3.28215388 8.49315338,3.64822944 L8.5,3.75 L8.5,7.75 C8.5,8.12969577 8.21784612,8.44349096 7.85177056,8.49315338 L7.75,8.5 L3.75,8.5 C3.33578644,8.5 3,8.16421356 3,7.75 C3,7.37030423 3.28215388,7.05650904 3.64822944,7.00684662 L3.75,7 L7,7 L7,3.75 C7,3.33578644 7.33578644,3 7.75,3 Z M16.25,3 C16.6296958,3 16.943491,3.28215388 16.9931534,3.64822944 L17,3.75 L17,7 L20.25,7 C20.6642136,7 21,7.33578644 21,7.75 C21,8.12969577 20.7178461,8.44349096 20.3517706,8.49315338 L20.25,8.5 L16.25,8.5 C15.8703042,8.5 15.556509,8.21784612 15.5068466,7.85177056 L15.5,7.75 L15.5,3.75 C15.5,3.33578644 15.8357864,3 16.25,3 Z"
-                                      id="🎨-Color"
-                                    />
-                                  </g>
-                                </g>
-                              </svg>
-                            </li>
-                          ) : (
-                            <li
-                              className="react-tabs__tab-horizontal"
-                              role="tab"
-                              id="react-tabs-0"
-                              aria-selected="true"
-                              aria-disabled="false"
-                              aria-controls="react-tabs-1"
-                              tabIndex={0}
-                              onClick={screen1.enter}
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 28 28"
-                                width="28"
-                                height="28"
-                              >
-                                <path
-                                  fill="currentColor"
-                                  d="M8.5 6A2.5 2.5 0 0 0 6 8.5V11h1V8.5C7 7.67 7.67 7 8.5 7H11V6H8.5zM6 17v2.5A2.5 2.5 0 0 0 8.5 22H11v-1H8.5A1.5 1.5 0 0 1 7 19.5V17H6zM19.5 7H17V6h2.5A2.5 2.5 0 0 1 22 8.5V11h-1V8.5c0-.83-.67-1.5-1.5-1.5zM22 19.5V17h-1v2.5c0 .83-.67 1.5-1.5 1.5H17v1h2.5a2.5 2.5 0 0 0 2.5-2.5z"
-                                ></path>
-                              </svg>
-                            </li>
-                          )}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+              {/* Date Range */}
+              <span className="d-flex justify-content-center react-tabs__tab-horizontal">
+                <i className="fa-light fa-calendar-star my-auto"></i>
+                <span className="ms-2 my-auto">1M</span>
+                <i className="fa-light fa-angle-down my-auto ms-1"></i>
+              </span>
 
-       
+                {/* Interval */}
+                <span className="d-flex justify-content-center react-tabs__tab-horizontal ms-1">
+                <svg
+                    className="my-auto"
+                    width={16}
+                    height={16}
+                    viewBox="0 0 24 24"
+                    data-icon="interval"
+                    style={{
+                      fill: "rgb(70, 78, 86)",
+                      stroke: "rgb(70, 78, 86)",
+                      strokeWidth: 0,
+                      verticalAlign: "bottom",
+                    }}
+                  >
+                    <path d="M10.91 3.37v5.168c0 .654-.49 1.185-1.092 1.185-.602 0-1.09-.53-1.09-1.185v-5.17H6.544v7.54c0 .654-.488 1.184-1.09 1.184-.603 0-1.09-.53-1.09-1.184v-7.54H3.272c-.602 0-1.09.533-1.09 1.186v13.892c0 .653.488 1.185 1.09 1.185h17.454c.602 0 1.09-.53 1.09-1.184V4.554c0-.653-.488-1.185-1.09-1.185h-1.09v5.168c0 .654-.49 1.185-1.092 1.185-.602 0-1.09-.53-1.09-1.185v-5.17h-2.182v7.54c0 .654-.49 1.184-1.09 1.184-.603 0-1.092-.53-1.092-1.184v-7.54h-2.18zM3.272 22C1.468 22 0 20.406 0 18.446V4.554C0 2.594 1.468 1 3.273 1h17.454C22.532 1 24 2.594 24 4.554v13.892C24 20.406 22.532 22 20.727 22H3.273z" />
+                  </svg>
+                <span className="ms-2 my-auto">Interval</span>
+                <span className="ms-2 my-auto">2Min</span>
+                <i className="fa-light fa-angle-down my-auto ms-1"></i>
+              </span>
+
+            </div>
+
+                    
+                  {/* top bar right*/}
+                  <div
+              className="tool-float tools-sidebar-horizontal"
+              data-tabs="true"
+            >
+              <ul className="react-tabs__tab-list-horizontal" role="tablist">
+                {fullScreen ? (
+                  <li
+                    className="react-tabs__tab-horizontal d-flex justify-content-center"
+                    role="tab"
+                    id="react-tabs-0"
+                    onClick={screen1.exit}
+                  >
+                 <i class="fa-thin fa-compress my-auto icon-center-28"></i>
+                  </li>
+                ) : (
+                  <li
+                    className="react-tabs__tab-horizontal d-flex justify-content-center"
+                    role="tab"
+                    id="react-tabs-0"
+                    onClick={screen1.enter}
+                  >
+                    <svg
+                      className="my-auto"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 28 28"
+                      width="28"
+                      height="28"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M8.5 6A2.5 2.5 0 0 0 6 8.5V11h1V8.5C7 7.67 7.67 7 8.5 7H11V6H8.5zM6 17v2.5A2.5 2.5 0 0 0 8.5 22H11v-1H8.5A1.5 1.5 0 0 1 7 19.5V17H6zM19.5 7H17V6h2.5A2.5 2.5 0 0 1 22 8.5V11h-1V8.5c0-.83-.67-1.5-1.5-1.5zM22 19.5V17h-1v2.5c0 .83-.67 1.5-1.5 1.5H17v1h2.5a2.5 2.5 0 0 0 2.5-2.5z"
+                      ></path>
+                    </svg>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
+
           {/* end ngIf: currentChartSettings && !readOnlyMode */}
           {/*<div id="bc-interactive-chart__chart-container-tooltip" data-ng-show="currentChartSettings.settings.tooltip.mode === 'cards' && !gridEnabled"></div>*/}
-          <div className="tool_and_chart-reduce d-flex flex-row justify-content-between"  >
+          <div className="tool_and_chart-reduce d-flex flex-row ">
             {/* ngIf: showDrawingsPanel && !isMobileOnly && !flipChartMode && !gridEnabled */}
             <div
-              className="tools-sidebar ng-scope cwgaxb-0 iOPuHO"
-              data-tabs="true"
+              className="tools-sidebar iOPuHO d-flex flex-column justify-content-between"
+            //  style={{height: options.height}}
             >
               <ul className="react-tabs__tab-list" role="tablist">
                 <li
@@ -404,6 +379,25 @@ export default function Index() {
                   ALL
                 </li>
               </ul>
+
+                 {/* left bar bottom */}
+     
+              <ul className=" tool-float tools-sidebar-horizontal react-tabs__tab-list-horizontal" role="tablist">
+              <li
+                  className="react-tabs__tab "
+                  role="tab"
+                  id="react-tabs-0"
+                  aria-selected="true"
+                  aria-disabled="false"
+                  aria-controls="react-tabs-1"
+                  tabIndex={0}
+                >
+                  <i class="fa-light fa-gear"></i>
+                </li>
+           
+              </ul>
+    
+
             </div>
 
             <CanvasJSChart
@@ -415,5 +409,4 @@ export default function Index() {
       </div>
     </FullScreen>
   );
-  
 }

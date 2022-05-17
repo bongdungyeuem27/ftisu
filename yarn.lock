@@ -7896,6 +7896,11 @@ react-scripts@5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
+react-spinner-animated@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-spinner-animated/-/react-spinner-animated-3.1.1.tgz#2e8a589afe3c0bef95980ca00dd346d02d58bdd8"
+  integrity sha512-bv4YRVAKjAMahHmeQfLp9qD+Y4v/ZkV9L/kYzVeAOSvvjjVknqdTn9iNT0CBqsW4AU3oFZ/xTle/5C8qzOvvsg==
+
 react-to-pdf@^0.0.14:
   version "0.0.14"
   resolved "https://registry.yarnpkg.com/react-to-pdf/-/react-to-pdf-0.0.14.tgz#8a30609f2237a5646a4619fab442996d6a12afbd"

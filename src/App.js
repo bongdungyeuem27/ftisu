@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import routes from "./Router/routes";
 import configureStore from "./Redux/configureStore";

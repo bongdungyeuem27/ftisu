@@ -57,13 +57,15 @@ table {
 
 body {
   --control-border-color: #101113;
-  --control-background-color: #fff;
+  --theme-white: #fff;
+  --theme-primary: #38507e;
+  --control-background-color: var(--theme-white);
   --control-caret-color: #000;
   --control-transition-duration: 0.3s;
   --control-transition-easing: ease;
   --control-dropdown-background-color: #eff2f5;
   --theme-color: #3861fb;
-  --theme-white: #fff;
+  
   --theme-light-color: #cfd6e4;
   --theme-light-blue-color: #e6f0ff;
   --theme-light-blue: #f0f6ff;
@@ -78,9 +80,9 @@ body {
   --up-color: #16c784;
   --down-color: #ea3943;
   --border-color: #eff2f5;
-  --bg-color: #fff;
+  --bg-color: var(--theme-white);
   --color-primary-black: #000;
-  --color-primary-white: #fff;
+  --color-primary-white: var(--theme-white);
   --color-primary-blue: #3861fb;
   --color-light-neutral-1: #f8fafd;
   --color-light-neutral-2: #eff2f5;
@@ -94,7 +96,7 @@ body {
   --button-bg-color: #222531;
   --breakpoint-md: 768px;
   --dark-bg: #000;
-  --card-bg: #fff;
+  --card-bg: var(--theme-white);
   --box-shadow: 0px 0px 2px rgba(128,138,157,0.12),0px 0px 24px rgba(128,138,157,0.14);
   --border-color: #eff2f5;
   --color-light-neutral-1: #f8fafd;
@@ -108,4 +110,10 @@ body {
   background: var(--color-light-neutral-1);
   border-radius: 8px;
   
+}
+.icon-center-28{
+      font-size: 23px;
+      width: 28px;
+      line-height: 28px;
+      text-align: center;
 }
