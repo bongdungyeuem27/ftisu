@@ -1,118 +1,48 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, { useEffect, useState, useCallback, useRef, lazy } from "react";
 import "./MyChart.css";
-import CanvasJSReact from "../../../common/canvasjs/canvasjs.react";
+import DrawChart from "./DrawChart";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import "./TopBar.css";
-
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import { listOfChartType } from "./listOfChartType";
+import { useParams } from "react-router-dom";
+import ChartDropdown from "./ChartDropdown";
 
 export default function Index() {
-  const [options, setOptions] = useState({
-    animationEnabled: true,
-    exportEnabled: true,
-    height: 450,
-    zoomEnabled: true,
-    theme: "light2", // "light1", "dark1", "dark2"
-    // title:{
-    //   text: "Bounce Rate by Week of Year"
-    // },
-    axisY: {
-      // title: "Bounce Rate",
-      includeZero: false,
-      suffix: "%",
-    },
-    axisX: {
-      // title: "Week of Year",
-      prefix: "W",
-      interval: 2,
-    },
-    data: [
-      {
-        type: "line",
-        toolTipContent: "Week {x}: {y}%",
-        dataPoints: [
-          { x: 1, y: 64 },
-          { x: 2, y: 61 },
-          { x: 3, y: 64 },
-          { x: 4, y: 62 },
-          { x: 5, y: 64 },
-          { x: 6, y: 60 },
-          { x: 7, y: 58 },
-          { x: 8, y: 59 },
-          { x: 9, y: 53 },
-          { x: 10, y: 54 },
-          { x: 11, y: 61 },
-          { x: 12, y: 60 },
-          { x: 13, y: 55 },
-          { x: 14, y: 60 },
-          { x: 15, y: 56 },
-          { x: 16, y: 60 },
-          { x: 17, y: 59.5 },
-          { x: 18, y: 63 },
-          { x: 19, y: 58 },
-          { x: 20, y: 54 },
-          { x: 21, y: 59 },
-          { x: 22, y: 64 },
-          { x: 23, y: 59 },
-        ],
-      },
-    ],
-  });
-  const horizontalToolBarRef = useRef(null);
+  const { currency } = useParams();
+  // Lấy kích thước của khung bao toà bộ bảng chart
   const coverCanvasRef = useRef(null);
-  // const [coverCanvasHeight, setcoverCanvasHeight] = useState(options.height);
   const screen1 = useFullScreenHandle();
   const [fullScreen, setFullScreen] = useState(false);
   const reportChange = useCallback(
     (state, handle) => {
       if (handle === screen1) {
-        options.height =
-          coverCanvasRef?.current?.clientHeight -
-          horizontalToolBarRef?.current?.clientHeight;
-
-        setOptions({ ...options });
         setFullScreen(state);
       }
     },
     [screen1]
   );
 
+  const [chartTypeSelected, setChartTypeSelected] = useState(0);
+
   return (
     <FullScreen handle={screen1} onChange={reportChange}>
       <div
+        ref={coverCanvasRef}
         className="bc-interactive-chart"
         data-ng-class="{'full-screen': fullScreen, 'dashboard': dashboardMode, 'full-tab-screen': fullTabScreen, 'grid-enabled': gridEnabled, 'flipchart-mode': flipChartMode}"
       >
-        <div className="bc-interactive-chart__wrapper" ref={coverCanvasRef}>
-           
+        <div className="bc-interactive-chart__wrapper">
           {/* Top bar */}
-          <div
-            className=" bc-interactive-chart__mobile-toolbar d-flex justify-content-between routeSwitcher"
-            ref={horizontalToolBarRef}
-          >
-           
-          {/* top bar left */}
-            <div className="topbar-left d-flex quick-settings justify-content-start tools-sidebar-horizontal react-tabs__tab-list-horizontal">
+          <div className=" bc-interactive-chart__mobile-toolbar d-flex justify-content-between routeSwitcher">
+            {/* top bar left */}
+            <div className="topbar-left d-flex quick-settings justify-content-start react-tabs__tab-list-horizontal">
               {/* Line */}
-              <span className="d-flex justify-content-center react-tabs__tab-horizontal">
-                <svg
-                  className="my-auto"
-                  width={16}
-                  height={16}
-                  viewBox="0 0 24 24"
-                  data-icon="line-type-line"
-                  style={{
-                    fill: "rgb(70, 78, 86)",
-                    stroke: "rgb(70, 78, 86)",
-                    strokeWidth: 0,
-                    verticalAlign: "bottom",
-                  }}
-                >
-                  <path d="M9.048 19.345c-.263 0-.518-.103-.707-.293l-2.985-2.986L2.71 18.73c-.39.39-1.022.393-1.415.003-.392-.39-.393-1.023-.004-1.414l3.354-3.375c.186-.19.44-.295.707-.295h.003c.265 0 .52.105.707.293l2.625 2.625 2.623-6.52c.125-.312.398-.54.726-.607.332-.07.67.034.908.272l4.28 4.265 3.774-9.352c.207-.512.794-.757 1.302-.553.513.207.76.79.554 1.3l-4.34 10.752c-.127.312-.4.538-.73.606-.327.067-.667-.034-.905-.272L12.6 12.195l-2.624 6.523c-.125.312-.4.54-.728.606-.066.014-.134.02-.2.02" />
-                </svg>
-                <span className="ms-2 my-auto">Line</span>
-                <i className="fa-light fa-angle-down my-auto ms-1"></i>
-              </span>
+
+              <ChartDropdown
+                list={listOfChartType}
+                selected={chartTypeSelected}
+                onChange={setChartTypeSelected}
+              ></ChartDropdown>
 
               {/* Indicators */}
               <span className="d-flex justify-content-center react-tabs__tab-horizontal">
@@ -161,33 +91,31 @@ export default function Index() {
                 <i className="fa-light fa-angle-down my-auto ms-1"></i>
               </span>
 
-                {/* Interval */}
-                <span className="d-flex justify-content-center react-tabs__tab-horizontal ms-1">
+              {/* Interval */}
+              <span className="d-flex justify-content-center react-tabs__tab-horizontal ms-1">
                 <svg
-                    className="my-auto"
-                    width={16}
-                    height={16}
-                    viewBox="0 0 24 24"
-                    data-icon="interval"
-                    style={{
-                      fill: "rgb(70, 78, 86)",
-                      stroke: "rgb(70, 78, 86)",
-                      strokeWidth: 0,
-                      verticalAlign: "bottom",
-                    }}
-                  >
-                    <path d="M10.91 3.37v5.168c0 .654-.49 1.185-1.092 1.185-.602 0-1.09-.53-1.09-1.185v-5.17H6.544v7.54c0 .654-.488 1.184-1.09 1.184-.603 0-1.09-.53-1.09-1.184v-7.54H3.272c-.602 0-1.09.533-1.09 1.186v13.892c0 .653.488 1.185 1.09 1.185h17.454c.602 0 1.09-.53 1.09-1.184V4.554c0-.653-.488-1.185-1.09-1.185h-1.09v5.168c0 .654-.49 1.185-1.092 1.185-.602 0-1.09-.53-1.09-1.185v-5.17h-2.182v7.54c0 .654-.49 1.184-1.09 1.184-.603 0-1.092-.53-1.092-1.184v-7.54h-2.18zM3.272 22C1.468 22 0 20.406 0 18.446V4.554C0 2.594 1.468 1 3.273 1h17.454C22.532 1 24 2.594 24 4.554v13.892C24 20.406 22.532 22 20.727 22H3.273z" />
-                  </svg>
+                  className="my-auto"
+                  width={16}
+                  height={16}
+                  viewBox="0 0 24 24"
+                  data-icon="interval"
+                  style={{
+                    fill: "rgb(70, 78, 86)",
+                    stroke: "rgb(70, 78, 86)",
+                    strokeWidth: 0,
+                    verticalAlign: "bottom",
+                  }}
+                >
+                  <path d="M10.91 3.37v5.168c0 .654-.49 1.185-1.092 1.185-.602 0-1.09-.53-1.09-1.185v-5.17H6.544v7.54c0 .654-.488 1.184-1.09 1.184-.603 0-1.09-.53-1.09-1.184v-7.54H3.272c-.602 0-1.09.533-1.09 1.186v13.892c0 .653.488 1.185 1.09 1.185h17.454c.602 0 1.09-.53 1.09-1.184V4.554c0-.653-.488-1.185-1.09-1.185h-1.09v5.168c0 .654-.49 1.185-1.092 1.185-.602 0-1.09-.53-1.09-1.185v-5.17h-2.182v7.54c0 .654-.49 1.184-1.09 1.184-.603 0-1.092-.53-1.092-1.184v-7.54h-2.18zM3.272 22C1.468 22 0 20.406 0 18.446V4.554C0 2.594 1.468 1 3.273 1h17.454C22.532 1 24 2.594 24 4.554v13.892C24 20.406 22.532 22 20.727 22H3.273z" />
+                </svg>
                 <span className="ms-2 my-auto">Interval</span>
                 <span className="ms-2 my-auto">2Min</span>
                 <i className="fa-light fa-angle-down my-auto ms-1"></i>
               </span>
-
             </div>
 
-                    
-                  {/* top bar right*/}
-                  <div
+            {/* top bar right*/}
+            <div
               className="tool-float tools-sidebar-horizontal"
               data-tabs="true"
             >
@@ -199,7 +127,7 @@ export default function Index() {
                     id="react-tabs-0"
                     onClick={screen1.exit}
                   >
-                 <i class="fa-thin fa-compress my-auto icon-center-28"></i>
+                    <i class="fa-thin fa-compress my-auto icon-center-28"></i>
                   </li>
                 ) : (
                   <li
@@ -232,7 +160,7 @@ export default function Index() {
             {/* ngIf: showDrawingsPanel && !isMobileOnly && !flipChartMode && !gridEnabled */}
             <div
               className="tools-sidebar iOPuHO d-flex flex-column justify-content-between"
-            //  style={{height: options.height}}
+              //  style={{height: options.height}}
             >
               <ul className="react-tabs__tab-list" role="tablist">
                 <li
@@ -380,10 +308,13 @@ export default function Index() {
                 </li>
               </ul>
 
-                 {/* left bar bottom */}
-     
-              <ul className=" tool-float tools-sidebar-horizontal react-tabs__tab-list-horizontal" role="tablist">
-              <li
+              {/* left bar bottom */}
+
+              <ul
+                className=" tool-float tools-sidebar-horizontal react-tabs__tab-list-horizontal"
+                role="tablist"
+              >
+                <li
                   className="react-tabs__tab "
                   role="tab"
                   id="react-tabs-0"
@@ -394,16 +325,15 @@ export default function Index() {
                 >
                   <i class="fa-light fa-gear"></i>
                 </li>
-           
               </ul>
-    
-
             </div>
 
-            <CanvasJSChart
-              options={options}
-              /* onRef={ref => this.chart = ref} */
-            />
+            <DrawChart
+              coverCanvasRef={coverCanvasRef}
+              selected={chartTypeSelected}
+              fullScreen={fullScreen}
+              currency={currency}
+            ></DrawChart>
           </div>
         </div>
       </div>

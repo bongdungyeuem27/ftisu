@@ -11,7 +11,6 @@ export const LANGUAGES = [
     { key: "FR", value: "fr", name: "Français" },
     { key: "HI", value: "hi", name: "हिन्दी" },
     { key: "HU", value: "hu", name: "magyar" }
-
 ]
 export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
 export const CHANGE_LANGUAGE_SUCCESS = "CHANGE_LANGUAGE_SUCCESS";

@@ -4,8 +4,14 @@ import Currency from "../Components/Currency";
 import Contact from "../Components/Contact";
 import Login from "../Components/Login";
 import Team from "../Components/Team";
+import Test from "../Components/Test";
 
 const routes = [
+  {
+    path: "/test",
+    exact: true,
+    main: <Test></Test>,
+  },
   {
     path: "/currencies/:currency",
     exact: true,

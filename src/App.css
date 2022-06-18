@@ -65,6 +65,7 @@ body {
   --control-transition-easing: ease;
   --control-dropdown-background-color: #eff2f5;
   --theme-color: #3861fb;
+  --theme-color-active: #2dd2cc;
   
   --theme-light-color: #cfd6e4;
   --theme-light-blue-color: #e6f0ff;
