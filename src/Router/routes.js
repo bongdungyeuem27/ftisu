@@ -5,6 +5,7 @@ import Contact from "../Components/Contact";
 import Login from "../Components/Login";
 import Team from "../Components/Team";
 import Test from "../Components/Test";
+import Crypto from "../Components/Crypto"
 
 const routes = [
   {
@@ -16,6 +17,11 @@ const routes = [
     path: "/currencies/:currency",
     exact: true,
     main: <Currency></Currency>,
+  },
+  {
+    path: "/crypto",
+    exact: true,
+    main: <Crypto></Crypto>,
   },
   {
     path: "/team",
