@@ -275,7 +275,6 @@
   white-space: nowrap;
   border-radius: 8px;
   padding: 0px;
-  color: var(--down-color);
 }
 .hzgCfk span[class^="icon"] {
   margin-right: 1px;
@@ -285,7 +284,6 @@
   white-space: nowrap;
   border-radius: 8px;
   padding: 0px;
-  color: var(--up-color);
 }
 .kAXKAX span[class^="icon"] {
   margin-right: 1px;
@@ -367,11 +365,11 @@
   box-sizing: content-box;
   padding-top: 2px;
   padding-bottom: 3px;
-  filter: hue-rotate(300deg) saturate(210%) brightness(0.7) contrast(170%);
+  /* filter: hue-rotate(300deg) saturate(210%) brightness(0.7) contrast(170%); */
 }
-.bCltOL.isUp {
+/* .bCltOL.isUp {
   filter: hue-rotate(85deg) saturate(80%) brightness(0.85);
-}
+} */
 .kjciSH {
   box-sizing: border-box;
   margin: 0px;

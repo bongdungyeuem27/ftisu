@@ -1,11 +1,49 @@
 import React, { useEffect, useState, useRef, lazy, Suspense } from "react";
 import "./Currency.css";
 import MyLoader from "../../common/MyLoader/index";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { numberWithCommas } from "../../common/helper/number";
+import { FIATS } from "../../Redux/constrants/fiatConst";
+import { CRYPTOS } from "../../common/constant/index";
+import { LANGUAGES } from "../../Redux/constrants/languageConst";
+import { dynamicString } from "../../common/helper/string";
+import { getCurrentPrice, getCoinDataApi, getCoinImage } from "../../api/crypto";
+import { API_CRYPTOCOMPARE_HOME } from "../../common/constant/index"
+import Caculator from "./Caculator";
 
 export default function Index() {
-  const MyChart = lazy(() => import('./MyChart'));
-  const TabStatistical = lazy(() => import('./TabStatistical'));
+  const MyChart = lazy(() => import("./MyChart"));
+  const TabStatistical = lazy(() => import("./TabStatistical"));
   const headerRef = useRef(null);
+  const { currency } = useParams();
+  const fiat = useSelector((state) => state.fiat.fiat);
+  const [currentPrice, setCurrentPrice] = useState(0);
+  const [dataCoinApi, setDataCoinApi] = useState();
+
+  const language = useSelector((state) => state.language.language);
+  // Chứa các từ ngữ đa ngôn ngữ
+  const [keywords, setKeywords] = useState();
+  // object chứa các từ vựng về crypto
+  const [cryptoObject, setCryptoObject] = useState(
+    CRYPTOS.find((x) => x.name.toLocaleLowerCase() === currency)
+  );
+  // object chứa các từ vựng về fiat
+  const [fiatObject, setFiatObject] = useState(
+    FIATS.find((x) => x.key === fiat)
+  );
+
+  useEffect(() => {
+    getCoinDataApi(cryptoObject.key, fiatObject.key)
+      .then((success) => {
+        setDataCoinApi(success.data.Data);
+        console.log(success.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   useEffect(() => {
     if (headerRef == null) return;
     window.addEventListener("scroll", () => {
@@ -22,29 +60,54 @@ export default function Index() {
       };
     });
   }, []);
+
+  useEffect(() => {
+    getCurrentPrice(cryptoObject.key, fiatObject.key)
+      .then((success) => {
+        setCurrentPrice(success.data.USD);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  //Language
+  useEffect(() => {
+    import(
+      `./keyword/${LANGUAGES.find((x) => x.key === language).value}/index.js`
+    )
+      .then((res) => {
+        setKeywords(res.default);
+      })
+      .catch((rej) => {
+        console.log(rej);
+        setKeywords(undefined);
+      });
+  }, [language]);
   return (
     <section className="currency">
       {/* Tiêu đề */}
-      <div className="sc-16r8icm-0 eMxKgr container">
+      <div className="sc-16r8icm-0 eMxKgr my-container">
         <div className="n78udj-0 jskEGI">
           <div className="sc-16r8icm-0 kjciSH top-summary-container">
             <div className="sc-16r8icm-0 kDzKwW nameSection">
               <div className="sc-16r8icm-0 gpRPnR nameHeader">
                 <img
-                  src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
+                  src={`${API_CRYPTOCOMPARE_HOME}${dataCoinApi?.CoinInfo.ImageUrl}?width=32`}
                   height={32}
                   width={32}
-                  alt="BTC"
+                  alt=""
                 />
                 <h2 className="sc-1q9q90x-0 jCInrl h1" color="text">
-                  Bitcoin<small className="nameSymbol">BTC</small>
+                  {cryptoObject?.name}
+                  <small className="nameSymbol">{cryptoObject?.value}</small>
                 </h2>
                 <span className="sc-80eeb0-1 iuAjRY">
                   <button
                     className="x0o17e-0 eCXbyL sc-7pvt85-0 ccOrkS"
                     style={{ width: "auto", padding: "0px 8px" }}
                   >
-                    <span className="icon-Star" />
+                    <i class="fa-thin fa-star"></i>
                   </button>
                 </span>
               </div>
@@ -53,19 +116,24 @@ export default function Index() {
                 style={{ flexWrap: "wrap" }}
                 className="sc-16r8icm-0 bILTHz"
               >
-                <div className="namePill namePillPrimary">Xếp hạng 1</div>
+                <div className="namePill namePillPrimary">
+                  {keywords?._rank} 1
+                </div>
               </div>
             </div>
             <div className="sc-16r8icm-0 kjciSH priceSection">
               <h1 className="priceHeading">
-                Giá Bitcoin{/* */}{" "}
-                <small>
-                  ({/* */}BTC{/* */})
-                </small>
+                {dynamicString(keywords?._price, {
+                  crypto: cryptoObject?.name,
+                })}
+                {/* */} <small>{cryptoObject?.value}</small>
               </h1>
               <div className="sc-16r8icm-0 kjciSH priceTitle">
                 <div className="priceValue ">
-                  <span>$43,510.94</span>
+                  <span>
+                    {fiatObject?.sign}
+                    {numberWithCommas(currentPrice)}
+                  </span>
                 </div>
                 <span
                   style={{
@@ -73,10 +141,11 @@ export default function Index() {
                     fontWeight: 600,
                     padding: "5px 10px",
                   }}
-                  className="sc-15yy2pl-0 gEePkg"
+                  className={dataCoinApi?.AggregatedData.CHANGEDAY<0?"gEePkg button-negative":"gEePkg button-postive"}
                 >
-                  <span className="icon-Caret-up" />
-                  2.66{/* */}%
+                  {dataCoinApi?.AggregatedData.CHANGEDAY<0?(<i class="fa-solid fa-caret-down"></i>):(<i class="fa-solid fa-caret-up"></i>)}
+                  {" "}
+                  {Math.round(Math.abs(dataCoinApi?.AggregatedData.CHANGEDAY/dataCoinApi?.AggregatedData.OPEN24HOUR)*100)/100}{/* */}%
                 </span>
               </div>
               <div className="n78udj-3 emihhf" ref={headerRef}>
@@ -87,22 +156,29 @@ export default function Index() {
                     width={24}
                     alt="BTC"
                   />
-                  &nbsp;&nbsp;<b>Bitcoin</b>&nbsp;{/* */}BTC
+                  &nbsp;&nbsp;<b>{cryptoObject?.name}</b>&nbsp;
+                  {cryptoObject?.value}
                 </span>
                 <span>
                   <div className="imn55z-0 hCqbVS price">
                     <span>Price: </span>
-                    <div>$43,510.94</div>&nbsp;
+                    <div>
+                      {fiatObject?.sign}
+                      {numberWithCommas(currentPrice)}
+                    </div>
+                    &nbsp;
                     <span
                       style={{
                         fontSize: "12px",
                         fontWeight: 600,
                         color: "#fff",
                       }}
-                      className="sc-15yy2pl-0 gEePkg"
+                      className={dataCoinApi?.AggregatedData.CHANGEDAY<0?"gEePkg button-negative":"gEePkg button-postive"}
                     >
-                      <span className="icon-Caret-up" />
-                      2.66{/* */}%
+                  {dataCoinApi?.AggregatedData.CHANGEDAY<0?(<i class="fa-solid fa-caret-down"></i>):(<i class="fa-solid fa-caret-up"></i>)}
+
+                      {" "}
+                  {Math.round(Math.abs(dataCoinApi?.AggregatedData.CHANGEDAY/dataCoinApi?.AggregatedData.OPEN24HOUR)*100)/100}{/* */}%
                     </span>
                   </div>
                   <span className="sc-80eeb0-1 iuAjRY">
@@ -123,7 +199,8 @@ export default function Index() {
                   <div className="heading hideOnDesktop">Liên kết</div>
                   <div className="mobileContent">
                     <div className="links-text">
-                      Trang web, Trình duyệt, Mạng xã hội, v.v.
+                      {keywords?._website}, {keywords?._explorers},{" "}
+                      {keywords?._community}, {keywords?._etc}
                     </div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -252,7 +329,7 @@ export default function Index() {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        <div className="buttonName">Cộng đồng</div>
+                        <div className="buttonName">{keywords?._community}</div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -306,7 +383,9 @@ export default function Index() {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        <div className="buttonName">Mã nguồn</div>
+                        <div className="buttonName">
+                          {keywords?._source_code}
+                        </div>
                         <div className="sc-16r8icm-0 sc-10up5z1-3 iTgjYQ">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -352,7 +431,9 @@ export default function Index() {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        <div className="buttonName">Sách trắng</div>
+                        <div className="buttonName">
+                          {keywords?._white_paper}
+                        </div>
                         <div className="sc-16r8icm-0 sc-10up5z1-3 iTgjYQ">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -381,7 +462,7 @@ export default function Index() {
                     <div className="sc-90sd2b-1 dWBXwc">
                       <div className="sc-90sd2b-2 kZmzHf">
                         <h4 color="text" className="sc-1q9q90x-0 jBqXqt">
-                          Bitcoin Liên kết
+                          {dynamicString(keywords?._links)}
                         </h4>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -479,7 +560,7 @@ export default function Index() {
                                   strokeLinejoin="round"
                                 />
                               </svg>
-                              Mã nguồn
+                              {keywords?._source_code}
                               <div className="sc-16r8icm-0 sc-10up5z1-3 jertNB">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -692,7 +773,9 @@ export default function Index() {
                           </div>
                           <div className="sc-16r8icm-0 jKrmxw">
                             <div className="sc-16r8icm-0 iyfDkY">
-                              <h6 className="modalHeading">Cộng đồng</h6>
+                              <h6 className="modalHeading">
+                                {keywords?._community}
+                              </h6>
                             </div>
                             <a
                               className="modalLink"
@@ -1048,7 +1131,7 @@ export default function Index() {
 
       {/* Phần Tool Carousel */}
       <div className="sc-16r8icm-0 sc-2a8jfd-3 kfTTiy">
-        <div className="container routeSwitcher">
+        <div className="my-container routeSwitcher">
           <span>
             <a
               href="/vi/currencies/near-protocol/"
@@ -1126,51 +1209,60 @@ export default function Index() {
               Price Estimates
             </a>
           </span>
- 
         </div>
       </div>
 
       {/* phần nội dung */}
-      <div className="sc-16r8icm-0 jKrmxw container">
-     
-          <div display=",,flex" className="sc-16r8icm-0 sc-19zk94m-1 gRSJaB">
-            <div
-              style={{
+      <div className="sc-16r8icm-0 jKrmxw my-container">
+        <div display=",,flex" className="sc-16r8icm-0 sc-19zk94m-1 gRSJaB">
+          {/* left */}
+          <div
+            style={{
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: "column",
+            }}
+            className="sc-16r8icm-0 dSXRna"
+          >
+            <div className="sc-19zk94m-2 cEhSvA">
+              <div className="sc-117f5dm-0 cjTISQ">
+                <h3 color="text" className="sc-1q9q90x-0 fyQGwp">
+                  {dynamicString(keywords?._chart_title, {
+                    crypto: cryptoObject?.name,
+                    fiat: fiatObject?.value,
+                  })}
+                </h3>
+              </div>
+              <div className="sc-16r8icm-0 kjciSH table-control-left table-control-chart-type">
+                <Suspense fallback={<MyLoader></MyLoader>}>
+                  <MyChart></MyChart>
+                </Suspense>
+              </div>
+            </div>
 
-                flexGrow: 1,
-                display: "flex",
-                flexDirection: "column",
-              }}
-              className="sc-16r8icm-0 dSXRna"
-            >
-       
-                <div className="sc-19zk94m-2 cEhSvA">
-             
-                   
-                      <div className="sc-117f5dm-0 cjTISQ">
-                        <h3 color="text" className="sc-1q9q90x-0 fyQGwp">
-                          biểu đồ Bitcoin sang USD
-                        </h3>
-                  
-                      </div>
-                      <div className="sc-16r8icm-0 kjciSH table-control-left table-control-chart-type">
-                      <Suspense fallback={<MyLoader></MyLoader>}>
-                        <MyChart></MyChart>
-                        </Suspense>
-                      </div>
-                     
-                   
-                 
-                </div>
-            
-            </div>
-            <div className="sc-16r8icm-0 iutcov border-box-shadow">
-            <Suspense fallback={<MyLoader></MyLoader>}>
-            <TabStatistical></TabStatistical>
-            </Suspense>
-            </div>
+            {/* caculator */}
+            <Caculator></Caculator>
           </div>
- 
+
+                  {/* right */}
+          <div className="sc-16r8icm-0 iutcov border-box-shadow">
+            <Suspense fallback={<MyLoader></MyLoader>}>
+              {cryptoObject &&
+                fiatObject &&
+                keywords &&
+                dataCoinApi &&
+                currentPrice && (
+                  <TabStatistical
+                    currentPrice={currentPrice}
+                    dataCoinApi={dataCoinApi}
+                    cryptoObject={cryptoObject}
+                    fiatObject={fiatObject}
+                    keywords={keywords}
+                  ></TabStatistical>
+                )}
+            </Suspense>
+          </div>
+        </div>
       </div>
     </section>
   );

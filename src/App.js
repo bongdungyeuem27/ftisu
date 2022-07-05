@@ -1,4 +1,6 @@
+import "./style.css"
 import "./App.css";
+
 import routes from "./Router/routes";
 import configureStore from "./Redux/configureStore";
 import { Provider } from "react-redux";

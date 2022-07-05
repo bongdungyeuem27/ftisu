@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.2.1",
     "axios": "^0.27.2",
     "babel-eslint": "^10.1.0",
+    "jquery": "^3.6.0",
     "kaktana-react-lightweight-charts": "^2.0.0",
     "lightweight-charts": "^3.8.0",
     "lodash": "^4.17.21",
@@ -17,6 +18,8 @@
     "react-dom": "^18.1.0",
     "react-dropdown": "^1.10.0",
     "react-full-screen": "^1.1.0",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-merge-refs": "^2.0.0",
     "react-modal": "^3.15.1",
     "react-redux": "^8.0.1",
     "react-redux-multilingual": "^2.0.4",
@@ -51,5 +54,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.4"
   }
 }

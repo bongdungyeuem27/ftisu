@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, lazy } from "react";
-import title from "../images/title.png";
+import logoname from "../../common/images/logoname176.png";
 import "./Header.css";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
@@ -86,9 +86,9 @@ export default function Header() {
       <header id="header" className="fixed-top d-flex align-items-center">
         <div className="container d-flex align-items-center justify-content-between">
           <div className="logo">
-            <h1>
-              <img style={{ width: "100%" }} alt="Inixtas" src={title}></img>
-            </h1>
+            <Link to = "/">
+              <img style={{ width: "100%" }} alt="Inixtas" src={logoname}></img>
+            </Link>
           </div>
           <nav id="navbar" className="navbar" ref={menuRight}>
             <ul ref={wrapperRef}>
@@ -124,7 +124,7 @@ export default function Header() {
                 </a>
               </li>
               <li>
-                <a className="getstarted scrollto" href="#about">
+                <a className="getstarted scrollto btn btn-warning" href="#about">
                   <i
                     style={{ paddingRight: "10px" }}
                     className="fa-thin fa-user"

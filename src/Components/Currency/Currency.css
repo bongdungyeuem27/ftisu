@@ -291,7 +291,6 @@
     white-space: nowrap;
     border-radius: 8px;
     padding: 3px 10px;
-    background-color: var(--up-color);
     color: rgb(255, 255, 255);
 }
 .gEePkg span[class^="icon"] {
@@ -355,7 +354,6 @@
     white-space: nowrap;
     border-radius: 8px;
     padding: 3px 10px;
-    background-color: var(--up-color);
     color: rgb(255, 255, 255);
 }
 .gEePkg span[class^="icon"] {
@@ -644,12 +642,6 @@
     font-weight: 600;
     line-height: 21px;
 }
-.kAXKAX {
-    white-space: nowrap;
-    border-radius: 8px;
-    padding: 0px;
-    color: var(--up-color);
-}
 .kAXKAX span[class^="icon"] {
     margin-right: 1px;
     margin-left: 1px;
@@ -693,9 +685,6 @@
     padding: 24px;
     background-color: var(--color-light-neutral-1);
     border-radius: 16px;
-}
-.dAxhCK .hide {
-    display: none;
 }
 .dDXPcp {
     -webkit-box-align: center;
@@ -885,4 +874,15 @@
     font-size: 14px;
     padding: 0px 24px;
     line-height: 24px;
+}
+.badge24h {
+    display: inline-block;
+    margin-left: 4px;
+    color: var(--color-light-neutral-6);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 18px;
+    background-color: var(--color-light-neutral-2);
+    border-radius: 4px;
+    padding: 2px 4px;
 }

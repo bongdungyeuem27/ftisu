@@ -1,5 +1,5 @@
 export const listOfChartType = [
-  <div>
+  <div className="d-flex">
     <svg
       className="my-auto"
       width={16}
@@ -17,7 +17,7 @@ export const listOfChartType = [
     </svg>
     <span className="ms-2 my-auto">Line</span>
   </div>,
-  <div>
+  <div className="d-flex">
     <svg
       className="my-auto"
       width={16}

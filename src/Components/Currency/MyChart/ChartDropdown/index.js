@@ -7,6 +7,7 @@ function useOutsideAlerter(ref, toggleRef, setOnShow) {
      * Alert if clicked on outside of element
      */
     function handleClickOutside(event) {
+      // console.log('target', event.target)
       if (
         ref.current &&
         !ref.current.contains(event.target) &&

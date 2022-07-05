@@ -7,30 +7,29 @@ import areaCreate from "./areaCreate";
 
 export default memo(function Index(props) {
   // const [data, setData] = useState([]);
-  const [pending, setPending] = useState(false);
+
   const chartContainerRef = useRef(undefined);
   const chart = useRef(undefined);
   const [fullScreenCache, setFullScreenCache] = useState(props.fullScreen);
   const [dimensionsBeforeFullscreen, setDimensionsBeforeFullscreen] = useState([
     1, 500,
   ]);
-  const [lastSelected, setLastSelected] = useState(props.selected);
+  const lastSelected = useRef(props.selected);
 
   useEffect(() => {
     // Tạo bảng
-    if (lastSelected !== props.selected) {
-      chart.current.remove()
-      setLastSelected(props.selected)
+    if (lastSelected.current !== props.selected) {
+      chart.current.remove();
+      lastSelected.current = props.selected;
       // chartContainerRef.current = undefined;
     }
     // else{
-      if (chartContainerRef.current.children.length !== 0) return;
+    if (chartContainerRef.current.children.length !== 0) return;
     // }
-   
-   
+
     chart.current = createChart(chartContainerRef.current, {
       width: props.coverCanvasRef.current.clientWidth - 50,
-      height: props.fullScreen?window.innerHeight-50:500,
+      height: props.fullScreen ? window.innerHeight - 50 : 500,
       layout: {
         backgroundColor: "#253248",
         textColor: "rgba(255, 255, 255, 0.9)",
@@ -94,17 +93,16 @@ export default memo(function Index(props) {
 
   useEffect(() => {
     // Nếu chuyển từ fullScreen sang thu nhỏ thì cập nhật lại kích thước trước đ
-    if (fullScreenCache !== props.fullScreen){
+    if (fullScreenCache !== props.fullScreen) {
       if (!props.fullScreen) {
         chart.current.applyOptions({
           width: dimensionsBeforeFullscreen[0],
           height: dimensionsBeforeFullscreen[1],
         });
-      }
-      else {
-          chart.current.applyOptions({
-            width: window.innerWidth-50,
-          height: window.innerHeight-50,
+      } else {
+        chart.current.applyOptions({
+          width: window.innerWidth - 50,
+          height: window.innerHeight - 50,
         });
       }
     }
@@ -114,7 +112,6 @@ export default memo(function Index(props) {
 
   return (
     <div>
-
       <div
         ref={chartContainerRef}
         className="chart-container"

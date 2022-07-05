@@ -4,11 +4,14 @@ import DrawChart from "./DrawChart";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import "./TopBar.css";
 import { listOfChartType } from "./listOfChartType";
+import { listOfChartIndicator } from "./listOfChartIndicator";
 import { useParams } from "react-router-dom";
 import ChartDropdown from "./ChartDropdown";
+import { dynamicString } from "../../../common/helper/string";
 
 export default function Index() {
   const { currency } = useParams();
+
   // Lấy kích thước của khung bao toà bộ bảng chart
   const coverCanvasRef = useRef(null);
   const screen1 = useFullScreenHandle();
@@ -23,6 +26,7 @@ export default function Index() {
   );
 
   const [chartTypeSelected, setChartTypeSelected] = useState(0);
+  const [chartIndicatorSelected, setChartIndicatorSelected] = useState(0);
 
   return (
     <FullScreen handle={screen1} onChange={reportChange}>
@@ -44,25 +48,13 @@ export default function Index() {
                 onChange={setChartTypeSelected}
               ></ChartDropdown>
 
+              <ChartDropdown
+                list={listOfChartIndicator}
+                selected={chartIndicatorSelected}
+                onChange={setChartIndicatorSelected}
+              ></ChartDropdown>
+
               {/* Indicators */}
-              <span className="d-flex justify-content-center react-tabs__tab-horizontal">
-                <svg
-                  className="my-auto"
-                  width={16}
-                  height={16}
-                  viewBox="0 0 48 48"
-                  data-icon="plus-circle"
-                  style={{
-                    fill: "rgb(70, 78, 86)",
-                    stroke: "rgb(70, 78, 86)",
-                    strokeWidth: 0,
-                    verticalAlign: "bottom",
-                  }}
-                >
-                  <path d="M26 22v-6c0-1.104-.896-2-2-2-1.105 0-2 .896-2 2v6h-6c-1.104 0-2 .896-2 2 0 1.105.896 2 2 2h6v6c0 1.105.895 2 2 2 1.104 0 2-.895 2-2v-6h6c1.104 0 2-.895 2-2 0-1.104-.896-2-2-2h-6zm-2 20c9.94 0 18-8.06 18-18S33.94 6 24 6 6 14.06 6 24s8.06 18 18 18zm0 4C11.85 46 2 36.15 2 24S11.85 2 24 2s22 9.85 22 22-9.85 22-22 22z" />
-                </svg>
-                <span className="ms-2 my-auto">Indicators</span>
-              </span>
 
               {/* Comparison */}
               <span className="d-flex justify-content-center react-tabs__tab-horizontal">

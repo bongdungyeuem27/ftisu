@@ -1,0 +1,103 @@
+[data-tippy-root] {
+  /* max-width: -webkit-calc(100vw - 10px); */
+  max-width: calc(100vw - 10px);
+  pointer-events: auto !important;
+}
+.tippy-box[data-theme~="cmc"] {
+  background-color: var(--control-background-color);
+  color: var(--text-color);
+}
+div.tippy-box {
+  border-radius: 8px;
+  /* background-color: var(--control-background-color);
+    color: var(--text-color); */
+}
+.tippy-content {
+  max-height: 300px;
+  /* overflow-y: scroll; */
+  position: relative;
+  padding: 5px 9px;
+  z-index: 1;
+}
+.dropdownItem:first-of-type {
+  margin-top: 4px;
+}
+.dropdownItem {
+  color: var(--color-primary-black);
+  border-radius: 8px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  padding: 8px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.jertNB {
+  box-sizing: border-box;
+  margin: 0px 0px 0px 4px;
+  color: var(--color-light-neutral-5);
+  height: 16px;
+  cursor: pointer !important;
+}
+.coGWQa {
+  box-sizing: border-box;
+  margin: 0px;
+  height: 16px;
+  width: 16px;
+}
+.tippy-box[data-theme~="cmc"] .tippy-arrow {
+  color: var(--control-background-color);
+}
+.tippy-box[data-placement^="bottom"] > .tippy-arrow {
+  top: 0;
+}
+.tippy-arrow {
+  width: 16px;
+  height: 16px;
+  /* color: var(--color-tippy-arrow); */
+}
+.tippy-box[data-placement^="bottom"] > .tippy-arrow:before {
+  top: -7px;
+  left: 0;
+  border-width: 0 8px 8px;
+  border-bottom-color: initial;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+.tippy-arrow:before {
+  content: "";
+  position: absolute;
+  border-color: transparent;
+  border-style: solid;
+}
+.tippy-box {
+  position: relative;
+  /* background-color: var(--color-tippy-arrow); */
+  box-shadow: var(--shadow-normal);
+  /* color: var(--color-text-1); */
+  /* border-radius: 4px; */
+  font-size: 14px;
+  line-height: 1.4;
+  outline: 0;
+
+  
+}
+
+.tippy-dropdown {
+    animation-name: fade-in;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in-out;
+    animation-direction:alternate;
+    animation-iteration-count: 1;
+} 
+
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* .aaa:hover  .tippy-box{ 
+    visibility: hidden
+} */
