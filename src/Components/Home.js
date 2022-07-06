@@ -9,7 +9,7 @@ import "./Home.css";
 import Pdf from "react-to-pdf";
 import { Link } from "react-router-dom";
 import Started from "./Started";
-import ListTopCoin from "./ListTopCoin";
+import ListTopCoin from "./Crypto/ListTopCoin";
 import { useSelector } from "react-redux";
 import { FIATS } from "../Redux/constrants/fiatConst";
 import Solution from "./Solution";

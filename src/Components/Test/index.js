@@ -2,10 +2,16 @@ import React, { useEffect, useState, useRef } from "react";
 import ChartDropdown from "../Currency/MyChart/ChartDropdown";
 import MyDropdown from "../MyDropdown/";
 import Solution from "../Solution"
+import { FIATS } from "../../Redux/constrants/fiatConst";
+import { useSelector } from "react-redux";
+import ListTopCoin from "../Crypto/ListTopCoin";
 
 export default function Index() {
   const ref = useRef();
-
+  const fiat = useSelector((state) => state.fiat.fiat);
+  const [fiatObject, setFiatObject] = useState(
+    FIATS.find((x) => x.key === fiat)
+  );
   useEffect(() => {
     // console.log("ref", ref)
   }, [])
@@ -35,6 +41,7 @@ export default function Index() {
    
       
     // </section>
-    <Solution></Solution>
+    // <Solution></Solution>
+    <ListTopCoin></ListTopCoin>
   );
 }
