@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkftisu=self.webpackChunkftisu||[]).push([[993],{5993:function(e,u,s){s.r(u);u.default={_temp_leader:"Ch\u1ee7 nhi\u1ec7m"}}}]);
+//# sourceMappingURL=993.2f6dce7f.chunk.js.map

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkftisu=self.webpackChunkftisu||[]).push([[967],{5967:function(e,c,r){r.r(c);c.default={_select_currency:"Select currency",_find:"Find",_popular_currencies:"Popular currencies",_fiat_currencies:"Fiat currencies"}}}]);
+//# sourceMappingURL=967.bfbf89db.chunk.js.map

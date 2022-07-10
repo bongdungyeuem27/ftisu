@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/993.2f6dce7f.chunk.js","mappings":"0GAGA,UAHc,CACZA,aAAc","sources":["Components/Team/keyword/vi/index.js"],"sourcesContent":["const index = {\n  _temp_leader: \"Chủ nhiệm\"\n}\nexport default index;"],"names":["_temp_leader"],"sourceRoot":""}

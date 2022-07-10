@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/31.f1689222.chunk.js","mappings":"yGAGA,UAHc,CACZA,mBAAoB","sources":["Components/Solution/keyword/vi/index.js"],"sourcesContent":["const index = {\n  _document_resource: \"Tài liệu nghiên cứu\"\n}\nexport default index;"],"names":["_document_resource"],"sourceRoot":""}

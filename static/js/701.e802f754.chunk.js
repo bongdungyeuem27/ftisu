@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkftisu=self.webpackChunkftisu||[]).push([[701],{3701:function(e,u,s){s.r(u);u.default={_document_resource:"Document Resource"}}}]);
+//# sourceMappingURL=701.e802f754.chunk.js.map

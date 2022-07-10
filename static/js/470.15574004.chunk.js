@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkftisu=self.webpackChunkftisu||[]).push([[470],{9470:function(e,u,a){a.r(u);u.default={_select_language:"Select language",_popular_language:"Popular Language"}}}]);
+//# sourceMappingURL=470.15574004.chunk.js.map

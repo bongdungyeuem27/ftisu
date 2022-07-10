@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/701.e802f754.chunk.js","mappings":"0GAGA,UAHc,CACVA,mBAAoB","sources":["Components/Solution/keyword/en/index.js"],"sourcesContent":["const index = {\n    _document_resource: \"Document Resource\",\n}\nexport default index;"],"names":["_document_resource"],"sourceRoot":""}

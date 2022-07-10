@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkftisu=self.webpackChunkftisu||[]).push([[510],{510:function(t,n,e){e.r(n);n.default={_menus:[{name:"Trang ch\u1ee7",to:"/",exact:!0},{name:"Th\xe0nh vi\xean",to:"/team",exact:!0},{name:"Li\xean h\u1ec7",to:"/contact",exact:!0}],_account:"T\xe0i kho\u1ea3n"}}}]);
+//# sourceMappingURL=510.a70bdaba.chunk.js.map
