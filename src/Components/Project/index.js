@@ -109,12 +109,12 @@ export default function Index() {
               </span>
             </span>
             <span className="hm-solutions__card-footer">
-              <a
+              <Link
                 className="swui-link swui-link--brand swui-link--secondary hm-solutions__card-button"
                 type="button"
                 // target="_blank"
                 
-                href="#overview"
+                to="crypto"
               >
                 Link Website
                 <span className="swui-link__no-break" />
@@ -126,7 +126,7 @@ export default function Index() {
                 >
                   <path d="M3 7.375h7.606L7.112 3.881 8 3l5 5-5 5-.881-.881 3.487-3.494H3v-1.25Z" />
                 </svg>
-              </a>
+              </Link>
             </span>
           </a>
         </div>

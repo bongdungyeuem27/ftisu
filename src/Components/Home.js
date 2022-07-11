@@ -29,8 +29,8 @@ export default function Home() {
         <Started></Started>
         <Solution></Solution>
         <Project></Project>
-
-        <ListTopCoin fiatObject={fiatObject}></ListTopCoin>
+    
+        {/* <ListTopCoin fiatObject={fiatObject}></ListTopCoin> */}
       </section>
 
       {/* End #main */}

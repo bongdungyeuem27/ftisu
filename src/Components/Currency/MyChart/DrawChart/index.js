@@ -1,9 +1,16 @@
-import React, { useEffect, useRef, memo, useState } from "react";
+import React, { useEffect, useRef, memo, useState, useContext } from "react";
 import _ from "lodash";
-import { createChart, CrosshairMode } from "lightweight-charts";
+import { createChart, CrosshairMode, TrackingModeExitMode } from "lightweight-charts";
 import candlestickCreate from "./candlestickCreate";
 import volumeCreate from "./volumeCreate";
 import areaCreate from "./areaCreate";
+import { ChartContext } from "../ChartContextProvider";
+import lstmCreate from "./lstmCreate";
+import gruCreate from "./gruCreate";
+import prophetCreate from "./prophetCreate";
+import arimaCreate from "./arimaCreate";
+import arimaLstmCreate from "./arimaLstmCreate";
+import arimaSvrCreate from "./arimaSvrCreate";
 
 export default memo(function Index(props) {
   // const [data, setData] = useState([]);
@@ -15,6 +22,14 @@ export default memo(function Index(props) {
     1, 500,
   ]);
   const lastSelected = useRef(props.selected);
+  const { listSelected, setListSelected } = useContext(ChartContext);
+
+  const [lstmSeries, setLstmSeries] = useState();
+  const [gruSeries, setGruSeries] = useState();
+  const [prophetSeries, setProphetSeries] = useState();
+  const [arimaSeries, setArimaSeries] = useState();
+  const [arimaLstmSeries, setArimaLstmSeries] = useState();
+  const [arimaSvrSeries, setArimaSvrSeries] = useState();
 
   useEffect(() => {
     // Tạo bảng
@@ -51,6 +66,7 @@ export default memo(function Index(props) {
       timeScale: {
         borderColor: "#485c7b",
       },
+      trackingMode: TrackingModeExitMode.OnNextTap
     });
 
     switch (props.selected) {
@@ -109,6 +125,42 @@ export default memo(function Index(props) {
 
     setFullScreenCache(props.fullScreen);
   }, [props.fullScreen]);
+
+  useEffect(() => {
+    if (lstmSeries !== undefined) {
+      lstmSeries.setData([]);
+    }
+    if (gruSeries !== undefined) {
+      gruSeries.setData([]);
+    }
+    if (prophetSeries !== undefined) {
+      prophetSeries.setData([]);
+    }
+    if (arimaSeries !== undefined) {
+      arimaSeries.setData([]);
+    }
+    if (arimaLstmSeries !== undefined) {
+      arimaLstmSeries.setData([]);
+    }
+    if (arimaSvrSeries !== undefined) {
+      arimaSvrSeries.setData([]);
+    }
+    for (var i = 0; i < listSelected.length; i++) {
+      if (listSelected[i] === "lstm")
+        lstmCreate(chart, props, lstmSeries, setLstmSeries);
+      if (listSelected[i] === "gru")
+        gruCreate(chart, props, gruSeries, setGruSeries);
+      if (listSelected[i] === "prophet")
+        prophetCreate(chart, props, prophetSeries, setProphetSeries);
+      if (listSelected[i] === "arima")
+        arimaCreate(chart, props, arimaSeries, setArimaSeries);
+      if (listSelected[i] === "arima_lstm")
+        arimaLstmCreate(chart, props, arimaLstmSeries, setArimaLstmSeries);
+      if (listSelected[i] === "arima_svr")
+        arimaSvrCreate(chart, props, arimaSvrSeries, setArimaSvrSeries);
+      if (listSelected[i] === "linear_regression");
+    }
+  }, [listSelected]);
 
   return (
     <div>

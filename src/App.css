@@ -114,6 +114,11 @@ body {
   transform: translate3d(0, -6px, 0);
   box-shadow: 0 16px 32px rgb(9 37 64 / 8%), 0 24px 40px rgb(9 37 64 / 12%);
 }
+.button-active {
+  color: #fff!important;
+  text-decoration: none;
+  background-color: var(--theme-color-active)!important;
+}
 .border-box-shadow {
   box-sizing: border-box;
   margin: 0px 0px 8px;

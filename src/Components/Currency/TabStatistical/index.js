@@ -16,7 +16,7 @@ export default memo(function Index(props) {
       <div className="sc-16r8icm-0 hgKnTV">
         <div className="sc-16r8icm-0 nds9rn-0 dAxhCK">
           <h2 color="text" className="sc-1q9q90x-0 bjfmoe">
-            BTC Thống kê giá
+            {props.dataCoinApi.CoinInfo.Name} Thống kê giá
           </h2>
           <div
             itemScope
@@ -180,18 +180,18 @@ export default memo(function Index(props) {
                   <tr>
                     <th scope="row">Thấp / Cao của hôm qua</th>
                     <td>
-                      <div>{props.fiatObject?.sign}42,726.16 /</div>
-                      <div>{props.fiatObject?.sign}44,131.85</div>
+                      <div>{props.fiatObject?.sign}{(Math.round(props.dataCoinApi.AggregatedData.LOWDAY * 100) / 100).toLocaleString()}/</div>
+                      <div>{props.fiatObject?.sign}{(Math.round(props.dataCoinApi.AggregatedData.HIGHDAY * 100) / 100).toLocaleString()}</div>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Mức giá Mở/Đóng cửa của ngày hôm qua</th>
                     <td>
-                      <div>{props.fiatObject?.sign}42,886.65 /</div>
-                      <div>{props.fiatObject?.sign}43,960.93</div>
+                      <div>{props.fiatObject?.sign} {props.dataCoinApi.AggregatedData.OPENDAY.toLocaleString()}/</div>
+                      <div>{props.fiatObject?.sign}</div>
                     </td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <th scope="row">Biến động của ngày hôm qua</th>
                     <td>
                       <div className="sc-16r8icm-0 sc-1siv958-0 kUSSuI">
@@ -210,19 +210,19 @@ export default memo(function Index(props) {
                           >
                             <path d="M18.0566 16H5.94336C5.10459 16 4.68455 14.9782 5.27763 14.3806L11.3343 8.27783C11.7019 7.90739 12.2981 7.90739 12.6657 8.27783L18.7223 14.3806C19.3155 14.9782 18.8954 16 18.0566 16Z" />
                           </svg>
-                          2.5%
+                         {Math.round(props.dataCoinApi.AggregatedData.VOLUME24HOURTO * 100) / 100}
                         </p>
                       </div>
                     </td>
-                  </tr>
+                  </tr> */}
                   <tr>
                     <th scope="row">Khối lượng giao dịch của ngày hôm qua</th>
-                    <td>{props.fiatObject?.sign}31,042,992,291.34</td>
+                    <td>{props.fiatObject?.sign}{props.dataCoinApi.AggregatedData.TOTALTOPTIERVOLUME24HTO.toLocaleString()}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div
+            {/* <div
               itemScope
               itemType="https://schema.org/Table"
               className="sc-16r8icm-0 fmPyWa"
@@ -342,7 +342,7 @@ export default memo(function Index(props) {
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </div> */}
             <div
               itemScope
               itemType="https://schema.org/Table"
@@ -351,17 +351,17 @@ export default memo(function Index(props) {
               <table>
                 <caption itemProp="about">Bitcoin Cung cấp</caption>
                 <tbody>
-                  <tr>
+                  {/* <tr>
                     <th scope="row">Lượng cung lưu hành</th>
-                    <td>18.993.462 BTC</td>
-                  </tr>
+                    <td>18.993.462 {props.dataCoinApi.CoinInfo.Name}</td>
+                  </tr> */}
                   <tr>
                     <th scope="row">Tổng cung</th>
-                    <td>18.993.462 BTC</td>
+                    <td>{props.dataCoinApi.CoinInfo.TotalCoinsMined.toLocaleString()}{props.dataCoinApi.CoinInfo.Name}</td>
                   </tr>
                   <tr>
                     <th scope="row">Tổng cung tối đa</th>
-                    <td>21.000.000 BTC</td>
+                    <td>{props.dataCoinApi.CoinInfo.MaxSupply.toLocaleString()} {props.dataCoinApi.CoinInfo.Name}</td>
                   </tr>
                 </tbody>
               </table>

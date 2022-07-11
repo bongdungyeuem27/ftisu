@@ -8,9 +8,15 @@ import { FIATS } from "../../Redux/constrants/fiatConst";
 import { CRYPTOS } from "../../common/constant/index";
 import { LANGUAGES } from "../../Redux/constrants/languageConst";
 import { dynamicString } from "../../common/helper/string";
-import { getCurrentPrice, getCoinDataApi, getCoinImage } from "../../api/crypto";
-import { API_CRYPTOCOMPARE_HOME } from "../../common/constant/index"
+import {
+  getCurrentPrice,
+  getCoinDataApi,
+  getCoinImage,
+} from "../../api/crypto";
+import { API_CRYPTOCOMPARE_HOME } from "../../common/constant/index";
 import Caculator from "./Caculator";
+import * as cryptoInfo from "./cryptoInfo";
+import { Link } from "react-router-dom";
 
 export default function Index() {
   const MyChart = lazy(() => import("./MyChart"));
@@ -117,7 +123,7 @@ export default function Index() {
                 className="sc-16r8icm-0 bILTHz"
               >
                 <div className="namePill namePillPrimary">
-                  {keywords?._rank} 1
+                  {keywords?._rank} {cryptoInfo[cryptoObject.name.toLowerCase()].rank}
                 </div>
               </div>
             </div>
@@ -141,11 +147,24 @@ export default function Index() {
                     fontWeight: 600,
                     padding: "5px 10px",
                   }}
-                  className={dataCoinApi?.AggregatedData.CHANGEDAY<0?"gEePkg button-negative":"gEePkg button-postive"}
+                  className={
+                    dataCoinApi?.AggregatedData.CHANGEDAY < 0
+                      ? "gEePkg button-negative"
+                      : "gEePkg button-postive"
+                  }
                 >
-                  {dataCoinApi?.AggregatedData.CHANGEDAY<0?(<i class="fa-solid fa-caret-down"></i>):(<i class="fa-solid fa-caret-up"></i>)}
-                  {" "}
-                  {Math.round(Math.abs(dataCoinApi?.AggregatedData.CHANGEDAY/dataCoinApi?.AggregatedData.OPEN24HOUR)*100)/100}{/* */}%
+                  {dataCoinApi?.AggregatedData.CHANGEDAY < 0 ? (
+                    <i class="fa-solid fa-caret-down"></i>
+                  ) : (
+                    <i class="fa-solid fa-caret-up"></i>
+                  )}{" "}
+                  {Math.round(
+                    Math.abs(
+                      dataCoinApi?.AggregatedData.CHANGEDAY /
+                        dataCoinApi?.AggregatedData.OPEN24HOUR
+                    ) * 100
+                  ) / 100}
+                  {/* */}%
                 </span>
               </div>
               <div className="n78udj-3 emihhf" ref={headerRef}>
@@ -173,12 +192,24 @@ export default function Index() {
                         fontWeight: 600,
                         color: "#fff",
                       }}
-                      className={dataCoinApi?.AggregatedData.CHANGEDAY<0?"gEePkg button-negative":"gEePkg button-postive"}
+                      className={
+                        dataCoinApi?.AggregatedData.CHANGEDAY < 0
+                          ? "gEePkg button-negative"
+                          : "gEePkg button-postive"
+                      }
                     >
-                  {dataCoinApi?.AggregatedData.CHANGEDAY<0?(<i class="fa-solid fa-caret-down"></i>):(<i class="fa-solid fa-caret-up"></i>)}
-
-                      {" "}
-                  {Math.round(Math.abs(dataCoinApi?.AggregatedData.CHANGEDAY/dataCoinApi?.AggregatedData.OPEN24HOUR)*100)/100}{/* */}%
+                      {dataCoinApi?.AggregatedData.CHANGEDAY < 0 ? (
+                        <i class="fa-solid fa-caret-down"></i>
+                      ) : (
+                        <i class="fa-solid fa-caret-up"></i>
+                      )}{" "}
+                      {Math.round(
+                        Math.abs(
+                          dataCoinApi?.AggregatedData.CHANGEDAY /
+                            dataCoinApi?.AggregatedData.OPEN24HOUR
+                        ) * 100
+                      ) / 100}
+                      {/* */}%
                     </span>
                   </div>
                   <span className="sc-80eeb0-1 iuAjRY">
@@ -224,9 +255,8 @@ export default function Index() {
                     <li>
                       <a
                         className="link-button"
-                        lang="vi"
                         rel="nofollow noopener"
-                        href="https://bitcoin.org/"
+                        href={cryptoInfo[cryptoObject.name.toLowerCase()].website}
                         target="_blank"
                       >
                         <svg
@@ -355,7 +385,7 @@ export default function Index() {
                         className="link-button"
                         lang="vi"
                         rel="nofollow noopener"
-                        href="https://github.com/bitcoin/bitcoin"
+                        href={cryptoInfo[cryptoObject.name.toLowerCase()].source}
                         target="_blank"
                       >
                         <svg
@@ -412,7 +442,7 @@ export default function Index() {
                         className="link-button"
                         lang="vi"
                         rel="nofollow noopener"
-                        href="https://bitcoin.org/bitcoin.pdf"
+                        href={cryptoInfo[cryptoObject.name.toLowerCase()].whitepaper}
                         target="_blank"
                       >
                         <svg
@@ -1244,7 +1274,7 @@ export default function Index() {
             <Caculator></Caculator>
           </div>
 
-                  {/* right */}
+          {/* right */}
           <div className="sc-16r8icm-0 iutcov border-box-shadow">
             <Suspense fallback={<MyLoader></MyLoader>}>
               {cryptoObject &&

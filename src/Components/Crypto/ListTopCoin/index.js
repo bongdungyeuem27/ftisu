@@ -14,6 +14,7 @@ import { CRYPTOS } from "../../../common/constant/index";
 import { LANGUAGES } from "../../../Redux/constrants/languageConst";
 import { dynamicString } from "../../../common/helper/string";
 import { useSearchParams } from "react-router-dom";
+import _ from "lodash";
 
 const style = {
   height: 30,
@@ -25,50 +26,15 @@ const itemsInOnePage = 100;
 const maxScreenElement = 10;
 const maxPage = 8;
 export default (function Index(props) {
-  const [searchParams] = useSearchParams();
   const [items, setItems] = useState([]);
-  const [page, setPage] = useState(
-    searchParams.get("page") === null ? 1 : parseInt(searchParams.get("page"))
-  );
   const language = useSelector((state) => state.language.language);
   // Chứa các từ ngữ đa ngôn ngữ
   const [keywords, setKeywords] = useState();
   // const [maxScreenElement] = useState(Math.round(window.screen.height / 74));
-  const pageApiLoaded = useRef(0);
   const fiat = useSelector((state) => state.fiat.fiat);
   const [fiatObject, setFiatObject] = useState(
     FIATS.find((x) => x.key === fiat)
   );
-  const [stopRender, setStopRender] = useState(false);
-
-  const fetchMoreData = () => {
-  
-    if (items.length >= itemsInOnePage) {
-      setStopRender(true);
-      console.log("stop render");
-      return;
-    }
-
-    topDailyVolumeData(
-      props.fiatObject.key,
-      maxScreenElement,
-      ((page - 1) * itemsInOnePage) / maxScreenElement + pageApiLoaded.current
-    )
-      .then(async (success) => {
-        console.log(success.data)
-        if (success.data.Message === "Err:No Data") {
-          setStopRender(true);
-          console.log("stop render");
-          return;
-        }
-        setItems(items.concat(success.data.Data));
-
-        pageApiLoaded.current += 1;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
   useEffect(() => {
     import(
@@ -82,14 +48,29 @@ export default (function Index(props) {
         setKeywords(undefined);
       });
   }, [language]);
+
+  useEffect(() => {
+    topDailyVolumeData(
+      props.fiatObject.key,
+      maxScreenElement,
+      0
+    )
+      .then(async (success) => {
+        let dataApi = _.filter(success.data.Data, function(o) { 
+          return o.CoinInfo.Name === 'BTC' || o.CoinInfo.Name === 'ETH' || o.CoinInfo.Name === 'XRP'; 
+       });
+        setItems(dataApi);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [])
   return (
     <div id="overview">
       <InfiniteScroll
         pageStart={0}
         dataLength={items.length}
-        next={fetchMoreData}
-        hasMore={true}
-        loader={!stopRender && <h4>Loading...</h4>}
+        hasMore={false}
       >
         
         <table id="coin-table" className="h7vnx2-2 czTsgW cmc-table  ">
@@ -295,7 +276,7 @@ export default (function Index(props) {
                       fontSize={0}
                       className="sc-1eb5slv-0 etpvrL"
                     >
-                      {(page - 1) * itemsInOnePage + key + 1}
+                      {(0) * itemsInOnePage + key + 1}
                     </p>
                   </td>
                   <td style={{ textAlign: "left" }}>
@@ -510,397 +491,7 @@ export default (function Index(props) {
         </table>
       </InfiniteScroll>
 
-      {stopRender && (
-        <>
-          {/* mobile page choose */}
-          <div className="sc-4r7b5t-2 bAteBr my-container">
-            <div className="sc-1t7mu4i-0 kMMdbd">
-              <ul className="pagination">
-                <li className="previous">
-                  <a
-                    href={page > 1 && `/?page=${page - 1}`}
-                    className="chevron"
-                    tabIndex={0}
-                    role="button"
-                    aria-disabled="false"
-                    aria-label="Previous page"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      height={14}
-                      width={14}
-                      viewBox="0 0 24 24"
-                      className="sc-16r8icm-0 dWGZqy"
-                    >
-                      <path
-                        d="M15 6L9 12L15 18"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeMiterlimit={10}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </a>
-                </li>
-                {page !== 1 && (
-                  <li className="page">
-                    <a
-                      role="button"
-                      tabIndex={0}
-                      aria-label="Page 1"
-                      href="/?page=1"
-                    >
-                      1
-                    </a>
-                  </li>
-                )}
-                {page - 2 > 1 && (
-                  <li className="break">
-                    <a role="button" tabIndex={0}>
-                      ...
-                    </a>
-                  </li>
-                )}
-                {/* {page - 3 > 1 && (
-                    <li className="page">
-                      <a
-                        role="button"
-                        tabIndex={0}
-                        aria-label="Page 2 is your current page"
-                        aria-current="page"
-                        href={`/?page=${page - 3}`}
-                      >
-                        {page - 3}
-                      </a>
-                    </li>
-                  )} */}
-                {page - 2 > 1 && (
-                  <li className="page">
-                    <a
-                      role="button"
-                      tabIndex={0}
-                      aria-label="Page 2 is your current page"
-                      aria-current="page"
-                      href={`/?page=${page - 2}`}
-                    >
-                      {page - 2}
-                    </a>
-                  </li>
-                )}
-                {page - 1 > 1 && (
-                  <li className="page">
-                    <a
-                      role="button"
-                      tabIndex={0}
-                      aria-label="Page 2 is your current page"
-                      aria-current="page"
-                      href={`/?page=${page - 1}`}
-                    >
-                      {page - 1}
-                    </a>
-                  </li>
-                )}
-                <li className="page active">
-                  <a
-                    role="button"
-                    tabIndex={0}
-                    aria-label="Page 2 is your current page"
-                    aria-current="page"
-                  >
-                    {page}
-                  </a>
-                </li>
-                {page + 1 < maxPage && (
-                  <li className="page">
-                    <a
-                      role="button"
-                      tabIndex={0}
-                      aria-label="Page 2 is your current page"
-                      aria-current="page"
-                      href={`/?page=${page + 1}`}
-                    >
-                      {page + 1}
-                    </a>
-                  </li>
-                )}
-                {page + 2 < maxPage && (
-                  <li className="page">
-                    <a
-                      role="button"
-                      tabIndex={0}
-                      aria-label="Page 2 is your current page"
-                      aria-current="page"
-                      href={`/?page=${page + 2}`}
-                    >
-                      {page + 2}
-                    </a>
-                  </li>
-                )}
-                {page + 2 < maxPage && (
-                  <li className="break">
-                    <a role="button" tabIndex={0}>
-                      ...
-                    </a>
-                  </li>
-                )}
-                {page !== maxPage && (
-                  <li className="page">
-                    <a
-                      role="button"
-                      tabIndex={0}
-                      aria-label="Page 100"
-                      href={`/?page=${maxPage}`}
-                    >
-                      {maxPage}
-                    </a>
-                  </li>
-                )}
-
-                <li className="next">
-                  <a
-                    className="chevron"
-                    tabIndex={0}
-                    role="button"
-                    aria-disabled="false"
-                    aria-label="Next page"
-                    href={page < maxPage && `/?page=${page + 1}`}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      height={14}
-                      width={14}
-                      viewBox="0 0 24 24"
-                      className="sc-16r8icm-0 dWGZqy"
-                    >
-                      <path
-                        d="M9 6L15 12L9 18"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeMiterlimit={10}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* pc page */}
-          <div className="sc-16r8icm-0 sc-4r7b5t-0 gJbsQH my-container">
-            <p color="text" fontSize={1} className="sc-1eb5slv-0 hykWbK">
-              {keywords?._showing} {(page - 1) * itemsInOnePage + 1} -{" "}
-              {(page - 1) * itemsInOnePage + items.length}
-            </p>
-            <div className="sc-4r7b5t-3 bvcQcm">
-              <div className="sc-1t7mu4i-0 kMMdbd">
-                <ul className="pagination">
-                  <li className="previous">
-                    <a
-                      href={page > 1 && `/?page=${page - 1}`}
-                      className="chevron"
-                      tabIndex={0}
-                      role="button"
-                      aria-disabled="false"
-                      aria-label="Previous page"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        height={14}
-                        width={14}
-                        viewBox="0 0 24 24"
-                        className="sc-16r8icm-0 dWGZqy"
-                      >
-                        <path
-                          d="M15 6L9 12L15 18"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          strokeMiterlimit={10}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  {page !== 1 && (
-                    <li className="page">
-                      <a
-                        role="button"
-                        tabIndex={0}
-                        aria-label="Page 1"
-                        href="/?page=1"
-                      >
-                        1
-                      </a>
-                    </li>
-                  )}
-                  {page - 2 > 1 && (
-                    <li className="break">
-                      <a role="button" tabIndex={0}>
-                        ...
-                      </a>
-                    </li>
-                  )}
-                  {/* {page - 3 > 1 && (
-                    <li className="page">
-                      <a
-                        role="button"
-                        tabIndex={0}
-                        aria-label="Page 2 is your current page"
-                        aria-current="page"
-                        href={`/?page=${page - 3}`}
-                      >
-                        {page - 3}
-                      </a>
-                    </li>
-                  )} */}
-                  {page - 2 > 1 && (
-                    <li className="page">
-                      <a
-                        role="button"
-                        tabIndex={0}
-                        aria-label="Page 2 is your current page"
-                        aria-current="page"
-                        href={`/?page=${page - 2}`}
-                      >
-                        {page - 2}
-                      </a>
-                    </li>
-                  )}
-                  {page - 1 > 1 && (
-                    <li className="page">
-                      <a
-                        role="button"
-                        tabIndex={0}
-                        aria-label="Page 2 is your current page"
-                        aria-current="page"
-                        href={`/?page=${page - 1}`}
-                      >
-                        {page - 1}
-                      </a>
-                    </li>
-                  )}
-                  <li className="page active">
-                    <a
-                      role="button"
-                      tabIndex={0}
-                      aria-label="Page 2 is your current page"
-                      aria-current="page"
-                    >
-                      {page}
-                    </a>
-                  </li>
-                  {page + 1 < maxPage && (
-                    <li className="page">
-                      <a
-                        role="button"
-                        tabIndex={0}
-                        aria-label="Page 2 is your current page"
-                        aria-current="page"
-                        href={`/?page=${page + 1}`}
-                      >
-                        {page + 1}
-                      </a>
-                    </li>
-                  )}
-                  {page + 2 < maxPage && (
-                    <li className="page">
-                      <a
-                        role="button"
-                        tabIndex={0}
-                        aria-label="Page 2 is your current page"
-                        aria-current="page"
-                        href={`/?page=${page + 2}`}
-                      >
-                        {page + 2}
-                      </a>
-                    </li>
-                  )}
-                  {page + 2 < maxPage && (
-                    <li className="break">
-                      <a role="button" tabIndex={0}>
-                        ...
-                      </a>
-                    </li>
-                  )}
-                  {page !== maxPage && (
-                    <li className="page">
-                      <a
-                        role="button"
-                        tabIndex={0}
-                        aria-label="Page 100"
-                        href={`/?page=${maxPage}`}
-                      >
-                        {maxPage}
-                      </a>
-                    </li>
-                  )}
-
-                  <li className="next">
-                    <a
-                      className="chevron"
-                      tabIndex={0}
-                      role="button"
-                      aria-disabled="false"
-                      aria-label="Next page"
-                      href={page < maxPage && `/?page=${page + 1}`}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        height={14}
-                        width={14}
-                        viewBox="0 0 24 24"
-                        className="sc-16r8icm-0 dWGZqy"
-                      >
-                        <path
-                          d="M9 6L15 12L9 18"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          strokeMiterlimit={10}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="sc-16r8icm-0 sc-4r7b5t-1 entgiO">
-              <p color="text2" fontSize={1} className="sc-1eb5slv-0 htiVYl">
-                Show rows
-              </p>
-              <div className="sc-16r8icm-0 tu1guj-0 cSTqvK">
-                100
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  height={14}
-                  width={14}
-                  viewBox="0 0 24 24"
-                  className="sc-16r8icm-0 dWGZqy"
-                >
-                  <path
-                    d="M6 9L12 15L18 9"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeMiterlimit={10}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
+  
     </div>
   );
 });

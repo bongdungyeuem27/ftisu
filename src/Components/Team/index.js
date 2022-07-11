@@ -105,7 +105,7 @@ function Index(props) {
               </div>
               <div className="member-info">
                 <h4>Nguyễn Minh Nhựt</h4>
-                <span>Nghiên cứu sinh</span>
+                <span>Nghiên cứu viên</span>
               </div>
             </div>
           </div>

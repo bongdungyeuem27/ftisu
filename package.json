@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.2.1",
     "axios": "^0.27.2",
     "babel-eslint": "^10.1.0",
+    "gh-pages": "^4.0.0",
     "jquery": "^3.6.0",
     "kaktana-react-lightweight-charts": "^2.0.0",
     "lightweight-charts": "^3.8.0",
