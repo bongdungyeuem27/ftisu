@@ -5,15 +5,23 @@ import candlestickCreate from "./candlestickCreate";
 import volumeCreate from "./volumeCreate";
 import areaCreate from "./areaCreate";
 import { ChartContext } from "../ChartContextProvider";
-import lstmCreate from "./lstmCreate";
-import gruCreate from "./gruCreate";
-import prophetCreate from "./prophetCreate";
-import arimaCreate from "./arimaCreate";
-import arimaLstmCreate from "./arimaLstmCreate";
-import arimaSvrCreate from "./arimaSvrCreate";
+import modelCreate from "./modelCreate";
+import {listOfChartIndicator} from "../listOfChartIndicator";
 
 export default memo(function Index(props) {
   // const [data, setData] = useState([]);
+  const [listModel, setListModel] = useState({});
+  // listModel['a'] = 0;
+  useEffect(() => {
+    let listModelTemp= {};
+    _.forEach(listOfChartIndicator, function(value, key) {
+      listModelTemp[value.key+'Series'] = undefined;
+    });
+    setListModel(listModelTemp)
+  }, [])
+
+ 
+
 
   const chartContainerRef = useRef(undefined);
   const chart = useRef(undefined);
@@ -30,6 +38,8 @@ export default memo(function Index(props) {
   const [arimaSeries, setArimaSeries] = useState();
   const [arimaLstmSeries, setArimaLstmSeries] = useState();
   const [arimaSvrSeries, setArimaSvrSeries] = useState();
+  const [svrSeries, setSvrSeries] = useState();
+  const [linearRegression, setLinearRegression] = useState();
 
   useEffect(() => {
     // Tạo bảng
@@ -126,44 +136,29 @@ export default memo(function Index(props) {
     setFullScreenCache(props.fullScreen);
   }, [props.fullScreen]);
 
+  const [k, setK] = useState();
+
   useEffect(() => {
-    if (lstmSeries !== undefined) {
-      lstmSeries.setData([]);
-    }
-    if (gruSeries !== undefined) {
-      gruSeries.setData([]);
-    }
-    if (prophetSeries !== undefined) {
-      prophetSeries.setData([]);
-    }
-    if (arimaSeries !== undefined) {
-      arimaSeries.setData([]);
-    }
-    if (arimaLstmSeries !== undefined) {
-      arimaLstmSeries.setData([]);
-    }
-    if (arimaSvrSeries !== undefined) {
-      arimaSvrSeries.setData([]);
-    }
-    for (var i = 0; i < listSelected.length; i++) {
-      if (listSelected[i] === "lstm")
-        lstmCreate(chart, props, lstmSeries, setLstmSeries);
-      if (listSelected[i] === "gru")
-        gruCreate(chart, props, gruSeries, setGruSeries);
-      if (listSelected[i] === "prophet")
-        prophetCreate(chart, props, prophetSeries, setProphetSeries);
-      if (listSelected[i] === "arima")
-        arimaCreate(chart, props, arimaSeries, setArimaSeries);
-      if (listSelected[i] === "arima_lstm")
-        arimaLstmCreate(chart, props, arimaLstmSeries, setArimaLstmSeries);
-      if (listSelected[i] === "arima_svr")
-        arimaSvrCreate(chart, props, arimaSvrSeries, setArimaSvrSeries);
-      if (listSelected[i] === "linear_regression");
-    }
+      _.forEach(listOfChartIndicator, async function(value, key) {
+        if(listSelected.find(i=>i===value.key)){
+          let listModelTemp = listModel;
+          listModelTemp[value.key+'Series'] =(await modelCreate(chart, props, value.key, listModelTemp[value.key+'Series'], value.color));
+          if (!listModel[value.key+'Series']){  
+            setListModel(listModelTemp);
+          }
+        }
+        else {
+          if ( listModel[value.key+'Series']){
+            listModel[value.key+'Series'].setData([]);
+          }
+        }
+      });
   }, [listSelected]);
 
   return (
     <div>
+    {/* //   {console.log(eval('a'))} */}
+    {/* {console.log(listModel['a'])} */}
       <div
         ref={chartContainerRef}
         className="chart-container"

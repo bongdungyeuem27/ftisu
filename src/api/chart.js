@@ -34,3 +34,6 @@ export const getArimaLstm = (type) => {
 export const getArimaSvr = (type) => {
   return axiosServices.get(`${API_ENDPOINT_LARAVEL}/api/crypto/${type}/arima_svr/getModel`);
 };  
+export const getModel = (type, model) => {
+  return axiosServices.get(`${API_ENDPOINT_LARAVEL}/api/crypto/${type}/${model}/getModel`);
+};  
