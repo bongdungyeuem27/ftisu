@@ -4,7 +4,7 @@ export default function areaCreate(chart, props) {
   let now = new Date();
   getDataClose(
     props.currency,
-    now.getDate() - 1,
+    now.getDate(),
     now.getMonth() + 1,
     now.getFullYear()
   )
