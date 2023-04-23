@@ -2,23 +2,23 @@ import React from "react";
 
 export default function Index() {
   return (
-    <section id="contact" className="contact section-bg">
+    <section id="contact" className="contact section-bg mt-3">
       <div className="container">
         <div className="section-title" data-aos="fade-up">
-          <h2>Contact Us</h2>
+          <h2>Liên hệ</h2>
         </div>
         <div className="row">
           <div
-            className="col-lg-4 col-md-6"
+            className="col-lg-6 col-md-6"
             data-aos="fade-up"
             data-aos-delay={100}
           >
             <div className="contact-about">
-              <h3>Vesperr</h3>
+              <h3>Khoa Hệ thống Thông tin</h3>
+              <h5 className="justify-center">Nhóm nghiên cứu Khoa học FTISU</h5>
               <p>
-                Cras fermentum odio eu feugiat. Justo eget magna fermentum
-                iaculis eu non diam phasellus. Scelerisque felis imperdiet proin
-                fermentum leo. Amet volutpat consequat mauris nunc congue.
+                Nhóm xây dựng và phát triển các thuật toán ứng dụng của Machine
+                Learning và Blockchain vào các lĩnh vực trong cuộc sống.
               </p>
               <div className="social-links">
                 <a href="#" className="twitter">
@@ -37,7 +37,7 @@ export default function Index() {
             </div>
           </div>
           <div
-            className="col-lg-3 col-md-6 mt-4 mt-md-0"
+            className="col-lg-6 col-md-6 mt-4 mt-md-0"
             data-aos="fade-up"
             data-aos-delay={200}
           >
@@ -45,83 +45,20 @@ export default function Index() {
               <div>
                 <i className="ri-map-pin-line" />
                 <p>
-                  A108 Adam Street
+                  Khoa Hệ thống Thông tin
                   <br />
-                  New York, NY 535022
+                  Trường Đại học Công nghệ thông tin, ĐHQG HCM
                 </p>
               </div>
               <div>
                 <i className="ri-mail-send-line" />
-                <p>info@example.com</p>
+                <p>minhnhut.devcntt@gmail.com</p>
               </div>
               <div>
                 <i className="ri-phone-line" />
-                <p>+1 5589 55488 55s</p>
+                <p>+84 362117972</p>
               </div>
             </div>
-          </div>
-          <div
-            className="col-lg-5 col-md-12"
-            data-aos="fade-up"
-            data-aos-delay={300}
-          >
-            <form
-              action="forms/contact.php"
-              method="post"
-              role="form"
-              className="php-email-form"
-            >
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="name"
-                  className="form-control"
-                  id="name"
-                  placeholder="Your Name"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="email"
-                  className="form-control"
-                  name="email"
-                  id="email"
-                  placeholder="Your Email"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  name="subject"
-                  id="subject"
-                  placeholder="Subject"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <textarea
-                  className="form-control"
-                  name="message"
-                  rows={5}
-                  placeholder="Message"
-                  required
-                  defaultValue={""}
-                />
-              </div>
-              <div className="my-3">
-                <div className="loading">Loading</div>
-                <div className="error-message" />
-                <div className="sent-message">
-                  Your message has been sent. Thank you!
-                </div>
-              </div>
-              <div className="text-center">
-                <button type="submit">Send Message</button>
-              </div>
-            </form>
           </div>
         </div>
       </div>

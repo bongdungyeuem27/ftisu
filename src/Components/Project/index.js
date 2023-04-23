@@ -29,11 +29,7 @@ export default function Index() {
           {keywords?._project_research}
         </h2>
         <div className="hm-solutions__cards mt-5">
-          <a
-
-            className="hm-solutions__card hover1"
-            data-test="solutions_card-1"
-          >
+          <a className="hm-solutions__card hover1" data-test="solutions_card-1">
             <span className="hm-solutions__card-body">
               <span className="hm-solutions__card-icon">
                 <img className="solution-icon" src={cv}></img>
@@ -79,11 +75,7 @@ export default function Index() {
           </a>
 
           {/*  */}
-          <a
-
-            className="hm-solutions__card hover1"
-            data-test="solutions_card-1"
-          >
+          <a className="hm-solutions__card hover1" data-test="solutions_card-1">
             <span className="hm-solutions__card-body">
               <span className="hm-solutions__card-icon">
                 <img className="solution-icon" src={predict}></img>
@@ -109,12 +101,12 @@ export default function Index() {
               </span>
             </span>
             <span className="hm-solutions__card-footer">
-              <Link
+              <a
                 className="swui-link swui-link--brand swui-link--secondary hm-solutions__card-button"
                 type="button"
-                // target="_blank"
-                
-                to="crypto"
+                target="_blank"
+                rel="noreferrer"
+                href="https://predict.ftisu.vn/"
               >
                 Link Website
                 <span className="swui-link__no-break" />
@@ -126,7 +118,7 @@ export default function Index() {
                 >
                   <path d="M3 7.375h7.606L7.112 3.881 8 3l5 5-5 5-.881-.881 3.487-3.494H3v-1.25Z" />
                 </svg>
-              </Link>
+              </a>
             </span>
           </a>
         </div>
