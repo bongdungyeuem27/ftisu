@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-2xl overflow-hidden pb-2 max-w-[100%] sm:max-w-[50%] md:max-w-[33%] lg:max-w-[25%] shadow-md shadow-purple-200 hover:shadow-2xl hover:shadow-purple-300 transition-all duration-150 ease-in-out"
+    class="rounded-2xl overflow-hidden pb-2 max-w-[100%] sm:max-w-[48%] lg:max-w-[31%] xl:max-w-[24%] shadow-md shadow-purple-200 hover:shadow-2xl hover:shadow-purple-300 transition-all duration-150 ease-in-out"
   >
     <div
       class="block rounded-lg bg-white "

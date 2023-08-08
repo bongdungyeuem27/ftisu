@@ -12,11 +12,8 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  image: {
-    dir: "assets/images",
-  },
   plugins: [{ src: "@/plugins/aos", ssr: false, mode: "client" }],
-  modules: ["@nuxt/image", "nuxt-svgo", "nuxt-icon"],
+  modules: ["nuxt-svgo", "nuxt-icon"],
   svgo: {
     svgoConfig: {
       multipass: true,
@@ -40,18 +37,7 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    // Homepage pre-rendered at build time
     "/": { prerender: true },
     "/team": { prerender: true },
-    // Product page generated on-demand, revalidates in background
-    "/products/**": { swr: 3600 },
-    // Blog post generated on-demand once until next deploy
-    "/blog/**": { isr: true },
-    // Admin dashboard renders only on client-side
-    "/admin/**": { ssr: false },
-    // Add cors headers on API routes
-    "/api/**": { cors: true },
-    // Redirects legacy urls
-    "/old-page": { redirect: "/new-page" },
   },
 });

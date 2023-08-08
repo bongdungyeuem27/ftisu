@@ -1,10 +1,11 @@
 <template>
   <Header></Header>
   <NuxtPage></NuxtPage>
-  <div>footer</div>
+  <FooterServer></FooterServer>
 </template>
 <script lang="ts" setup>
 import Header from "@/components/header/Header.server.vue";
+import FooterServer from "@/components/footer/Footer.server.vue";
 
 useSeoMeta({
   title: "FTISU",

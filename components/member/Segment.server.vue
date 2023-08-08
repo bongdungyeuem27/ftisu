@@ -1,12 +1,12 @@
 <template>
-  <section class="container mx-auto px-2 md:px-6">
+  <section class="container flex flex-col items-center px-2 md:px-1">
     <!-- Section: Design Block -->
     <div class="text-center">
       <h2 class=" text-3xl font-bold">
         {{ team.title }}
       </h2>
 
-      <div class="flex gap-x-6 justify-center mt-6">
+      <div class="flex gap-x-4 gap-y-4 justify-center mt-6 flex-wrap">
         <MemberServer
           v-for="(member, index) in team.members"
           :key="member.id"

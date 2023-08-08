@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-8 flex flex-col w-full gap-10">
+  <div class="mt-8 flex flex-col items-center w-full gap-10">
     <SegmentServer
       v-for="team in teams"
       :key="team.id"
