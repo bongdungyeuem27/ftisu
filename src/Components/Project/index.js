@@ -123,6 +123,55 @@ export default function Index() {
           </a>
         </div>
       </div>
+
+      <div className="hm-solutions__container swui-container ">
+        <h2 className="swui-h2 hm-solutions__title text-center">
+          Các tính năng cộng đồng
+        </h2>
+        <div className="hm-solutions__cards mt-5">
+          <a className="hm-solutions__card hover1" data-test="solutions_card-1">
+            <span className="hm-solutions__card-body">
+              <span className="hm-solutions__card-icon">
+                <img className="solution-icon" src={cv}></img>
+              </span>
+              <span className="hm-solutions__card-info">
+                <h3 className="hm-solutions__card-title">ISCV Chain</h3>
+                <ul className="hm-solutions__card-list">
+                  <li className="body-text body-text--sm hm-solutions__card-item">
+                    ISCV Go
+                  </li>
+                  <li className="body-text body-text--sm hm-solutions__card-item">
+                    ISCV Machine
+                  </li>
+                  <li className="body-text body-text--sm hm-solutions__card-item">
+                    ISCV Storage
+                  </li>
+                  <li className="body-text body-text--sm hm-solutions__card-item">
+                    ISCV Cosmos
+                  </li>
+                </ul>
+              </span>
+            </span>
+            <span className="hm-solutions__card-footer">
+              <Link
+                className="swui-link swui-link--brand swui-link--secondary hm-solutions__card-button"
+                to="/iscvchain"
+              >
+                Link ISCV Chain
+                <span className="swui-link__no-break" />
+                <svg
+                  className="swui-link__arrow"
+                  width={16}
+                  height={16}
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M3 7.375h7.606L7.112 3.881 8 3l5 5-5 5-.881-.881 3.487-3.494H3v-1.25Z" />
+                </svg>
+              </Link>
+            </span>
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

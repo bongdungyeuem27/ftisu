@@ -38,6 +38,11 @@ import quoctrung from "./images/quoctrung.jpg";
 import tuquyen from "./images/tuquyen.jpg";
 import mytran from "./images/mytran.jpg";
 import thanhnoi from "./images/thanhnoi.jpg";
+import tuantrung from "./images/tuantrung.jpg";
+import anhhuy from "./images/anhhuy.jpg";
+import anhduc from "./images/anhduc.jpg";
+import thaysang from "./images/thaysang.jpg";
+import thien from "./images/thien.jpg";
 import defaultPerson from "./images/default.jpg";
 
 function Index(props) {
@@ -101,6 +106,31 @@ function Index(props) {
           <p>Nghiên cứu về chuỗi thời gian và ứng dụng chuỗi thời gian</p>
         </div>
         <div className="row d-flex justify-content-center">
+          <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div className="member" data-aos="fade-up" data-aos-delay={200}>
+              <div className="member-img">
+                <img src={thaysang} className="img-fluid" alt="" />
+                <div className="social">
+                  <a href>
+                    <i className="bi bi-twitter" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-facebook" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-instagram" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-linkedin" />
+                  </a>
+                </div>
+              </div>
+              <div className="member-info">
+                <h4>Vũ Minh Sang</h4>
+                <span>Thạc sĩ</span>
+              </div>
+            </div>
+          </div>
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay={200}>
               <div className="member-img">
@@ -234,7 +264,7 @@ function Index(props) {
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay={200}>
               <div className="member-img">
-                <img src={defaultPerson} className="img-fluid" alt="" />
+                <img src={tuantrung} className="img-fluid" alt="" />
                 <div className="social">
                   <a href>
                     <i className="bi bi-twitter" />
@@ -525,7 +555,7 @@ function Index(props) {
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay={200}>
               <div className="member-img">
-                <img src={defaultPerson} className="img-fluid" alt="" />
+                <img src={anhhuy} className="img-fluid" alt="" />
                 <div className="social">
                   <a href>
                     <i className="bi bi-twitter" />
@@ -579,32 +609,6 @@ function Index(props) {
               </div>
               <div className="member-info">
                 <h4>Trịnh Thị Thanh Trúc</h4>
-                <span>Sinh viên</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div className="member" data-aos="fade-up" data-aos-delay={200}>
-              <div className="member-img">
-                <img src={huong} className="img-fluid" alt="" />
-                <div className="social">
-                  <a href>
-                    <i className="bi bi-twitter" />
-                  </a>
-                  <a href>
-                    <i className="bi bi-facebook" />
-                  </a>
-                  <a href>
-                    <i className="bi bi-instagram" />
-                  </a>
-                  <a href>
-                    <i className="bi bi-linkedin" />
-                  </a>
-                </div>
-              </div>
-              <div className="member-info">
-                <h4>Nguyễn Thị Viết Hương</h4>
                 <span>Sinh viên</span>
               </div>
             </div>
@@ -791,57 +795,6 @@ function Index(props) {
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay={200}>
               <div className="member-img">
-                <img src={hieu} className="img-fluid" alt="" />
-                <div className="social">
-                  <a href>
-                    <i className="bi bi-twitter" />
-                  </a>
-                  <a href>
-                    <i className="bi bi-facebook" />
-                  </a>
-                  <a href>
-                    <i className="bi bi-instagram" />
-                  </a>
-                  <a href>
-                    <i className="bi bi-linkedin" />
-                  </a>
-                </div>
-              </div>
-              <div className="member-info">
-                <h4>Lý Gia Hiếu</h4>
-                <span>Sinh viên</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div className="member" data-aos="fade-up" data-aos-delay={200}>
-              <div className="member-img">
-                <img src={buu} className="img-fluid" alt="" />
-                <div className="social">
-                  <a href>
-                    <i className="bi bi-twitter" />
-                  </a>
-                  <a href>
-                    <i className="bi bi-facebook" />
-                  </a>
-                  <a href>
-                    <i className="bi bi-instagram" />
-                  </a>
-                  <a href>
-                    <i className="bi bi-linkedin" />
-                  </a>
-                </div>
-              </div>
-              <div className="member-info">
-                <h4>Châu Ngọc Bửu Đăng</h4>
-                <span>Sinh viên</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div className="member" data-aos="fade-up" data-aos-delay={200}>
-              <div className="member-img">
                 <img src={ngocan} className="img-fluid" alt="" />
                 <div className="social">
                   <a href>
@@ -979,7 +932,7 @@ function Index(props) {
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div className="member" data-aos="fade-up" data-aos-delay={200}>
               <div className="member-img">
-                <img src={defaultPerson} className="img-fluid" alt="" />
+                <img src={anhduc} className="img-fluid" alt="" />
                 <div className="social">
                   <a href>
                     <i className="bi bi-twitter" />
@@ -1049,6 +1002,115 @@ function Index(props) {
               </div>
               <div className="member-info">
                 <h4>Nguyễn Văn Lực</h4>
+                <span>Sinh viên</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="container mt-4">
+        <div className="section-title" data-aos="fade-up">
+          <h2>Team Thương mại điện tử</h2>
+          <p>Xây dựng hệ thống thương mại điệnm tử</p>
+        </div>
+        <div className="row d-flex justify-content-center">
+          <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div className="member" data-aos="fade-up" data-aos-delay={200}>
+              <div className="member-img">
+                <img src={huong} className="img-fluid" alt="" />
+                <div className="social">
+                  <a href>
+                    <i className="bi bi-twitter" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-facebook" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-instagram" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-linkedin" />
+                  </a>
+                </div>
+              </div>
+              <div className="member-info">
+                <h4>Nguyễn Thị Viết Hương</h4>
+                <span>Sinh viên</span>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div className="member" data-aos="fade-up" data-aos-delay={200}>
+              <div className="member-img">
+                <img src={thien} className="img-fluid" alt="" />
+                <div className="social">
+                  <a href>
+                    <i className="bi bi-twitter" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-facebook" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-instagram" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-linkedin" />
+                  </a>
+                </div>
+              </div>
+              <div className="member-info">
+                <h4>Nguyễn Phước Thiện</h4>
+                <span>Sinh viên</span>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div className="member" data-aos="fade-up" data-aos-delay={200}>
+              <div className="member-img">
+                <img src={hieu} className="img-fluid" alt="" />
+                <div className="social">
+                  <a href>
+                    <i className="bi bi-twitter" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-facebook" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-instagram" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-linkedin" />
+                  </a>
+                </div>
+              </div>
+              <div className="member-info">
+                <h4>Lý Gia Hiếu</h4>
+                <span>Sinh viên</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div className="member" data-aos="fade-up" data-aos-delay={200}>
+              <div className="member-img">
+                <img src={buu} className="img-fluid" alt="" />
+                <div className="social">
+                  <a href>
+                    <i className="bi bi-twitter" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-facebook" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-instagram" />
+                  </a>
+                  <a href>
+                    <i className="bi bi-linkedin" />
+                  </a>
+                </div>
+              </div>
+              <div className="member-info">
+                <h4>Châu Ngọc Bửu Đăng</h4>
                 <span>Sinh viên</span>
               </div>
             </div>

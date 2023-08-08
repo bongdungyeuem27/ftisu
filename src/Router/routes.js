@@ -5,7 +5,8 @@ import Contact from "../Components/Contact";
 import Login from "../Components/Login";
 import Team from "../Components/Team";
 import Test from "../Components/Test";
-import Crypto from "../Components/Crypto"
+import Crypto from "../Components/Crypto";
+import ISCVChain from "../Components/ISCVChain";
 
 const routes = [
   {
@@ -26,29 +27,32 @@ const routes = [
   {
     path: "/team",
     exact: true,
-    main:  <Team ></Team>,
+    main: <Team></Team>,
   },
   {
     path: "/contact",
     exact: true,
-    main:  <Contact ></Contact>,
+    main: <Contact></Contact>,
+  },
+  {
+    path: "/iscvchain",
+    exact: true,
+    main: <ISCVChain></ISCVChain>,
   },
   {
     path: "/login",
     exact: true,
-    main:  <Login ></Login>,
+    main: <Login></Login>,
   },
   {
     path: "/",
     exact: true,
-    main:  <Home ></Home>,
+    main: <Home></Home>,
   },
   {
     path: "",
     exact: false,
-    main:  <NotFoundPage></NotFoundPage>,
+    main: <NotFoundPage></NotFoundPage>,
   },
-
-
 ];
 export default routes;
