@@ -1,12 +1,12 @@
 <template>
   <footer
-    class="relative pt-2 lg:pt-2 lg:pb-0 text- min-h-[15rem] flex items-end"
+    class="relative pt-2 lg:pt-2 lg:pb-0 text- min-h-[15rem] flex items-end bg-white dark:bg-black"
   >
     <div
-      class="flex flex-col items-center justify-between w-full px-4 gap-2 md:flex-row"
+      class="absolute z-[1] flex flex-col items-center justify-between w-full px-4 gap-2 md:flex-row"
     >
       <div class="flex flex-row items-center gap-2 basis-0 grow-[1]">
-        <NuxtLink to="/" class="mb-2 inline-block max-w-[160px]">
+        <NuxtLink to="/" class="mb-2 inline-block max-w-[160px]" ref="ftisu">
           <ImageServer
             :width="150"
             :height="100"
@@ -18,11 +18,15 @@
 
       <div class="flex justify-center items-end gap-2 mb-2 md:mb-6">
         <div class="flex-1">
-          <h4 class="text-dark mb-2 text-lg font-semibold">License</h4>
+          <h4 class="text-dark mb-2 text-lg font-semibold dark:text-gray-200">
+            License
+          </h4>
           <div
             class="flex flex-row md:flex-col gap-1 items-center md:items-start"
           >
-            <p class="text-body-color text-base font-quicksand">
+            <p
+              class="text-body-color text-base font-quicksand dark:text-gray-300"
+            >
               &copy; Copyright 2023 FTISU
               <br />
               All Rights Reserved
@@ -35,7 +39,7 @@
     </div>
 
     <div>
-      <span class="absolute left-0 bottom-0 z-[-1]">
+      <span class="absolute left-0 bottom-0 z-[0]">
         <svg
           width="217"
           height="229"
@@ -62,7 +66,7 @@
           </defs>
         </svg>
       </span>
-      <span class="absolute top-10 right-10 z-[-1]">
+      <span class="absolute top-10 right-10 z-[0]">
         <svg
           width="75"
           height="75"

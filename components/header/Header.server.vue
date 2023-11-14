@@ -1,6 +1,6 @@
 <template>
   <header
-    class="flex justify-between h-[60px] border-b-[1px] border-gray-200 sticky"
+    class="flex justify-between h-[60px] border-b-[1px] border-gray-200 sticky bg-white dark:bg-black"
   >
     <div class="flex shrink-0 basis-0 grow-[0.5]">
       <Image

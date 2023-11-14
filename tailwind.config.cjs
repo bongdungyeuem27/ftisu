@@ -34,13 +34,20 @@ for (const colorName in tailwindColors) {
     });
   }
 }
-module.exports = {
+export default {
+  darkMode: 'media',
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,vue}",
     "./components/**/*.{js,ts,jsx,tsx,vue}",
+    "./layouts/**/*.{js,ts,jsx,tsx,vue}",
     "./sections/**/*.{js,ts,jsx,tsx,vue}",
     "./app/**/*.{js,ts,jsx,tsx,vue}",
   ],
+  variants: {
+    extend: {
+      backgroundColor: ['dark'],
+    },
+  },
   safelist: colorSafeList,
   theme: {
     extend: {

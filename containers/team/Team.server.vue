@@ -2,7 +2,7 @@
   <section class="container flex flex-col items-center px-2 md:px-1">
     <!-- Section: Design Block -->
     <div class="text-center">
-      <h2 class=" text-3xl font-bold">
+      <h2 class="text-3xl font-bold text-black dark:text-white">
         {{ team.title }}
       </h2>
 
@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { ITeam } from "data/metadata";
-import MemberServer from "./Member.server.vue";
+import MemberServer from "@/components/member/Member.server.vue";
 type IProps = {
   team: ITeam;
 };

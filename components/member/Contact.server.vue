@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink class="px-2">
+  <NuxtLink :rel="category" class="px-2">
     <GithubSVG v-if="category === 'github'"></GithubSVG>
     <LinkedinSVG v-if="category === 'linkedin'"></LinkedinSVG>
   </NuxtLink>

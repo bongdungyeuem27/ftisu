@@ -1,9 +1,9 @@
 <template>
   <div
-    class="rounded-2xl overflow-hidden pb-2 max-w-[100%] sm:max-w-[48%] lg:max-w-[31%] xl:max-w-[24%] shadow-md shadow-purple-200 hover:shadow-2xl hover:shadow-purple-300 transition-all duration-150 ease-in-out"
+    class="rounded-2xl overflow-hidden pb-2 max-w-[100%] sm:max-w-[48%] lg:max-w-[31%] xl:max-w-[24%] shadow-md shadow-purple-200 hover:shadow-2xl hover:shadow-purple-300 transition-all duration-150 ease-in-out dark:shadow-transparent dark:border-gray-300 dark:border-[1px]"
   >
     <div
-      class="block rounded-lg bg-white "
+      class="block rounded-lg bg-white dark:bg-black"
     >
       <div class="relative overflow-hidden bg-cover bg-no-repeat">
         <ImageServer
@@ -16,7 +16,7 @@
         ></div>
         <svg
           v-if="order === 0"
-          class="absolute text-white dark:text-neutral-700 left-0 bottom-0"
+          class="absolute text-white dark:text-black left-0 bottom-0"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
         >
@@ -27,7 +27,7 @@
         </svg>
         <svg
           v-if="order === 1"
-          class="absolute text-white dark:text-neutral-700 left-0 bottom-0"
+          class="absolute text-white dark:text-black left-0 bottom-0"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
         >
@@ -38,7 +38,7 @@
         </svg>
         <svg
           v-if="order === 2"
-          class="absolute text-white dark:text-neutral-700 left-0 bottom-0"
+          class="absolute text-white dark:text-black left-0 bottom-0"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
         >
@@ -58,8 +58,8 @@
           <ContactServer v-if="member.linkedin" :category="'linkedin'">
           </ContactServer>
         </ul>
-        <h5 class=" text-lg font-bold cursor-default">{{ member.name }}</h5>
-        <p class="mt-1 text-neutral-500 cursor-default">
+        <h5 class=" text-lg font-bold cursor-default text-black dark:text-white">{{ member.name }}</h5>
+        <p class="mt-1 text-neutral-500 cursor-default dark:text-gray-400">
           {{ member.role }}
         </p>
       

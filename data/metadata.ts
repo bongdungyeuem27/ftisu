@@ -1,7 +1,5 @@
 import { v4 } from "uuid";
-import iscvImage from "@/assets/images/relationships/iscv.png";
-import blocktraceImage from "@/assets/images/relationships/blocktrace.png";
-import edupathImage from "@/assets/images/relationships/edupath.png";
+
 import {
   anImage,
   anhducImage,
@@ -41,11 +39,13 @@ import {
   tuquyenImage,
   uyenImage,
 } from "assets/images/team";
+import { iscvImage } from "assets/images/relationships";
+import { blockchainImage, forecastImage } from "assets/images/projects";
 export type IRelationship = {
   id: string;
   image: string;
   title: string;
-  description: string;
+  description?: string;
   features: string[];
   to: string;
 };
@@ -55,25 +55,15 @@ export const relationships: IRelationship[] = [
     id: v4(),
     image: iscvImage,
     title: "ISCV",
-    description: "Lorem ipsum dolor sit amet, consectetur adip",
-    features: ["f1", "f2", "f3", "f4"],
+    description:
+      "ISCV is a new job platform that uses blockchain and machine learning to revolutionize the way people find and apply for jobs. ISCV can interview your personality based on your images and voice, and assess factors such as your intelligence, personality, and work motivation. ISCV is also a job social network, allowing you to connect with other job seekers and employers, share experiences, and find new job opportunities.",
+    features: [
+      "CV on blockchain",
+      "Job social network",
+      "Big Five Interview",
+      "Personality analysis",
+    ],
     to: "https://iscv.ftisu.vn/",
-  },
-  {
-    id: v4(),
-    image: blocktraceImage,
-    title: "Blocktrace",
-    description: "Lorem ipsum dolor sit amet, consectetur adip",
-    features: ["f1", "f2", "f3", "f4"],
-    to: "https://blocktrace.ftisu.vn/",
-  },
-  {
-    id: v4(),
-    image: edupathImage,
-    title: "Edupath",
-    description: "Lorem ipsum dolor sit amet, consectetur adip",
-    features: ["f1", "f2", "f3", "f4"],
-    to: "https://edupath.ftisu.vn/",
   },
 ];
 
@@ -192,12 +182,6 @@ export const teams: ITeam[] = [
         name: "Lưu Trần Anh Khoa",
         role: "Student",
         image: khoaImage,
-      },
-      {
-        id: v4(),
-        name: "Nguyễn Thành Nội",
-        role: "Student",
-        image: thanhnoiImage,
       },
       {
         id: v4(),
@@ -389,5 +373,32 @@ export const teams: ITeam[] = [
         image: buuImage,
       },
     ],
+  },
+];
+
+export const documents: IRelationship[] = [
+  {
+    id: v4(),
+    image: blockchainImage,
+    title: "Blockchain",
+    features: [
+      "Blockchain solutions",
+      "Smart Contract",
+      "Custom Chain",
+      "DApps",
+    ],
+    to: "https://github.com/iscv-lab",
+  },
+  {
+    id: v4(),
+    image: forecastImage,
+    title: "Data Analysis",
+    features: [
+      "Machine Learning & AI",
+      "Forecast Technology",
+      "Descriptive Statistics",
+      "Statistical Inference",
+    ],
+    to: "https://github.com/VHNhat/Cryptocurrency-Prediction",
   },
 ];

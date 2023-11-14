@@ -1,8 +1,36 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  app: {
+    head: {
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
+      title: "FTISU",
+      meta: [
+        {
+          name: "og:title",
+          content: "FTISU",
+        },
+        {
+          name: "description",
+          content: "FTISU Information system lab",
+        },
+
+        {
+          name: "ogDescription",
+          content: "FTISU Information system lab",
+        },
+      ],
+      htmlAttrs: {
+        lang: "en",
+      },
+    },
+  },
   css: ["~/styles/main.css"],
   ssr: true,
+  alias: {
+    "@/*": "./*",
+  },
   experimental: {
     componentIslands: true,
   },
