@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import Image from "@/components/image/Image.server.vue";
 import FeaturesServer from "./Features.server.vue";
-import LearnmoreServer, { ICardHint } from "./Learnmore.server.vue";
+import LearnmoreServer, { type ICardHint } from "./Learnmore.server.vue";
 type IProps = {
   image: string;
   features: string[];

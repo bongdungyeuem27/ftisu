@@ -12,7 +12,9 @@
     ></CardServer>
 
     <div class="flex flex-col flex-1 gap-2 sm:py-4 h-full justify-between">
-      <h3 class="text-2xl text-black font-semibold dark:text-white">{{ data.title }}</h3>
+      <h3 class="text-2xl text-black font-semibold dark:text-white">
+        {{ data.title }}
+      </h3>
       <div class="flex w-full gap-4 shrink-0 sm:hidden sm:gap-12">
         <Image
           :src="data.image"
@@ -44,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { IRelationship } from "@/data/metadata";
+import { type IRelationship } from "../../data/metadata";
 import CardServer from "./Card.server.vue";
 import FeaturesServer from "./Features.server.vue";
 type IProps = {

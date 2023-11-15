@@ -2,9 +2,7 @@
   <div
     class="rounded-2xl overflow-hidden pb-2 max-w-[100%] sm:max-w-[48%] lg:max-w-[31%] xl:max-w-[24%] shadow-md shadow-purple-200 hover:shadow-2xl hover:shadow-purple-300 transition-all duration-150 ease-in-out dark:shadow-transparent dark:border-gray-300 dark:border-[1px]"
   >
-    <div
-      class="block rounded-lg bg-white dark:bg-black"
-    >
+    <div class="block rounded-lg bg-white dark:bg-black">
       <div class="relative overflow-hidden bg-cover bg-no-repeat">
         <ImageServer
           :src="member.image"
@@ -58,11 +56,12 @@
           <ContactServer v-if="member.linkedin" :category="'linkedin'">
           </ContactServer>
         </ul>
-        <h5 class=" text-lg font-bold cursor-default text-black dark:text-white">{{ member.name }}</h5>
+        <h5 class="text-lg font-bold cursor-default text-black dark:text-white">
+          {{ member.name }}
+        </h5>
         <p class="mt-1 text-neutral-500 cursor-default dark:text-gray-400">
           {{ member.role }}
         </p>
-      
       </div>
     </div>
   </div>
@@ -70,7 +69,7 @@
 
 <script setup lang="ts">
 import ImageServer from "@/components/image/Image.server.vue";
-import { IMember } from "@/data/metadata";
+import { type IMember } from "../../data/metadata";
 import ContactServer from "./Contact.server.vue";
 type IProps = {
   order: 0 | 1 | 2;

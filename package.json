@@ -10,22 +10,22 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^0.7.5",
-    "@nuxt/image": "1.0.0-rc.1",
-    "@nuxtjs/tailwindcss": "^6.8.0",
-    "@types/aos": "^3.0.4",
-    "@types/node": "^20.4.8",
-    "@types/uuid": "^9.0.2",
+    "@nuxt/devtools": "^1.0.2",
+    "@nuxt/image": "1.0.0",
+    "@nuxtjs/tailwindcss": "^6.9.4",
+    "@types/aos": "^3.0.7",
+    "@types/node": "^20.9.0",
+    "@types/uuid": "^9.0.7",
     "aos": "^2.3.4",
-    "autoprefixer": "^10.4.14",
-    "daisyui": "^3.5.1",
-    "nuxt": "^3.6.5",
-    "nuxt-icon": "^0.5.0",
-    "nuxt-svgo": "^3.4.0",
-    "postcss": "^8.4.27",
-    "tailwindcss": "^3.3.3"
+    "autoprefixer": "^10.4.16",
+    "daisyui": "^4.0.4",
+    "nuxt": "^3.8.1",
+    "nuxt-icon": "^0.6.6",
+    "nuxt-svgo": "^3.6.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5"
   },
   "dependencies": {
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   }
 }

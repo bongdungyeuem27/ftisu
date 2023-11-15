@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { IRelationship } from "@/data/metadata";
+import { type IRelationship } from "../../data/metadata";
 import CardServer from "./Card.server.vue";
 
 type IProps = {

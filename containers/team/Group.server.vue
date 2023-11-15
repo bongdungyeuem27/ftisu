@@ -1,32 +1,33 @@
 <template>
-  <section class="container flex flex-col items-center px-2 md:px-1">
+  <div class="container flex flex-col items-center px-2 md:px-1">
     <!-- Section: Design Block -->
     <div class="text-center">
-      <h2 class="text-3xl font-bold text-black dark:text-white">
-        {{ team.title }}
-      </h2>
+      <img />
 
       <div class="flex gap-x-4 gap-y-4 justify-center mt-6 flex-wrap">
         <MemberServer
-          v-for="(member, index) in team.members"
-          :key="member.id"
+          v-for="(member, index) in localMembers"
+          :key="member"
           :order="((index % 3) as 0|1|2)"
           :member="member"
         ></MemberServer>
       </div>
     </div>
     <!-- Section: Design Block -->
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ITeam } from "data/metadata";
+import { members, type IGroup } from "../../data/metadata";
 import MemberServer from "@/components/member/Member.server.vue";
 type IProps = {
-  team: ITeam;
+  group: IGroup;
 };
 const props = defineProps<IProps>();
-const { team } = props;
+const { group } = props;
+
+const localMembers = group.memberIDs.map((memberID) => members[memberID]);
+console.log(localMembers)
 </script>
 
 <style scoped></style>
