@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     },
   },
   plugins: [{ src: "@/plugins/aos", ssr: false, mode: "client" }],
-  modules: ["nuxt-svgo", "nuxt-icon"],
+  modules: ["nuxt-svgo", "nuxt-icon", "@nuxt/image"],
   svgo: {
     svgoConfig: {
       multipass: true,

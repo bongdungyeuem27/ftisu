@@ -14,3 +14,6 @@ import FooterServer from "@/components/footer/Footer.server.vue";
 //   ogDescription: "FTISU UIT Lab",
 // });
 </script>
+<style lang="css">
+@import url("@/assets/css/main.css");
+</style>

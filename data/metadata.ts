@@ -1,15 +1,21 @@
 import { v4 } from "uuid";
 
+import { blockchainImage, forecastImage } from "assets/images/projects";
+import { iscvImage } from "assets/images/relationships";
 import {
   anImage,
   anhducImage,
   anhhuyImage,
+  anhthuImage,
   baoanImage,
+  baochauImage,
   buuImage,
   defaultPersonImage,
+  diuaiImage,
   hieuImage,
   hoaImage,
   huongImage,
+  huulongImage,
   huyImage,
   khanhImage,
   khoaImage,
@@ -20,13 +26,16 @@ import {
   minhImage,
   mytranImage,
   ngocanImage,
+  ngohuyImage,
   nhatImage,
   nhiImage,
   nhutImage,
   quanImage,
+  quanghuyImage,
   quoctrungImage,
+  tangducImage,
   thangImage,
-  anhthuImage,
+  thanhcongImage,
   thanhnoiImage,
   thaoquyenImage,
   thaysangImage,
@@ -39,17 +48,16 @@ import {
   tuantrungImage,
   tuquyenImage,
   uyenImage,
-  quanghuyImage,
-  diuaiImage,
-  tangducImage,
-  ngohuyImage,
-  huulongImage,
-  baochauImage,
-  thanhcongImage,
   vananhImage,
 } from "assets/images/team";
-import { iscvImage } from "assets/images/relationships";
-import { blockchainImage, forecastImage } from "assets/images/projects";
+import {
+  ecg1l,
+  ecg1r,
+  ecg2l,
+  ecg2r,
+  skinDeseaseL,
+  skinDeseaseR,
+} from "~/assets/images/group";
 export type IRelationship = {
   id: string;
   image: string;
@@ -95,6 +103,9 @@ export type IMember = {
 export type IGroup = {
   id: string;
   name: string;
+  imageLeft?: string;
+  imageRight?: string;
+  color?: string;
   memberIDs: IMemberID[];
 };
 
@@ -428,12 +439,15 @@ export const topics: ITopic[] = [
     ],
   },
   {
-    id: v4(),
+    id: "medicine_and_health_care",
     title: "MEDICINE AND HEALTH CARE",
     groups: [
       {
-        id: v4(),
-        name: "ECG",
+        id: "ecg_1",
+        name: "Electrocardiogram - ECG",
+        imageRight: ecg1r,
+        imageLeft: ecg1l,
+        color: "#87bcb4",
         memberIDs: [
           "trinh_thi_thanh_truc",
           "nguyen_quoc_trung",
@@ -442,7 +456,10 @@ export const topics: ITopic[] = [
       },
       {
         id: v4(),
-        name: "ECG",
+        name: "Electrocardiogram - ECG",
+        imageRight: ecg2r,
+        imageLeft: ecg2l,
+        color: "#E05C6D",
         memberIDs: [
           "luong_thi_thuy_trang",
           "tran_quang_minh",
@@ -451,8 +468,11 @@ export const topics: ITopic[] = [
         ],
       },
       {
-        id: v4(),
+        id: "skin_disease",
         name: "Skin Disease",
+        imageRight: skinDeseaseR,
+        imageLeft: skinDeseaseL,
+        color: "#E78A7C",
         memberIDs: [
           "nguyen_minh_nhut",
           "luong_thi_thuy_trang",
@@ -496,169 +516,165 @@ export const topics: ITopic[] = [
       {
         id: v4(),
         name: "Blockbase",
-        memberIDs: [
-          "le_mai_duy_khanh",
-          "nguyen_thai_bao",
-          "tran_thuy_an",
-        ],
+        memberIDs: ["le_mai_duy_khanh", "nguyen_thai_bao", "tran_thuy_an"],
       },
       {
         id: v4(),
         name: "Blockbase",
-        memberIDs: [
-          "le_mai_duy_khanh",
-          "duong_quoc_anh",
-          "nguyen_le_tuan_anh",
-        ],
+        memberIDs: ["le_mai_duy_khanh", "duong_quoc_anh", "nguyen_le_tuan_anh"],
       },
     ],
   },
-  {
-    id: v4(),
-    title: "Forecast",
-    groups: [
-      {
-        id: v4(),
-        name: "LSTM",
-        memberIDs: ["nguyen_minh_nhut", "le_thi_ai_nhi", "le_huu_thang"],
-      },
-      {
-        id: v4(),
-        name: "Multivariate",
-        memberIDs: ["nguyen_minh_nhut", "nguyen_thanh_noi", "nguyen_quang_huy"],
-      },
-      {
-        id: v4(),
-        name: "Anomoly",
-        memberIDs: ["nguyen_minh_nhut", "ho_bao_an", "ho_tuan_trung"],
-      },
-      {
-        id: v4(),
-        name: "Monte Carlo",
-        memberIDs: ["nguyen_minh_nhut", "dang_thanh_dat"],
-      },
-      {
-        id: v4(),
-        name: "Setiment",
-        memberIDs: ["nguyen_thi_viet_huong", "lam_ngoc_an"],
-      },
-      {
-        id: v4(),
-        name: "House Price",
-        memberIDs: [
-          "nguyen_minh_nhut",
-          "nguyen_viet_thu",
-          "truong_thi_kim_thoa",
-        ],
-      },
-      {
-        id: v4(),
-        name: "Risk",
-        memberIDs: ["nguyen_minh_nhut", "ho_ngoc_tuong_vy", "nguyen_thi_van_anh"],
-      },
-    ],
-  },
-  {
-    id: v4(),
-    title: "Natural Language Processing",
-    groups: [
-      {
-        id: v4(),
-        name: "Smart UML",
-        memberIDs: [
-          "dang_vu_phuong_uyen",
-          "nguyen_thi_my_tran",
-          "ton_nu_tu_quyen",
-        ],
-      },
-      {
-        id: v4(),
-        name: "Gallery Art",
-        memberIDs: ["nguyen_minh_nhut", "vo_hoang_nhat", "bui_quoc_huy"],
-      },
-      {
-        id: v4(),
-        name: "Virtual class",
-        memberIDs: [
-          "nguyen_minh_nhut",
-          "phan_pham_quynh_hoa",
-          "thai_tang_duc",
-          "tran_anh_huy",
-        ],
-      },
-      {
-        id: v4(),
-        name: "Music Analysis",
-        memberIDs: ["nguyen_minh_nhut", "ly_gia_hieu", "ngo_quoc_huy"],
-      },
-      {
-        id: v4(),
-        name: "HR Support",
-        memberIDs: ["nguyen_minh_nhut", "vuong_yen_nhi", "vo_hung_khang"],
-      },
-    ],
-  },
-  {
-    id: v4(),
-    title: "Graphs, Geography",
-    groups: [
-      {
-        id: v4(),
-        name: "Tour Trip",
-        memberIDs: [
-          "dang_minh_quan",
-          "le_van_anh_duc",
-          "pham_le_diu_ai",
-          "nguyen_huu_long",
-        ],
-      },
-      {
-        id: v4(),
-        name: "Edupath",
-        memberIDs: [
-          "nguyen_minh_nhut",
-          "tran_man_quan",
-          "dang_nguyen_phuoc_an",
-        ],
-      },
-      {
-        id: v4(),
-        name: "AQI",
-        memberIDs: ["nguyen_minh_nhut", "le_van_anh_duc", "nguyen_van_luc"],
-      },
-      {
-        id: v4(),
-        name: "Research",
-        memberIDs: [
-          "nguyen_minh_nhut",
-          "le_van_anh_duc",
-          "le_nguyen_gia_hung",
-          "nguyen_thien_bao_chau",
-        ],
-      },
-    ],
-  },
-  {
-    id: v4(),
-    title: "Multimedia",
-    groups: [
-      {
-        id: v4(),
-        name: "Media Research",
-        memberIDs: ["nguyen_minh_nhut", "phan_thanh_cong", "tran_vu_bao"],
-      },
-      {
-        id: v4(),
-        name: "Media Research",
-        memberIDs: ["nguyen_minh_nhut", "phan_thi_thuy_hien"],
-      },
-      {
-        id: v4(),
-        name: "Media Research",
-        memberIDs: ["nguyen_minh_nhut", "pham_phu_tuan"],
-      },
-    ],
-  },
+  // {
+  //   id: v4(),
+  //   title: "Forecast",
+  //   groups: [
+  //     {
+  //       id: v4(),
+  //       name: "LSTM",
+  //       memberIDs: ["nguyen_minh_nhut", "le_thi_ai_nhi", "le_huu_thang"],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Multivariate",
+  //       memberIDs: ["nguyen_minh_nhut", "nguyen_thanh_noi", "nguyen_quang_huy"],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Anomoly",
+  //       memberIDs: ["nguyen_minh_nhut", "ho_bao_an", "ho_tuan_trung"],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Monte Carlo",
+  //       memberIDs: ["nguyen_minh_nhut", "dang_thanh_dat"],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Setiment",
+  //       memberIDs: ["nguyen_thi_viet_huong", "lam_ngoc_an"],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "House Price",
+  //       memberIDs: [
+  //         "nguyen_minh_nhut",
+  //         "nguyen_viet_thu",
+  //         "truong_thi_kim_thoa",
+  //       ],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Risk",
+  //       memberIDs: [
+  //         "nguyen_minh_nhut",
+  //         "ho_ngoc_tuong_vy",
+  //         "nguyen_thi_van_anh",
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: v4(),
+  //   title: "Natural Language Processing",
+  //   groups: [
+  //     {
+  //       id: v4(),
+  //       name: "Smart UML",
+  //       memberIDs: [
+  //         "dang_vu_phuong_uyen",
+  //         "nguyen_thi_my_tran",
+  //         "ton_nu_tu_quyen",
+  //       ],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Gallery Art",
+  //       memberIDs: ["nguyen_minh_nhut", "vo_hoang_nhat", "bui_quoc_huy"],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Virtual class",
+  //       memberIDs: [
+  //         "nguyen_minh_nhut",
+  //         "phan_pham_quynh_hoa",
+  //         "thai_tang_duc",
+  //         "tran_anh_huy",
+  //       ],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Music Analysis",
+  //       memberIDs: ["nguyen_minh_nhut", "ly_gia_hieu", "ngo_quoc_huy"],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "HR Support",
+  //       memberIDs: ["nguyen_minh_nhut", "vuong_yen_nhi", "vo_hung_khang"],
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: v4(),
+  //   title: "Graphs, Geography",
+  //   groups: [
+  //     {
+  //       id: v4(),
+  //       name: "Tour Trip",
+  //       memberIDs: [
+  //         "dang_minh_quan",
+  //         "le_van_anh_duc",
+  //         "pham_le_diu_ai",
+  //         "nguyen_huu_long",
+  //       ],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Edupath",
+  //       memberIDs: [
+  //         "nguyen_minh_nhut",
+  //         "tran_man_quan",
+  //         "dang_nguyen_phuoc_an",
+  //       ],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "AQI",
+  //       memberIDs: ["nguyen_minh_nhut", "le_van_anh_duc", "nguyen_van_luc"],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Research",
+  //       memberIDs: [
+  //         "nguyen_minh_nhut",
+  //         "le_van_anh_duc",
+  //         "le_nguyen_gia_hung",
+  //         "nguyen_thien_bao_chau",
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: v4(),
+  //   title: "Multimedia",
+  //   groups: [
+  //     {
+  //       id: v4(),
+  //       name: "Media Research",
+  //       memberIDs: ["nguyen_minh_nhut", "phan_thanh_cong", "tran_vu_bao"],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Media Research",
+  //       memberIDs: ["nguyen_minh_nhut", "phan_thi_thuy_hien"],
+  //     },
+  //     {
+  //       id: v4(),
+  //       name: "Media Research",
+  //       memberIDs: ["nguyen_minh_nhut", "pham_phu_tuan"],
+  //     },
+  //   ],
+  // },
 ];
 
 export const documents: IRelationship[] = [

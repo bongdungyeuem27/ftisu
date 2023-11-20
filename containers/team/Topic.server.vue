@@ -2,7 +2,7 @@
   <section class="container flex flex-col items-center px-2 md:px-1">
     <!-- Section: Design Block -->
     <div class="text-center">
-      <h2 class="text-3xl font-bold text-black dark:text-white">
+      <h2 class="text-3xl font-bold text-black dark:text-white font-quicksand">
         {{ topic.title }}
       </h2>
 
