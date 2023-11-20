@@ -51,12 +51,22 @@ import {
   vananhImage,
 } from "assets/images/team";
 import {
+  blockbase1L,
+  blockbase1R,
+  blockbase2L,
+  blockbase2R,
   ecg1l,
   ecg1r,
   ecg2l,
   ecg2r,
+  gymL,
+  gymR,
+  iscvL,
+  iscvR,
   skinDeseaseL,
   skinDeseaseR,
+  supplyL,
+  supplyR,
 } from "~/assets/images/group";
 export type IRelationship = {
   id: string;
@@ -480,8 +490,11 @@ export const topics: ITopic[] = [
         ],
       },
       {
-        id: v4(),
+        id: "gym",
         name: "Gym",
+        imageRight: gymR,
+        imageLeft: gymL,
+        color: "#1B87DF",
         memberIDs: [
           "le_mai_duy_khanh",
           "chau_ngoc_buu_dang",
@@ -491,12 +504,15 @@ export const topics: ITopic[] = [
     ],
   },
   {
-    id: v4(),
+    id: "team_blockchain",
     title: "TEAM BLOCKCHAIN",
     groups: [
       {
-        id: v4(),
+        id: "iscv",
         name: "ISCV",
+        imageLeft: iscvL,
+        imageRight: iscvR,
+        color: "#E27D2A",
         memberIDs: [
           "dang_minh_quan",
           "le_mai_duy_khanh",
@@ -505,8 +521,11 @@ export const topics: ITopic[] = [
         ],
       },
       {
-        id: v4(),
+        id: "supply_chain",
         name: "Supply Chain",
+        color: "#99BFD6",
+        imageLeft: supplyL,
+        imageRight: supplyR,
         memberIDs: [
           "nguyen_minh_nhut",
           "phan_pham_quynh_hoa",
@@ -514,13 +533,19 @@ export const topics: ITopic[] = [
         ],
       },
       {
-        id: v4(),
+        id: "blockbase_1",
         name: "Blockbase",
+        imageLeft: blockbase1L,
+        imageRight: blockbase1R,
+        color: "#8E8E8E",
         memberIDs: ["le_mai_duy_khanh", "nguyen_thai_bao", "tran_thuy_an"],
       },
       {
-        id: v4(),
+        id: "blockbase_1",
         name: "Blockbase",
+        imageLeft: blockbase2L,
+        imageRight: blockbase2R,
+        color: "#DBDBDB",
         memberIDs: ["le_mai_duy_khanh", "duong_quoc_anh", "nguyen_le_tuan_anh"],
       },
     ],
