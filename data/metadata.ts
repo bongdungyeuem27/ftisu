@@ -51,6 +51,8 @@ import {
   vananhImage,
 } from "assets/images/team";
 import {
+  anomolyL,
+  anomolyR,
   blockbase1L,
   blockbase1R,
   blockbase2L,
@@ -63,6 +65,10 @@ import {
   gymR,
   iscvL,
   iscvR,
+  lstmL,
+  lstmR,
+  multiL,
+  multiR,
   skinDeseaseL,
   skinDeseaseR,
   supplyL,
@@ -545,60 +551,69 @@ export const topics: ITopic[] = [
         name: "Blockbase",
         imageLeft: blockbase2L,
         imageRight: blockbase2R,
-        color: "#DBDBDB",
+        color: "#545454",
         memberIDs: ["le_mai_duy_khanh", "duong_quoc_anh", "nguyen_le_tuan_anh"],
       },
     ],
   },
-  // {
-  //   id: v4(),
-  //   title: "Forecast",
-  //   groups: [
-  //     {
-  //       id: v4(),
-  //       name: "LSTM",
-  //       memberIDs: ["nguyen_minh_nhut", "le_thi_ai_nhi", "le_huu_thang"],
-  //     },
-  //     {
-  //       id: v4(),
-  //       name: "Multivariate",
-  //       memberIDs: ["nguyen_minh_nhut", "nguyen_thanh_noi", "nguyen_quang_huy"],
-  //     },
-  //     {
-  //       id: v4(),
-  //       name: "Anomoly",
-  //       memberIDs: ["nguyen_minh_nhut", "ho_bao_an", "ho_tuan_trung"],
-  //     },
-  //     {
-  //       id: v4(),
-  //       name: "Monte Carlo",
-  //       memberIDs: ["nguyen_minh_nhut", "dang_thanh_dat"],
-  //     },
-  //     {
-  //       id: v4(),
-  //       name: "Setiment",
-  //       memberIDs: ["nguyen_thi_viet_huong", "lam_ngoc_an"],
-  //     },
-  //     {
-  //       id: v4(),
-  //       name: "House Price",
-  //       memberIDs: [
-  //         "nguyen_minh_nhut",
-  //         "nguyen_viet_thu",
-  //         "truong_thi_kim_thoa",
-  //       ],
-  //     },
-  //     {
-  //       id: v4(),
-  //       name: "Risk",
-  //       memberIDs: [
-  //         "nguyen_minh_nhut",
-  //         "ho_ngoc_tuong_vy",
-  //         "nguyen_thi_van_anh",
-  //       ],
-  //     },
-  //   ],
-  // },
+  {
+    id: v4(),
+    title: "Forecast",
+    groups: [
+      {
+        id: v4(),
+        name: "LSTM",
+        imageLeft: lstmL,
+        imageRight: lstmR,
+        color: "#6ABB9C",
+        memberIDs: ["nguyen_minh_nhut", "le_thi_ai_nhi", "le_huu_thang"],
+      },
+      {
+        id: v4(),
+        name: "Multivariate",
+        imageLeft: multiL,
+        imageRight: multiR,
+        color: "#3E5C82",
+        memberIDs: ["nguyen_minh_nhut", "nguyen_thanh_noi", "nguyen_quang_huy"],
+      },
+      {
+        id: v4(),
+        name: "Anomoly",
+        imageLeft: anomolyL,
+        imageRight: anomolyR,
+        color: "#D740DC",
+        memberIDs: ["nguyen_minh_nhut", "ho_bao_an", "ho_tuan_trung"],
+      },
+      {
+        id: v4(),
+        name: "Monte Carlo",
+        memberIDs: ["nguyen_minh_nhut", "dang_thanh_dat"],
+      },
+      {
+        id: v4(),
+        name: "Setiment",
+        memberIDs: ["nguyen_thi_viet_huong", "lam_ngoc_an"],
+      },
+      {
+        id: v4(),
+        name: "House Price",
+        memberIDs: [
+          "nguyen_minh_nhut",
+          "nguyen_viet_thu",
+          "truong_thi_kim_thoa",
+        ],
+      },
+      {
+        id: v4(),
+        name: "Risk",
+        memberIDs: [
+          "nguyen_minh_nhut",
+          "ho_ngoc_tuong_vy",
+          "nguyen_thi_van_anh",
+        ],
+      },
+    ],
+  },
   // {
   //   id: v4(),
   //   title: "Natural Language Processing",
