@@ -1,5 +1,3 @@
-import { v4 } from "uuid";
-
 import { blockchainImage, forecastImage } from "assets/images/projects";
 import { iscvImage } from "assets/images/relationships";
 import {
@@ -106,6 +104,7 @@ import {
   umlL,
   umlR,
 } from "~/assets/images/group";
+
 export type IRelationship = {
   id: string;
   image: string;
@@ -117,7 +116,7 @@ export type IRelationship = {
 
 export const relationships: IRelationship[] = [
   {
-    id: v4(),
+    id: "iscv",
     image: iscvImage,
     title: "ISCV",
     description:
@@ -254,7 +253,7 @@ export const members: { [key: IMemberID]: IMember } = {
   },
   luu_tran_anh_khoa: {
     name: "Lưu Trần Anh Khoa",
-    role: "Student",
+    role: "Engineer",
     image: khoaImage,
   },
   vu_minh_sang: {
@@ -288,7 +287,7 @@ export const members: { [key: IMemberID]: IMember } = {
     image: ngohuyImage,
   },
   vuong_yen_nhi: {
-    name: "Vương Yến Nhi",
+    name: "Vương Thị Yến Nhi",
     role: "Student",
     image: defaultPersonImage,
   },
@@ -309,7 +308,7 @@ export const members: { [key: IMemberID]: IMember } = {
   },
   phan_pham_quynh_hoa: {
     name: "Phan Phạm Quỳnh Hoa",
-    role: "Student",
+    role: "Engineer",
     image: hoaImage,
   },
   nguyen_thien_bao_chau: {
@@ -344,7 +343,7 @@ export const members: { [key: IMemberID]: IMember } = {
   },
   dang_vu_phuong_uyen: {
     name: "Đặng Vũ Phương Uyên",
-    role: "Student",
+    role: "Engineer",
     image: uyenImage,
   },
   nguyen_viet_thu: {
@@ -364,7 +363,7 @@ export const members: { [key: IMemberID]: IMember } = {
   },
   tran_man_quan: {
     name: "Trần Mẫn Quân",
-    role: "Student",
+    role: "Engineer",
     image: manquanImage,
   },
   lam_ngoc_an: {
@@ -389,7 +388,7 @@ export const members: { [key: IMemberID]: IMember } = {
   },
   le_van_anh_duc: {
     name: "Lê Văn Anh Đức",
-    role: "Student",
+    role: "Engineer",
     image: anhducImage,
   },
   nguyen_thi_van_anh: {
@@ -476,11 +475,11 @@ export const members: { [key: IMemberID]: IMember } = {
 
 export const topics: ITopic[] = [
   {
-    id: v4(),
+    id: "team_leader",
     title: "TEAM LEADER",
     groups: [
       {
-        id: v4(),
+        id: "head_of_scientific_research_projects",
         name: "Head of scientific research projects",
         memberIDs: ["nguyen_dinh_thuan"],
       },
@@ -492,7 +491,7 @@ export const topics: ITopic[] = [
     groups: [
       {
         id: "ecg_1",
-        name: "Electrocardiogram - ECG",
+        name: "ECG",
         imageRight: ecg1r,
         imageLeft: ecg1l,
         color: "#87bcb4",
@@ -503,8 +502,8 @@ export const topics: ITopic[] = [
         ],
       },
       {
-        id: v4(),
-        name: "Electrocardiogram - ECG",
+        id: "ecg_2",
+        name: "ECG",
         imageRight: ecg2r,
         imageLeft: ecg2l,
         color: "#E05C6D",
@@ -589,11 +588,11 @@ export const topics: ITopic[] = [
     ],
   },
   {
-    id: v4(),
+    id: "forecast",
     title: "Forecast",
     groups: [
       {
-        id: v4(),
+        id: "lstm",
         name: "LSTM",
         imageLeft: lstmL,
         imageRight: lstmR,
@@ -601,7 +600,7 @@ export const topics: ITopic[] = [
         memberIDs: ["nguyen_minh_nhut", "le_thi_ai_nhi", "le_huu_thang"],
       },
       {
-        id: v4(),
+        id: "multivariate",
         name: "Multivariate",
         imageLeft: multiL,
         imageRight: multiR,
@@ -609,7 +608,7 @@ export const topics: ITopic[] = [
         memberIDs: ["nguyen_minh_nhut", "nguyen_thanh_noi", "nguyen_quang_huy"],
       },
       {
-        id: v4(),
+        id: "anomoly",
         name: "Anomoly",
         imageLeft: anomolyL,
         imageRight: anomolyR,
@@ -617,7 +616,7 @@ export const topics: ITopic[] = [
         memberIDs: ["nguyen_minh_nhut", "ho_bao_an", "ho_tuan_trung"],
       },
       {
-        id: v4(),
+        id: "monte_carlo",
         name: "Monte Carlo",
         imageLeft: monteL,
         imageRight: monteR,
@@ -625,15 +624,15 @@ export const topics: ITopic[] = [
         memberIDs: ["nguyen_minh_nhut", "dang_thanh_dat"],
       },
       {
-        id: v4(),
-        name: "Setiment",
+        id: "sentiment",
+        name: "Sentiment",
         imageLeft: sentimentL,
         imageRight: sentimentR,
         color: "#3471D3",
         memberIDs: ["nguyen_thi_viet_huong", "lam_ngoc_an"],
       },
       {
-        id: v4(),
+        id: "house_price",
         name: "House Price",
         imageLeft: houseL,
         imageRight: houseR,
@@ -645,7 +644,7 @@ export const topics: ITopic[] = [
         ],
       },
       {
-        id: v4(),
+        id: "risk",
         name: "Risk",
         imageLeft: riskL,
         imageRight: riskR,
@@ -659,11 +658,11 @@ export const topics: ITopic[] = [
     ],
   },
   {
-    id: v4(),
+    id: "natural_language_processing",
     title: "Natural Language Processing",
     groups: [
       {
-        id: v4(),
+        id: "smart_uml",
         name: "Smart UML",
         imageLeft: umlL,
         imageRight: umlR,
@@ -675,7 +674,7 @@ export const topics: ITopic[] = [
         ],
       },
       {
-        id: v4(),
+        id: "gallery_art",
         name: "Gallery Art",
         imageLeft: galleryL,
         imageRight: galleryR,
@@ -683,7 +682,7 @@ export const topics: ITopic[] = [
         memberIDs: ["nguyen_minh_nhut", "vo_hoang_nhat", "bui_quoc_huy"],
       },
       {
-        id: v4(),
+        id: "virtual_class",
         name: "Virtual class",
         imageLeft: classL,
         imageRight: classR,
@@ -704,7 +703,7 @@ export const topics: ITopic[] = [
         memberIDs: ["nguyen_minh_nhut", "ly_gia_hieu", "ngo_quoc_huy"],
       },
       {
-        id: v4(),
+        id: "hr_support",
         imageLeft: hrL,
         imageRight: hrR,
         color: "#2BA4F8",
@@ -714,11 +713,11 @@ export const topics: ITopic[] = [
     ],
   },
   {
-    id: v4(),
+    id: "graphs_geography",
     title: "Graphs, Geography",
     groups: [
       {
-        id: v4(),
+        id: "tour_trip",
         name: "Tour Trip",
         imageLeft: tripL,
         imageRight: tripR,
@@ -731,7 +730,7 @@ export const topics: ITopic[] = [
         ],
       },
       {
-        id: v4(),
+        id: "edupath",
         name: "Edupath",
         imageLeft: eduL,
         imageRight: eduR,
@@ -743,7 +742,7 @@ export const topics: ITopic[] = [
         ],
       },
       {
-        id: v4(),
+        id: "aqi",
         name: "AQI",
         imageLeft: aqiL,
         imageRight: aqiR,
@@ -751,7 +750,7 @@ export const topics: ITopic[] = [
         memberIDs: ["nguyen_minh_nhut", "le_van_anh_duc", "nguyen_van_luc"],
       },
       {
-        id: v4(),
+        id: "research",
         name: "Research",
         imageLeft: researchL,
         imageRight: researchR,
@@ -766,11 +765,11 @@ export const topics: ITopic[] = [
     ],
   },
   {
-    id: v4(),
+    id: "multimedia",
     title: "Multimedia",
     groups: [
       {
-        id: v4(),
+        id: "media_research_1",
         name: "Media Research",
         imageLeft: media1L,
         imageRight: media1R,
@@ -778,7 +777,7 @@ export const topics: ITopic[] = [
         memberIDs: ["nguyen_minh_nhut", "phan_thanh_cong", "tran_vu_bao"],
       },
       {
-        id: v4(),
+        id: "media_research_2",
         name: "Media Research",
         imageLeft: media2L,
         imageRight: media2R,
@@ -786,7 +785,7 @@ export const topics: ITopic[] = [
         memberIDs: ["nguyen_minh_nhut", "phan_thi_thuy_hien"],
       },
       {
-        id: v4(),
+        id: "media_research_3",
         imageLeft: media3L,
         imageRight: media3R,
         name: "Media Research",
@@ -799,7 +798,7 @@ export const topics: ITopic[] = [
 
 export const documents: IRelationship[] = [
   {
-    id: v4(),
+    id: "blockchain",
     image: blockchainImage,
     title: "Blockchain",
     features: [
@@ -811,7 +810,7 @@ export const documents: IRelationship[] = [
     to: "https://github.com/iscv-lab",
   },
   {
-    id: v4(),
+    id: "data_analysis",
     image: forecastImage,
     title: "Data Analysis",
     features: [

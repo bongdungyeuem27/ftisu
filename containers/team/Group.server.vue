@@ -15,7 +15,7 @@
           :src="group.imageLeft"
           class="absolute left-4 top-1/2 -translate-y-1/2 h-full object-contain"
         />
-        <h4 class="text-2xl text-white font-quicksand">{{ group.name }}</h4>
+        <h4 class="text-2xl text-white font-quicksand break-words">{{ group.name }}</h4>
       </div>
       <div class="flex gap-x-4 gap-y-4 justify-center flex-wrap">
         <MemberServer
