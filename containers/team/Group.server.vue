@@ -3,6 +3,7 @@
     <!-- Section: Design Block -->
     <div class="text-center flex flex-col items-center gap-6">
       <div
+        v-if="group.imageRight || group.imageLeft || group.color"
         :style="{ backgroundColor: group.color }"
         class="flex relative w-full h-24 text-center justify-center items-center rounded-lg"
       >
@@ -39,7 +40,6 @@ const props = defineProps<IProps>();
 const { group } = props;
 
 const localMembers = group.memberIDs.map((memberID) => members[memberID]);
-
 </script>
 
 <style scoped></style>

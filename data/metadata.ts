@@ -53,6 +53,8 @@ import {
 import {
   anomolyL,
   anomolyR,
+  aqiL,
+  aqiR,
   blockbase1L,
   blockbase1R,
   blockbase2L,
@@ -77,12 +79,20 @@ import {
   iscvR,
   lstmL,
   lstmR,
+  media1L,
+  media1R,
+  media2L,
+  media2R,
+  media3L,
+  media3R,
   monteL,
   monteR,
   multiL,
   multiR,
   musicL,
   musicR,
+  researchL,
+  researchR,
   riskL,
   riskR,
   sentimentL,
@@ -565,7 +575,7 @@ export const topics: ITopic[] = [
         name: "Blockbase",
         imageLeft: blockbase1L,
         imageRight: blockbase1R,
-        color: "#8E8E8E",
+        color: "#9E38BD",
         memberIDs: ["le_mai_duy_khanh", "nguyen_thai_bao", "tran_thuy_an"],
       },
       {
@@ -573,7 +583,7 @@ export const topics: ITopic[] = [
         name: "Blockbase",
         imageLeft: blockbase2L,
         imageRight: blockbase2R,
-        color: "#545454",
+        color: "#2F2F2F",
         memberIDs: ["le_mai_duy_khanh", "duong_quoc_anh", "nguyen_le_tuan_anh"],
       },
     ],
@@ -735,11 +745,17 @@ export const topics: ITopic[] = [
       {
         id: v4(),
         name: "AQI",
+        imageLeft: aqiL,
+        imageRight: aqiR,
+        color: "#FDAA27",
         memberIDs: ["nguyen_minh_nhut", "le_van_anh_duc", "nguyen_van_luc"],
       },
       {
         id: v4(),
         name: "Research",
+        imageLeft: researchL,
+        imageRight: researchR,
+        color: "#D6A646",
         memberIDs: [
           "nguyen_minh_nhut",
           "le_van_anh_duc",
@@ -749,27 +765,36 @@ export const topics: ITopic[] = [
       },
     ],
   },
-  // {
-  //   id: v4(),
-  //   title: "Multimedia",
-  //   groups: [
-  //     {
-  //       id: v4(),
-  //       name: "Media Research",
-  //       memberIDs: ["nguyen_minh_nhut", "phan_thanh_cong", "tran_vu_bao"],
-  //     },
-  //     {
-  //       id: v4(),
-  //       name: "Media Research",
-  //       memberIDs: ["nguyen_minh_nhut", "phan_thi_thuy_hien"],
-  //     },
-  //     {
-  //       id: v4(),
-  //       name: "Media Research",
-  //       memberIDs: ["nguyen_minh_nhut", "pham_phu_tuan"],
-  //     },
-  //   ],
-  // },
+  {
+    id: v4(),
+    title: "Multimedia",
+    groups: [
+      {
+        id: v4(),
+        name: "Media Research",
+        imageLeft: media1L,
+        imageRight: media1R,
+        color: "#BE4DD5",
+        memberIDs: ["nguyen_minh_nhut", "phan_thanh_cong", "tran_vu_bao"],
+      },
+      {
+        id: v4(),
+        name: "Media Research",
+        imageLeft: media2L,
+        imageRight: media2R,
+        color: "#2CBB31",
+        memberIDs: ["nguyen_minh_nhut", "phan_thi_thuy_hien"],
+      },
+      {
+        id: v4(),
+        imageLeft: media3L,
+        imageRight: media3R,
+        name: "Media Research",
+        color: "#5CA7F8",
+        memberIDs: ["nguyen_minh_nhut", "pham_phu_tuan"],
+      },
+    ],
+  },
 ];
 
 export const documents: IRelationship[] = [
