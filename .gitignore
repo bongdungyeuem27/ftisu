@@ -25,3 +25,5 @@ logs
 .output.zip
 
 bun.lockb
+
+.output *.zip

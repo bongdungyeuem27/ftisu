@@ -7,15 +7,11 @@
         :style="{ backgroundColor: group.color }"
         class="flex relative w-full h-24 text-center justify-center items-center rounded-lg"
       >
-        <img
-          :src="group.imageRight"
-          class="absolute right-4 top-1/2 -translate-y-1/2 h-full object-contain"
-        />
-        <img
-          :src="group.imageLeft"
-          class="absolute left-4 top-1/2 -translate-y-1/2 h-full object-contain"
-        />
-        <h4 class="text-2xl text-white font-quicksand break-words">{{ group.name }}</h4>
+        <img :src="group.imageLeft" class="h-full object-contain w-48" />
+        <h4 class="text-2xl text-white font-quicksand break-words">
+          {{ group.name }}
+        </h4>
+        <img :src="group.imageRight" class="h-full object-contain w-48" />
       </div>
       <div class="flex gap-x-4 gap-y-4 justify-center flex-wrap">
         <MemberServer
